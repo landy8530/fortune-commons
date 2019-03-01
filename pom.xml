@@ -13,6 +13,8 @@
 
     <modules>
         <module>commons-datacache</module>
+        <module>commons-core</module>
+        <module>commons-nosql</module>
     </modules>
 
     <properties>
