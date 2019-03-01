@@ -1,0 +1,39 @@
+module01:
+  testStringKey: testValue
+  testBooleanKey: 0
+  testIntKey: 10
+  testFloatKey: 3.45
+  testDoubleKey: 4.566
+  testLongKey: 3234242
+
+#以下配置为动态注入，通过setting.xml或者pom.xml文件的profile配置
+#注入顺序如下，如果没找到相应的值，则再找下一个配置文件中的相应配置
+#1.全局配置文件conf/setting.xml
+#2.用户目录下的setting.xml
+#3.当前工程的pom.xml
+#4.resources目录下的配置文件(本例为${profiles.active}/test.yml)
+global:
+  homepage.xhfplans: '${homepage.xhfplans}'
+  github.url: '${agent.images.host}'
+
+local:
+  profile.path: '${local.profile.path}'
+
+api:
+  #Open to public network, could not call these api directly, call them via 3scale
+  hmac:
+    - xhf/create
+    - xhf/update
+    - xhfs
+    - xhf/get-xhf
+    - xhf/update-xhf-by-token
+    - xhf/get-xhf-by-token
+    - xhf/generate-token
+    - xhf/validate-token
+    - xhf/expire-token
+    - xhf/completed-email
+    - xhf/ping
+    - xhf/re-send-odc-invitation
+    - xhf/get-agent-notes
+    - xhf/update-agent-notes
+    - xhf/create-xhf-token
