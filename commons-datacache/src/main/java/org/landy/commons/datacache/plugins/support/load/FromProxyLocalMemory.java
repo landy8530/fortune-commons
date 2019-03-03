@@ -1,12 +1,12 @@
 package org.landy.commons.datacache.plugins.support.load;
 
-import org.landy.commons.datacache.plugins.support.FetchOperate;
+import org.landy.commons.datacache.plugins.support.FetchOperator;
 
 public class FromProxyLocalMemory extends FromCache {
-    private FetchOperate operate;
+    private FetchOperator operate;
     private long expiredTime;
 
-    public FromProxyLocalMemory(FetchOperate operate, long expiredTime) {
+    public FromProxyLocalMemory(FetchOperator operate, long expiredTime) {
         this.operate = operate;
         this.expiredTime = expiredTime;
     }

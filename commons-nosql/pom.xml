@@ -9,7 +9,59 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <!--<mongodb.version>2.9.3</mongodb.version>-->
+        <mongodb.version>3.10.1</mongodb.version>
+        <spring.data.version>2.1.5.RELEASE</spring.data.version>
+    </properties>
+
     <artifactId>commons-nosql</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.landy</groupId>
+            <artifactId>commons-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--mongodb驱动包：包括bson，mongo-java-drive和mongo-java-core-->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>${mongodb.version}</version>
+        </dependency>
+        <!--mongodb Spring核心包-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>${spring.data.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mongodb</groupId>
+                    <artifactId>mongo-java-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-commons</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--mongodb Spring依赖包-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>${spring.data.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
 
+    </dependencies>
+
+    <build>
+        <finalName>commons-nosql</finalName>
+    </build>
 </project>

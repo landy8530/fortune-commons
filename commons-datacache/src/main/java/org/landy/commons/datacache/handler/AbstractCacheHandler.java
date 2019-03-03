@@ -5,7 +5,7 @@ import org.landy.commons.datacache.DataCacheFacade;
 public abstract class AbstractCacheHandler {
 
     protected String getKey(String key) {
-        return DataCacheFacade.getInstance().getDataCacheConfig().getDataCacheConfigBean().getCacheKeyPrefix() + key;
+        return DataCacheFacade.getInstance().getCacheKeyPrefix() + key;
     }
 
 }

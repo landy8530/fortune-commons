@@ -14,10 +14,14 @@ public abstract class AbstractApplicationContextHelper implements ApplicationCon
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+        ApplicationContextHolder.setApplicationContext(applicationContext);
     }
 
-    public ApplicationContext accessApplicationContext() {
-        return this.applicationContext;
+    public static ApplicationContext accessApplicationContext() {
+        return ApplicationContextHolder.accessApplicationContext();
     }
 
+    public static Object getBean(String beanName) {
+        return accessApplicationContext().getBean(beanName);
+    }
 }

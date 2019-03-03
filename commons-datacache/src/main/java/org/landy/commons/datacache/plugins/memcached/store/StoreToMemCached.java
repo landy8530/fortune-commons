@@ -2,7 +2,7 @@ package org.landy.commons.datacache.plugins.memcached.store;
 
 import org.landy.commons.datacache.data.MyCustomCacheData;
 import org.landy.commons.datacache.handler.StoreToCache;
-import org.landy.commons.datacache.plugins.memcached.MemCachedOperate;
+import org.landy.commons.datacache.plugins.memcached.MemCachedOperator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class StoreToMemCached extends StoreToCache {
 	private static Logger log = LoggerFactory.getLogger(StoreToMemCached.class);
 	
-	private MemCachedOperate memcachedOperate;
+	private MemCachedOperator memcachedOperate;
 
 	
 	public StoreToMemCached() {
@@ -22,7 +22,7 @@ public class StoreToMemCached extends StoreToCache {
 	
 
 
-	public StoreToMemCached(MemCachedOperate memcachedOperate) {
+	public StoreToMemCached(MemCachedOperator memcachedOperate) {
 		this();
 		this.memcachedOperate = memcachedOperate;
 	}
@@ -57,11 +57,11 @@ public class StoreToMemCached extends StoreToCache {
 		return true;
 	}
  
-	public MemCachedOperate getMemcachedOperate() {
+	public MemCachedOperator getMemcachedOperate() {
 		return memcachedOperate;
 	}
 
-	public void setMemcachedOperate(MemCachedOperate memcachedOperate) {
+	public void setMemcachedOperate(MemCachedOperator memcachedOperate) {
 		this.memcachedOperate = memcachedOperate;
 	}
 

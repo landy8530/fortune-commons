@@ -1,76 +1,70 @@
 package org.landy.commons.datacache.conf;
 
-import com.mongodb.DB;
-import com.mongodb.Mongo;
-import com.mongodb.WriteConcern;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.Assert;
+import com.mongodb.ConnectionString;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 
-import java.util.ResourceBundle;
-
+@Configuration
+@ComponentScan("org.landy.commons.datacache")
 public class MongoConfig extends AbstractCacheConfig {
 
-    private int port;
+    private static final String MONGODB_PREFIX = "mongodb://";
+
+    @Value("${mongodb.database}")
     private String mongoDBName;
+    @Value("${mongodb.collectionName}")
     private String mongoCollectionName;
-    private DB db;
 
-    public MongoConfig() {
+    @Bean("mongoCollection")
+    public MongoCollection<Document> mongoCollection(@Qualifier("mongoTemplate") MongoOperations mongoTemplate) {
+        return mongoTemplate.getCollection(mongoCollectionName);
     }
 
-    void parseOtherConfig(ResourceBundle rs) {
-        LOGGER.info("解析Mongo参数");
-        LOGGER.info("MongoDB=" + super.getHubCacheServer());
-        String val = rs.getString("port");
-        Assert.notNull(val, "MongoDB的端口不为空");
-        this.port = Integer.parseInt(val);
-        this.mongoDBName = rs.getString("mongoDBName");
-        Assert.notNull(this.mongoDBName, "Mongo数据库名不为空");
-        this.mongoCollectionName = rs.getString("mongoCollectionName");
-        Assert.notNull(this.mongoCollectionName, "Mongo集合名不为空");
-
-        try {
-            Mongo mongo = new Mongo(super.getHubCacheServer(), this.port);
-            mongo.setWriteConcern(WriteConcern.SAFE);
-            this.db = mongo.getDB(this.mongoDBName);
-            if (StringUtils.isNotBlank(this.getHubCacheAccount()) && StringUtils.isNotBlank(this.getHubCachePassword())) {
-                LOGGER.info("配置认证：account=" + this.getHubCacheAccount() + ",password=" + this.getHubCachePassword());
-                char[] chpwds = this.getHubCachePassword().toCharArray();
-                boolean isauth = this.db.authenticate(this.getHubCacheAccount(), chpwds);
-                Assert.isTrue(isauth, "认证不成功");
-            }
-        } catch (Exception var6) {
-            LOGGER.error("Mongo连接创建失败");
-        }
-
+    @Bean("mongoTemplate")
+    public MongoOperations mongoTemplate(@Qualifier("mongoDbFactory") MongoDbFactory mongoDbFactory) {
+        MongoOperations mongoTemplate = new MongoTemplate(mongoDbFactory);
+        return mongoTemplate;
     }
 
-    public int getPort() {
-        return this.port;
+    @Bean("mongoDbFactory")
+    public MongoDbFactory mongoDbFactory(@Qualifier("mongoClient") MongoClient mongoClient) {
+        MongoDbFactory mongoDbFactory = new SimpleMongoClientDbFactory(mongoClient, mongoDBName);
+        return mongoDbFactory;
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    @Bean("mongoClient")
+    public MongoClient mongoClient(@Qualifier("connectionString") final ConnectionString connectionString) {
+        MongoClient mongoClient = MongoClients.create(connectionString);
+        return mongoClient;
+    }
+
+    @Bean("connectionString")
+    public ConnectionString connectionString() {
+        //https://docs.mongodb.com/manual/reference/connection-string/#connections-connection-examples
+        //mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database.collection][?options]]
+        //mongodb://sysop:moon@localhost/records
+        String connString = MONGODB_PREFIX + super.getHubCacheAccount() + ":" + super.getHubCachePassword() +
+                            "@" + super.getHubCacheServer() + ":" +super.getHubCachePort() + "/" + mongoDBName;
+        ConnectionString connectionString = new ConnectionString(connString);
+        return connectionString;
     }
 
     public String getMongoDBName() {
-        return this.mongoDBName;
-    }
-
-    public void setMongoDBName(String mongoDBName) {
-        this.mongoDBName = mongoDBName;
+        return mongoDBName;
     }
 
     public String getMongoCollectionName() {
-        return this.mongoCollectionName;
+        return mongoCollectionName;
     }
-
-    public void setMongoCollectionName(String mongoCollectionName) {
-        this.mongoCollectionName = mongoCollectionName;
-    }
-
-    public DB getDb() {
-        return this.db;
-    }
-
 }

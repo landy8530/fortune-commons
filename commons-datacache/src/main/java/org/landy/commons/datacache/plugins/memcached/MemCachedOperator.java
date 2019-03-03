@@ -1,21 +1,21 @@
 package org.landy.commons.datacache.plugins.memcached;
 
 import com.danga.MemCached.MemCachedClient;
-import org.landy.commons.datacache.plugins.support.FetchOperate;
+import org.landy.commons.datacache.plugins.support.FetchOperator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.Map;
 
-public class MemCachedOperate implements FetchOperate {
-	private  Logger logger = LoggerFactory.getLogger(MemCachedOperate.class);
+public class MemCachedOperator implements FetchOperator {
+	private  Logger logger = LoggerFactory.getLogger(MemCachedOperator.class);
 	
 
 	private  MemCachedClient memCachedClient;
 	
 	 
-	public MemCachedOperate(MemCachedClient memCachedClient){
+	public MemCachedOperator(MemCachedClient memCachedClient){
 		this.memCachedClient=memCachedClient;
 	}
 	
@@ -75,7 +75,7 @@ public class MemCachedOperate implements FetchOperate {
     /**
      * 删除所有
      * 
-     * @author:詹保山
+     * @author:Landy
      */
     public void deleteAll(){
     	logger.info("清空所有缓存数据........start");

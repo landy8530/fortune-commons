@@ -1,0 +1,31 @@
+#緩存服務公共配置
+data:
+  cache:
+    common:
+      #缓存策略，可选值：local/mongodb/redis/memcached
+      cacheStrategy: "mongodb"
+      mappingLocalFlag: true
+      expiredTime: 10
+      cacheKeyPrefix: "fortune_"
+      loadFlag: true
+    server:
+      host: 127.0.0.1
+      port: 28028
+      account: fortune
+      password: fortune
+
+#MongoDB配置
+mongodb:
+  database: "fortune"
+  collectionName: "global_data"
+
+#MemCached配置
+memcache:
+  initConn: 50
+  minConn: 50
+  maxConn: 500
+
+#Redis配置
+
+
+

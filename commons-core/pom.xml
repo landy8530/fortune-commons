@@ -11,5 +11,7 @@
 
     <artifactId>commons-core</artifactId>
 
-
+    <build>
+        <finalName>commons-core</finalName>
+    </build>
 </project>

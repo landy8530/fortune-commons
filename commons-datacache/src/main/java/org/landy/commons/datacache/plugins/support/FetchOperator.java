@@ -1,6 +1,6 @@
 package org.landy.commons.datacache.plugins.support;
 
-public interface FetchOperate {
+public interface FetchOperator {
 
     Object get(String key);
 

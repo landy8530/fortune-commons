@@ -16,7 +16,7 @@ public abstract class CacheDataLoadAdapter {
         return this.storeCacheDataService.store(key, value);
     }
 
-    public abstract boolean loaderData();
+    public abstract boolean loadData();
 
     public abstract List<String> getStoreKeys();
 

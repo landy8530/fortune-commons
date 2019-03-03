@@ -1,14 +1,14 @@
 package org.landy.commons.datacache.plugins.memcached.load;
 
 import org.landy.commons.datacache.handler.LoadFromCache;
-import org.landy.commons.datacache.plugins.memcached.MemCachedOperate;
+import org.landy.commons.datacache.plugins.memcached.MemCachedOperator;
 import org.landy.commons.datacache.plugins.support.load.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LoadFromMemCached extends LoadFromCache {
 	private Logger logger = LoggerFactory.getLogger(LoadFromMemCached.class);
-	private MemCachedOperate memcachedOperate;
+	private MemCachedOperator memcachedOperate;
 	/**
 	 * 过期时间，以秒为单位
 	 */
@@ -22,7 +22,7 @@ public class LoadFromMemCached extends LoadFromCache {
 	 */
 	private FromCache fromCache;
 
-	public LoadFromMemCached(MemCachedOperate memcachedOperate, long expiredTime, boolean mappingLocalFlag) {
+	public LoadFromMemCached(MemCachedOperator memcachedOperate, long expiredTime, boolean mappingLocalFlag) {
 		this.memcachedOperate = memcachedOperate;
 		this.setExpiredTime(expiredTime);
 		this.setMappingLocalFlag(mappingLocalFlag);
@@ -32,11 +32,11 @@ public class LoadFromMemCached extends LoadFromCache {
 		return this.fromCache.fetch(super.getKey(key));
 	}
 
-	public MemCachedOperate getMemcachedOperate() {
+	public MemCachedOperator getMemcachedOperate() {
 		return this.memcachedOperate;
 	}
 
-	public void setMemcachedOperate(MemCachedOperate memcachedOperate) {
+	public void setMemcachedOperate(MemCachedOperator memcachedOperate) {
 		this.memcachedOperate = memcachedOperate;
 	}
 
@@ -61,7 +61,7 @@ public class LoadFromMemCached extends LoadFromCache {
 			this.fromCache = new FromProxyLocalMemory(this.memcachedOperate, this.expiredTime);
 		} else {
 			this.logger.info("直接从Memcached获取缓存数据");
-			this.fromCache = new FromMemcached(this.memcachedOperate);
+			this.fromCache = new FromMemCached(this.memcachedOperate);
 		}
 
 	}

@@ -2,14 +2,14 @@ package org.landy.commons.datacache.plugins.mongo.store;
 
 import org.landy.commons.datacache.data.MyCustomCacheData;
 import org.landy.commons.datacache.handler.StoreToCache;
-import org.landy.commons.datacache.plugins.mongo.MongoDBOperate;
+import org.landy.commons.datacache.plugins.mongo.MongoDBOperator;
 
 import java.util.List;
 
 public class StoreToMongo extends StoreToCache {
-    private MongoDBOperate mongoCacheOperate;
+    private MongoDBOperator mongoCacheOperate;
 
-    public StoreToMongo(MongoDBOperate mongoCacheOperate) {
+    public StoreToMongo(MongoDBOperator mongoCacheOperate) {
         this.mongoCacheOperate = mongoCacheOperate;
     }
 

@@ -11,7 +11,7 @@ public abstract class StoreToCache extends AbstractCacheHandler {
      * @param key
      * @param value
      * @return
-     * @author:詹保山
+     * @author:Landy
      */
     public abstract <T> boolean store(String key,T value);
 
@@ -20,7 +20,7 @@ public abstract class StoreToCache extends AbstractCacheHandler {
      * @param key
      * @param value
      * @return
-     * @author:詹保山
+     * @author:Landy
      */
     public abstract <T> boolean store(String key, MyCustomCacheData<T> value);
 
@@ -29,20 +29,20 @@ public abstract class StoreToCache extends AbstractCacheHandler {
      * @param key
      * @param value
      * @return
-     * @author:詹保山
+     * @author:Landy
      */
     public abstract <T> boolean replace(String key,T value);
     /**
      * 删除操作
      * @param key
      * @return
-     * @author:詹保山
+     * @author:Landy
      */
     public abstract boolean  delete(String key);
     /**
      * 删除所有数据
      * @return
-     * @author:詹保山
+     * @author:Landy
      */
     public abstract boolean deleteAll();
 
@@ -50,7 +50,7 @@ public abstract class StoreToCache extends AbstractCacheHandler {
      * 根据Key 列表进行删除
      * @param keyList
      * @return
-     * @author:詹保山
+     * @author:Landy
      */
     public abstract boolean delete(List<String> keyList);
 
