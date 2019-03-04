@@ -16,7 +16,7 @@
 ##### 1.1.2.1 Mongo-Java-Driver 2.x
 
 ```xml
-<!--MongoBD-Spring整合-->
+<!--MongoDB-Spring整合-->
 <dependency>
     <groupId>org.mongodb</groupId>
     <artifactId>mongo-java-driver</artifactId>
@@ -32,7 +32,7 @@
 ##### 1.1.2.2 Mongo-Java-Driver 3.x
 
 ```xml
-<!--MongoBD-Spring整合-->
+<!--MongoDB-Spring整合-->
 <dependency>
     <groupId>org.mongodb</groupId>
     <artifactId>mongo-java-driver</artifactId>
