@@ -5,6 +5,7 @@ data:
       #缓存策略，可选值：local/mongodb/redis/memcached
       cacheStrategy: "mongodb"
       mappingLocalFlag: true
+      #映射到本地缓存的过期时间（单位：S）
       expiredTime: 10
       cacheKeyPrefix: "fortune_"
       loadFlag: true

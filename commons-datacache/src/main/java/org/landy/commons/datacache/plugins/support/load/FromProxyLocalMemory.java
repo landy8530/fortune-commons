@@ -27,7 +27,7 @@ public class FromProxyLocalMemory extends FromCache {
             long curerentTime = System.currentTimeMillis();
             long cs = curerentTime - localData.getTime();
             if (cs > this.expiredTime) { //过期数据重新加载
-                //logger.info(key+"--本地数据过期，重新获取");
+                LOGGER.info(key+"--本地数据过期，重新获取");
                 data = this.operate.get(key);
                 localData.setData(data);
                 localData.setTime(System.currentTimeMillis());

@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 
 @Configuration
-@ComponentScan("org.landy.commons.datacache")
+//@ComponentScan("org.landy.commons.datacache")
 public class MongoConfig extends AbstractCacheConfig {
 
     private static final String MONGODB_PREFIX = "mongodb://";

@@ -47,7 +47,7 @@ public class LoadFromMemCached extends LoadFromCache {
 	public void setExpiredTime(long expiredTime) {
 		this.expiredTime = expiredTime;
 		this.expiredTime = expiredTime * 1000L;
-		this.logger.info("映射本地缓存的过期时间(毫米)：" + this.expiredTime);
+		this.logger.info("映射本地缓存的过期时间(ms)：" + this.expiredTime);
 	}
 
 	public boolean getMappingLocalFlag() {

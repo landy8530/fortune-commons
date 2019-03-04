@@ -1,14 +1,10 @@
 package org.landy.commons.datacache.plugins.support.load;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MappingToLocalContainer {
 
-    private Logger logger = LoggerFactory.getLogger(MappingToLocalContainer.class);
     private static Map<String, LocalData> container = new ConcurrentHashMap(32);
 
     public MappingToLocalContainer() {

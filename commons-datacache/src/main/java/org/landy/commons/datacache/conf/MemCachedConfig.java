@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan("org.landy.commons.datacache")
+//@ComponentScan("org.landy.commons.datacache")
 public class MemCachedConfig extends AbstractCacheConfig {
 
     @Value("${memcache.initConn}")
