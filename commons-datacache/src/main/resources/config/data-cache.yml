@@ -25,6 +25,8 @@ memcache:
   initConn: 50
   minConn: 50
   maxConn: 500
+  #Memcached缓存过期时间(s)
+  expiredTime: 30
 
 #Redis配置
 

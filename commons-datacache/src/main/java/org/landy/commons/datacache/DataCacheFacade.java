@@ -60,7 +60,7 @@ public class DataCacheFacade extends AbstractApplicationContextHelper {
         DataCacheStrategy dataCacheStrategy = DataCacheStrategy.fromStrategy(localConfig.getCacheStrategy());
         switch (dataCacheStrategy) {
             case MEMCACHED:
-                MemCachedOperator memcachedOperate = new MemCachedOperator(memCachedConfig.memCachedClient());
+                MemCachedOperator memcachedOperate = new MemCachedOperator(memCachedConfig.memCachedClient(),memCachedConfig.getExpiredTime4Memcached());
                 storeToCache = new StoreToMemCached(memcachedOperate);
                 fetchFromCache = new LoadFromMemCached(memcachedOperate, memCachedConfig.getExpiredTime(), memCachedConfig.isMappingLocalFlag());
                 break;

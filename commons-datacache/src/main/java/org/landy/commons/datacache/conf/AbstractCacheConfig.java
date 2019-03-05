@@ -23,7 +23,7 @@ public abstract class AbstractCacheConfig {
     @Value("${data.cache.common.mappingLocalFlag}")
     private boolean mappingLocalFlag;
     @Value("${data.cache.common.expiredTime}")
-    private long expiredTime;
+    private int expiredTime;
     @Value("${data.cache.common.cacheKeyPrefix}")
     private String cacheKeyPrefix;
     @Value("${data.cache.common.loadFlag}")
@@ -77,11 +77,11 @@ public abstract class AbstractCacheConfig {
         this.mappingLocalFlag = mappingLocalFlag;
     }
 
-    public long getExpiredTime() {
+    public int getExpiredTime() {
         return expiredTime;
     }
 
-    public void setExpiredTime(long expiredTime) {
+    public void setExpiredTime(int expiredTime) {
         this.expiredTime = expiredTime;
     }
 

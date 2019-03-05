@@ -12,7 +12,12 @@
     <properties>
         <!--<mongodb.version>2.9.3</mongodb.version>-->
         <mongodb.version>3.10.1</mongodb.version>
-        <spring.data.version>2.1.5.RELEASE</spring.data.version>
+        <spring.data.mongo.version>2.1.5.RELEASE</spring.data.mongo.version>
+
+        <!--redis-->
+        <!--https://github.com/xetorthio/jedis-->
+        <jedis.version>3.0.1</jedis.version>
+        <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
     </properties>
 
     <artifactId>commons-nosql</artifactId>
@@ -33,7 +38,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
-            <version>${spring.data.version}</version>
+            <version>${spring.data.mongo.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.mongodb</groupId>
@@ -49,16 +54,45 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
-            <version>${spring.data.version}</version>
+            <version>${spring.data.mongo.version}</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.6</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.projectlombok</groupId>-->
+            <!--<artifactId>lombok</artifactId>-->
+            <!--<version>1.18.6</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
+        <!--redis-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${spring.data.redis.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-tx</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-oxm</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context-support</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <build>

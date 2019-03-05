@@ -2,6 +2,10 @@ package org.landy.commons.datacache.conf;
 
 import com.danga.MemCached.MemCachedClient;
 import com.danga.MemCached.SockIOPool;
+import net.rubyeye.xmemcached.MemcachedClient;
+import net.rubyeye.xmemcached.MemcachedClientBuilder;
+import net.rubyeye.xmemcached.XMemcachedClientBuilder;
+import net.rubyeye.xmemcached.utils.AddrUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +21,8 @@ public class MemCachedConfig extends AbstractCacheConfig {
     private int minConn = 50;
     @Value("${memcache.maxConn}")
     private int maxConn = 500;
+    @Value("${memcache.expiredTime}")
+    private int expiredTime4Memcached = 0;
 
     public MemCachedConfig() {
     }
@@ -45,8 +51,18 @@ public class MemCachedConfig extends AbstractCacheConfig {
         this.maxConn = maxConn;
     }
 
+    public int getExpiredTime4Memcached() {
+        return expiredTime4Memcached;
+    }
+
+    public void setExpiredTime4Memcached(int expiredTime4Memcached) {
+        this.expiredTime4Memcached = expiredTime4Memcached;
+    }
+    //https://github.com/killme2008/xmemcached/wiki/Xmemcached%20%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97
     @Bean("memCachedClient")
-    public MemCachedClient memCachedClient() {
+    public MemcachedClient memCachedClient() {
+        MemcachedClientBuilder builder = new XMemcachedClientBuilder(
+                AddrUtil.getAddresses("localhost:11211"));
         MemCachedClient memCachedClient = new MemCachedClient();
         LOGGER.info("memServers=" + super.getHubCacheServer());
         String[] servers = super.getHubCacheServer().split(",");

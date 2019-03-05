@@ -20,7 +20,13 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-
+    <!--memCached 四种客户端版本，推荐：xmemcached-->
+    <!--https://www.cnblogs.com/EasonJim/p/7624822.html-->
+    <!--https://github.com/killme2008/xmemcached/wiki/Xmemcached%20%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97-->
+    <xmemcached.version>2.4.6</xmemcached.version>
+    <spymemcached.version>2.12.2</spymemcached.version>
+    <danga.memcached.version>2.6.6</danga.memcached.version>
+    <memcached.java.client.version>3.0.2</memcached.java.client.version>
   </properties>
 
   <dependencies>
@@ -36,18 +42,34 @@
     </dependency>
     <!--MemCache-->
     <dependency>
-      <groupId>danga</groupId>
-      <artifactId>memCached</artifactId>
-      <version>2.6.6</version>
-      <scope>compile</scope>
+    <groupId>com.googlecode.xmemcached</groupId>
+    <artifactId>xmemcached</artifactId>
+    <version>${xmemcached.version}</version>
     </dependency>
+    <!--<dependency>-->
+      <!--<groupId>net.spy</groupId>-->
+      <!--<artifactId>spymemcached</artifactId>-->
+      <!--<version>${spymemcached.version}</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>danga</groupId>-->
+      <!--<artifactId>memCached</artifactId>-->
+      <!--<version>${danga.memcached.version}</version>-->
+      <!--<scope>compile</scope>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>com.whalin</groupId>-->
+      <!--<artifactId>Memcached-Java-Client</artifactId>-->
+      <!--<version>${memcached.java.client.version}</version>-->
+    <!--</dependency>-->
     <!--MemCache连接池依赖包-->
-    <dependency>
-      <groupId>commons-pool</groupId>
-      <artifactId>commons-pool</artifactId>
-      <version>1.6</version>
-      <scope>compile</scope>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>commons-pool</groupId>-->
+      <!--<artifactId>commons-pool</artifactId>-->
+      <!--<version>1.6</version>-->
+      <!--<scope>compile</scope>-->
+    <!--</dependency>-->
+
   </dependencies>
 
   <build>
