@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public abstract class AbstractCacheConfig {
     protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractCacheConfig.class);
+
+    protected static final String SERVERS_ACCOUNTS_DELIMITER = "@";
+    protected static final String SERVERS_DELIMITER = ":";
+    protected static final String ACCOUNTS_DELIMITER = ":";
+
     @Value("${data.cache.server.host}")
     private String hubCacheServer;
     @Value("${data.cache.server.port}")
@@ -28,6 +33,8 @@ public abstract class AbstractCacheConfig {
     private String cacheKeyPrefix;
     @Value("${data.cache.common.loadFlag}")
     private boolean loadFlag;
+    @Value("${data.cache.common.clusterFlag}")
+    private boolean clusterFlag;
 
     public String getHubCacheServer() {
         return hubCacheServer;
@@ -99,5 +106,13 @@ public abstract class AbstractCacheConfig {
 
     public void setLoadFlag(boolean loadFlag) {
         this.loadFlag = loadFlag;
+    }
+
+    public boolean isClusterFlag() {
+        return clusterFlag;
+    }
+
+    public void setClusterFlag(boolean clusterFlag) {
+        this.clusterFlag = clusterFlag;
     }
 }

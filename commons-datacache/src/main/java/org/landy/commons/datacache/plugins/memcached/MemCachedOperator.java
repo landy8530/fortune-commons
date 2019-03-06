@@ -43,6 +43,12 @@ public class MemCachedOperator implements FetchOperator {
         return false;
     }
 
+    /**
+     * @param key 存储的key名称
+     * @param value 实际存储的数据，可以是任意的java可序列化类型。
+     * @param expiredTime 是expire时间（单位秒），超过这个时间,memcached将这个数据替换出去，0表示永久存储（默认是一个月）
+     * @return
+     */
     public boolean add(String key, Object value, int expiredTime) {
         try {
             return this.getMemcachedClient().add(key, expiredTime, value);
