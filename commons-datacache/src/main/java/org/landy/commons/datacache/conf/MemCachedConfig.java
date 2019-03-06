@@ -1,21 +1,35 @@
 package org.landy.commons.datacache.conf;
 
 import net.rubyeye.xmemcached.MemcachedClient;
-import net.rubyeye.xmemcached.MemcachedClientBuilder;
-import net.rubyeye.xmemcached.XMemcachedClientBuilder;
+import net.rubyeye.xmemcached.auth.AuthInfo;
+import net.rubyeye.xmemcached.buffer.SimpleBufferAllocator;
+import net.rubyeye.xmemcached.command.BinaryCommandFactory;
+import net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator;
+import net.rubyeye.xmemcached.transcoders.SerializingTranscoder;
 import net.rubyeye.xmemcached.utils.AddrUtil;
+import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.landy.commons.core.setting.Settings;
+import org.landy.commons.core.utils.StringUtil;
+import org.landy.commons.datacache.exception.DataCacheConfigException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 //@ComponentScan("org.landy.commons.datacache")
 public class MemCachedConfig extends AbstractCacheConfig {
+
+    @Autowired
+    private Settings settings;
 
     @Value("${memcache.initConn}")
     private int initConn = 50;
@@ -27,8 +41,14 @@ public class MemCachedConfig extends AbstractCacheConfig {
     private int expiredTime4Memcached = 0;
     @Value("${memcache.connectionPoolSize}")
     private int connectionPoolSize;
-    @Value("${memcache.cluster}")
+//    @Value("${memcache.cluster}")
     private List<String> cluster;
+
+    private List<Integer> weights;
+    private List<String> accounts = new ArrayList<>();
+    private String servers;
+
+    private Map<InetSocketAddress, AuthInfo> authInfoMap = new HashMap<>();
 
     public MemCachedConfig() {
     }
@@ -81,55 +101,104 @@ public class MemCachedConfig extends AbstractCacheConfig {
         this.cluster = cluster;
     }
 
-    //https://github.com/killme2008/xmemcached/wiki/Xmemcached%20%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97
     @Bean("memCachedClient")
     public MemcachedClient memCachedClient() {
-        if(super.isClusterFlag()) {
-            List<String> cluster = this.cluster;
-            if(CollectionUtils.isNotEmpty(cluster)) {
-                cluster.stream().forEach(item -> {
-
-                });
-            }
-        }
-
-        MemcachedClientBuilder builder = new XMemcachedClientBuilder(
-                AddrUtil.getAddresses("localhost:11211"));
+        XMemcachedClientFactoryBean xMemcachedClientFactoryBean = xMemcachedClientFactoryBean();
         MemcachedClient memCachedClient = null;
         try {
-            memCachedClient = builder.build();
-        } catch (IOException e) {
-            e.printStackTrace();
+            memCachedClient = (MemcachedClient)xMemcachedClientFactoryBean.getObject();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(),e);
         }
-//        LOGGER.info("memServers=" + super.getHubCacheServer());
-//        String[] servers = super.getHubCacheServer().split(",");
-//        SockIOPool pool = SockIOPool.getInstance();
-//        pool.setServers(servers);
-//        if (this.initConn == 0) {
-//            this.initConn = 50;
-//        }
-//        LOGGER.info("initConn=" + this.initConn);
-//        pool.setInitConn(this.initConn);
-//
-//        if (this.minConn == 0) {
-//            this.minConn = 50;
-//        }
-//        LOGGER.info("minConn=" + this.minConn);
-//        pool.setMinConn(this.minConn);
-//
-//        if (this.maxConn == 0) {
-//            this.maxConn = 500;
-//        }
-//        LOGGER.info("maxConn=" + this.maxConn);
-//        pool.setMaxConn(this.maxConn);
-//        pool.setMaxIdle(3600000L);
-//        pool.setMaintSleep(3000L);
-//        pool.setNagle(false);
-//        pool.setSocketTO(3000);
-//        pool.setSocketConnectTO(0);
-//        pool.initialize();
         return memCachedClient;
     }
 
+    @Bean(value = "xMemcachedClientFactoryBean",destroyMethod = "shutdown")
+    public XMemcachedClientFactoryBean xMemcachedClientFactoryBean() {
+        XMemcachedClientFactoryBean factoryBean = new XMemcachedClientFactoryBean();
 
+        this.initServerInfo();
+
+        factoryBean.setServers(servers);
+        // server's weights
+        factoryBean.setWeights(weights);
+        // AuthInfo map,only valid on 1.2.5 or later version
+        factoryBean.setAuthInfoMap(authInfoMap);
+        // nio connection pool size
+        factoryBean.setConnectionPoolSize(connectionPoolSize);
+        // Use binary protocol,default is TextCommandFactory
+        factoryBean.setCommandFactory(binaryCommandFactory());
+        // Distributed strategy
+        factoryBean.setSessionLocator(sessionLocator());
+        // Serializing transcoder
+        factoryBean.setTranscoder(serializingTranscoder());
+        // ByteBuffer allocator
+        factoryBean.setBufferAllocator(bufferAllocator());
+        // Failure mode
+        factoryBean.setFailureMode(false);
+
+        return factoryBean;
+    }
+
+    @Bean
+    public BinaryCommandFactory binaryCommandFactory() {
+        return new BinaryCommandFactory();
+    }
+
+    @Bean
+    public KetamaMemcachedSessionLocator sessionLocator() {
+        return new KetamaMemcachedSessionLocator();
+    }
+
+    @Bean
+    public SerializingTranscoder serializingTranscoder() {
+        return new SerializingTranscoder();
+    }
+
+    @Bean
+    public SimpleBufferAllocator bufferAllocator() {
+        return new SimpleBufferAllocator();
+    }
+
+    private void initServerInfo() {
+        List<String> serverList = new ArrayList<>();
+        if(super.isClusterFlag()) {
+            this.cluster = settings.getAsList("memcache.cluster");
+            List<String> cluster = this.cluster;
+            if(CollectionUtils.isNotEmpty(cluster)) {
+                weights = new ArrayList<>();
+                cluster.stream().forEach(item -> {
+                    String[] serversArr = StringUtils.split(item,SERVERS_ACCOUNTS_DELIMITER);
+                    if(serversArr == null || serversArr.length != 3) {
+                        throw new DataCacheConfigException("集群配置不符合预定规则，集群配置格式：account:password@host:port@weight");
+                    }
+                    String account = serversArr[0];//account:password
+                    String server = serversArr[1];//host:port
+                    String weight = serversArr[2];//weight
+                    serverList.add(server);
+                    accounts.add(account);
+                    weights.add(Integer.valueOf(weight));
+                    String[] accountArr = StringUtils.split(account,ACCOUNT_PASSWORD_DELIMITER);
+                    if(accountArr != null && accountArr.length == 2) {
+                        String username = accountArr[0];
+                        String password = accountArr[1];
+                        buildAuthInfo(server,username,password);
+                    }
+                });
+            }
+        } else {
+            String server = super.getHubCacheServer() + SERVER_PORT_DELIMITER + super.getHubCachePort();
+            serverList.add(server);
+            String username = super.getHubCacheAccount();
+            String password = super.getHubCachePassword();
+            buildAuthInfo(server,username,password);
+        }
+        servers = StringUtil.listToString(serverList,SERVERS_DELIMITER);
+    }
+
+    public void buildAuthInfo(String server,String username,String password) {
+        InetSocketAddress socketAddress = AddrUtil.getOneAddress(server);
+        AuthInfo authInfo = AuthInfo.typical(username,password); //CRAM-MD5 or PLAIN auth
+        authInfoMap.put(socketAddress,authInfo);
+    }
 }

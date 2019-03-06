@@ -10,8 +10,9 @@ public abstract class AbstractCacheConfig {
     protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractCacheConfig.class);
 
     protected static final String SERVERS_ACCOUNTS_DELIMITER = "@";
-    protected static final String SERVERS_DELIMITER = ":";
-    protected static final String ACCOUNTS_DELIMITER = ":";
+    protected static final String SERVER_PORT_DELIMITER = ":";
+    protected static final String SERVERS_DELIMITER = " ";
+    protected static final String ACCOUNT_PASSWORD_DELIMITER = ":";
 
     @Value("${data.cache.server.host}")
     private String hubCacheServer;
