@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-@ComponentScan("org.landy.commons.datacache")
+//@ComponentScan("org.landy.commons.datacache")
 public class DataCacheConfig {
 
-    @Bean(name = DataCacheFacade.BEAN_NAME_DATA_CACHE_FACADE,initMethod = "init")
+    @Bean(name = DataCacheFacade.BEAN_NAME_DATA_CACHE_FACADE)
     public DataCacheFacade dataCacheFacade() {
         DataCacheFacade dataCacheFacade = new DataCacheFacade();
         List<CacheDataLoadAdapter> cacheDataAdapterList = new ArrayList<>();
@@ -49,4 +49,5 @@ public class DataCacheConfig {
             return keys;
         }
     }
+
 }

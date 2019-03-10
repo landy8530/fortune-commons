@@ -8,6 +8,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public abstract class AbstractCacheConfig {
     protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractCacheConfig.class);
+
+    protected static final String SERVERS_ACCOUNTS_DELIMITER = "@";
+    protected static final String SERVER_PORT_DELIMITER = ":";
+    protected static final String SERVERS_DELIMITER = " ";
+    protected static final String ACCOUNT_PASSWORD_DELIMITER = ":";
+
     @Value("${data.cache.server.host}")
     private String hubCacheServer;
     @Value("${data.cache.server.port}")
@@ -23,11 +29,15 @@ public abstract class AbstractCacheConfig {
     @Value("${data.cache.common.mappingLocalFlag}")
     private boolean mappingLocalFlag;
     @Value("${data.cache.common.expiredTime}")
-    private long expiredTime;
+    private int expiredTime;
     @Value("${data.cache.common.cacheKeyPrefix}")
     private String cacheKeyPrefix;
     @Value("${data.cache.common.loadFlag}")
     private boolean loadFlag;
+    @Value("${data.cache.common.clusterFlag}")
+    private boolean clusterFlag;
+    @Value("${data.cache.common.authFlag}")
+    private boolean authFlag;
 
     public String getHubCacheServer() {
         return hubCacheServer;
@@ -77,11 +87,11 @@ public abstract class AbstractCacheConfig {
         this.mappingLocalFlag = mappingLocalFlag;
     }
 
-    public long getExpiredTime() {
+    public int getExpiredTime() {
         return expiredTime;
     }
 
-    public void setExpiredTime(long expiredTime) {
+    public void setExpiredTime(int expiredTime) {
         this.expiredTime = expiredTime;
     }
 
@@ -99,5 +109,21 @@ public abstract class AbstractCacheConfig {
 
     public void setLoadFlag(boolean loadFlag) {
         this.loadFlag = loadFlag;
+    }
+
+    public boolean isClusterFlag() {
+        return clusterFlag;
+    }
+
+    public void setClusterFlag(boolean clusterFlag) {
+        this.clusterFlag = clusterFlag;
+    }
+
+    public boolean isAuthFlag() {
+        return authFlag;
+    }
+
+    public void setAuthFlag(boolean authFlag) {
+        this.authFlag = authFlag;
     }
 }

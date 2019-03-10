@@ -1,12 +1,12 @@
 package org.landy.commons.datacache;
 
+import org.landy.commons.core.help.AbstractApplicationContextHelper;
 import org.landy.commons.datacache.adapter.CacheDataLoadAdapter;
 import org.landy.commons.datacache.conf.LocalConfig;
 import org.landy.commons.datacache.conf.MemCachedConfig;
 import org.landy.commons.datacache.conf.MongoConfig;
 import org.landy.commons.datacache.handler.LoadFromCache;
 import org.landy.commons.datacache.handler.StoreToCache;
-import org.landy.commons.datacache.help.AbstractApplicationContextHelper;
 import org.landy.commons.datacache.plugins.local.load.LoadFromLocalMemory;
 import org.landy.commons.datacache.plugins.local.store.StoreToLocalMemory;
 import org.landy.commons.datacache.plugins.memcached.MemCachedOperator;
@@ -21,7 +21,6 @@ import org.landy.commons.datacache.service.impl.LoadCacheDataServiceImpl;
 import org.landy.commons.datacache.service.impl.StoreCacheDataServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.util.StringUtils;
 
@@ -37,34 +36,37 @@ public class DataCacheFacade extends AbstractApplicationContextHelper {
     private LoadCacheDataService fetchCacheDataService;
     private StoreCacheDataService storeCacheDataService;
 
-    @Autowired
-    private MongoConfig mongoConfig;
-    @Autowired
-    private MongoOperations mongoTemplate;
-    @Autowired
-    private MemCachedConfig memCachedConfig;
-    @Autowired
+//    @Autowired
+//    private MongoConfig mongoConfig;
+////    @Autowired
+//    private MongoOperations mongoTemplate;
+//    @Autowired
+//    private MemCachedConfig memCachedConfig;
+////    @Autowired
     private LocalConfig localConfig;
 
     public DataCacheFacade() {
     }
 
     public static DataCacheFacade getInstance() {
-        return (DataCacheFacade) getBean(BEAN_NAME_DATA_CACHE_FACADE);
+        return getBean(BEAN_NAME_DATA_CACHE_FACADE,DataCacheFacade.class);
     }
 
     public void init() {
         StoreToCache storeToCache;
         LoadFromCache fetchFromCache;
-
+        localConfig = getBean(LocalConfig.BEAN_NAME,LocalConfig.class);
         DataCacheStrategy dataCacheStrategy = DataCacheStrategy.fromStrategy(localConfig.getCacheStrategy());
         switch (dataCacheStrategy) {
             case MEMCACHED:
-                MemCachedOperator memcachedOperate = new MemCachedOperator(memCachedConfig.memCachedClient());
+                MemCachedConfig memCachedConfig = getBean(MemCachedConfig.BEAN_NAME,MemCachedConfig.class);
+                MemCachedOperator memcachedOperate = new MemCachedOperator(memCachedConfig.memCachedClient(),memCachedConfig.getExpiredTime4Memcached());
                 storeToCache = new StoreToMemCached(memcachedOperate);
                 fetchFromCache = new LoadFromMemCached(memcachedOperate, memCachedConfig.getExpiredTime(), memCachedConfig.isMappingLocalFlag());
                 break;
             case MONGO:
+                MongoConfig mongoConfig = getBean(MongoConfig.BEAN_NAME,MongoConfig.class);
+                MongoOperations mongoTemplate = getBean(MongoConfig.BEAN_NAME_MONGO_TEMPLATE,MongoOperations.class);
                 MongoDBOperator mongoDBOperate = new MongoDBOperator(mongoTemplate,mongoConfig.getMongoCollectionName());
                 storeToCache = new StoreToMongo(mongoDBOperate);
                 fetchFromCache = new LoadFromMongo(mongoDBOperate, mongoConfig.getExpiredTime(), mongoConfig.isMappingLocalFlag());

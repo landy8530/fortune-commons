@@ -46,3 +46,47 @@
 ## MemCache
 
 ## Redis
+
+> Spring Data Redis 2.x binaries require JDK level 8.0 and above and Spring Framework 5.1.5.RELEASE and above.
+> 
+> In terms of key-value stores, Redis 2.6.x or higher is required. Spring Data Redis is currently tested against the latest 4.0 release.
+
+Redis 依赖Maven坐标
+
+```xml
+<!--redis-->
+<properties>
+    <!--redis-->
+    <jedis.version>2.10.0-m1</jedis.version>
+    <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
+</properties>
+
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>${jedis.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-redis</artifactId>
+    <version>${spring.data.redis.version}</version>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```

@@ -3,27 +3,42 @@ data:
   cache:
     common:
       #缓存策略，可选值：local/mongodb/redis/memcached
-      cacheStrategy: "mongodb"
+      cacheStrategy: "memcached"
       mappingLocalFlag: true
+      #映射到本地缓存的过期时间（单位：S）
       expiredTime: 10
       cacheKeyPrefix: "fortune_"
       loadFlag: true
+      #是否集群,如果集群，则使用各自缓存中间件的集群配置
+      clusterFlag: false
+      #是否需要安全权限认证
+      authFlag: false
     server:
-      host: 127.0.0.1
-      port: 28028
-      account: test
-      password: test
+      host: 119.23.49.83
+      port: 11234
+      account: memcached
+      password: 123456
+
 
 #MongoDB配置
 mongodb:
   database: "fortune"
-  collectionName: "global"
+  collectionName: "global_data"
 
 #MemCached配置
 memcache:
   initConn: 50
   minConn: 50
   maxConn: 500
+  #server 连接池大小
+  connectionPoolSize: 2
+  #Memcached缓存过期时间(s)
+  expiredTime: 30
+  #集群配置格式：account:password@host:port@weight
+  cluster:
+    - fortune1:fortune1@127.0.0.1:11211@1
+    - fortune2:fortune2@127.0.0.1:11212@2
+    - fortune3:fortune3@127.0.0.1:11213@3
 
 #Redis配置
 

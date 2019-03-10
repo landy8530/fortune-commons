@@ -1,113 +1,219 @@
 package org.landy.commons.datacache.plugins.memcached;
 
-import com.danga.MemCached.MemCachedClient;
+import net.rubyeye.xmemcached.MemcachedClient;
+import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.landy.commons.datacache.plugins.support.FetchOperator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 public class MemCachedOperator implements FetchOperator {
-	private  Logger logger = LoggerFactory.getLogger(MemCachedOperator.class);
-	
+    private Logger logger = LoggerFactory.getLogger(MemCachedOperator.class);
 
-	private  MemCachedClient memCachedClient;
-	
-	 
-	public MemCachedOperator(MemCachedClient memCachedClient){
-		this.memCachedClient=memCachedClient;
-	}
-	
-	/**
+
+    private MemcachedClient memcachedClient;
+    private int expiredTime;
+
+    public MemCachedOperator(MemcachedClient memcachedClient, int expiredTime) {
+        this.memcachedClient = memcachedClient;
+        this.expiredTime = expiredTime;
+    }
+
+    /**
      * 添加一个指定的值到缓存中，如果有Key存在则不会替换
+     *
      * @param key
      * @param value
      * @return
      */
-    public boolean add(String key, Object value)
-    {
-        return this.getMemCachedClient().add(key, value);
+    public boolean add(String key, Object value) {
+        try {
+            return this.getMemcachedClient().add(key, expiredTime, value);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return false;
     }
-     
-    public boolean add(String key, Object value, Date expiry)
-    {
-        return this.getMemCachedClient().add(key, value, expiry);
+
+    /**
+     * @param key 存储的key名称
+     * @param value 实际存储的数据，可以是任意的java可序列化类型。
+     * @param expiredTime 是expire时间（单位秒），超过这个时间,memcached将这个数据替换出去，0表示永久存储（默认是一个月）
+     * @return
+     */
+    public boolean add(String key, Object value, int expiredTime) {
+        try {
+            return this.getMemcachedClient().add(key, expiredTime, value);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return false;
     }
-    public boolean put(String key ,Object value){
-//    	logger.info("key="+key+",data="+value);
-    	return this.getMemCachedClient().set(key, value);
+    /**
+     * 添加一个指定的值到缓存中，如果有Key存在则会替换
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public boolean put(String key, Object value) {
+        try {
+            return this.getMemcachedClient().set(key,expiredTime, value);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return false;
     }
-    public boolean put(String key, Object value, Date expiry){
-        return this.getMemCachedClient().set(key, value, expiry);
+
+    public boolean put(String key, Object value, int expiredTime) {
+        try {
+            return this.getMemcachedClient().set(key, expiredTime, value);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return false;
     }
-     
+
     /**
      * 替换一个指定的值到缓存中.
+     *
      * @param key
      * @param value
      * @return
      */
-    public boolean replace(String key, Object value)
-    {
-        return this.getMemCachedClient().replace(key, value);
+    public boolean replace(String key, Object value) {
+        try {
+            return this.getMemcachedClient().replace(key,expiredTime, value);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return false;
     }
+
     /**
      * 替换
+     *
      * @param key
      * @param value
-     * @param expiry
+     * @param expiredTime
      * @return
      */
-    public boolean replace(String key, Object value, Date expiry)
-    {
-        return this.getMemCachedClient().replace(key, value, expiry);
+    public boolean replace(String key, Object value, int expiredTime) {
+        try {
+            return this.getMemcachedClient().replace(key, expiredTime,value);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return false;
     }
+
     /**
      * 删除一个指定的值到缓存中.
+     *
      * @param key
      * @return
      */
-    public boolean delete(String key)
-    {
-        return this.getMemCachedClient().delete(key);
+    public boolean delete(String key) {
+        try {
+            return this.getMemcachedClient().delete(key);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return false;
     }
+
     /**
      * 删除所有
-     * 
+     *
      * @author:Landy
      */
-    public void deleteAll(){
-    	logger.info("清空所有缓存数据........start");
-    	this.getMemCachedClient().flushAll();
-    	logger.info("清空所有缓存数据........end");
+    public void deleteAll() {
+        logger.info("清空所有缓存数据........start");
+        try {
+            this.getMemcachedClient().flushAll();
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        logger.info("清空所有缓存数据........end");
     }
+
     /**
      * 根据指定的关键字获取对象.
+     *
      * @param key
      * @return
      */
-    public Object get(String key)
-    {
-        return this.getMemCachedClient().get(key);
+    public Object get(String key) {
+        try {
+            return this.getMemcachedClient().get(key);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return null;
     }
+
     /**
      * 获取多个
+     *
      * @param keys
      * @return
      */
-    public Map<String,Object> getMulti(String[] keys){
-    	return this.getMemCachedClient().getMulti(keys);
+    public Map<String, Object> getMulti(String[] keys) {
+        List<String> keyList = Arrays.asList(keys);
+        try {
+            return this.getMemcachedClient().get(keyList);
+        } catch (TimeoutException e) {
+            logger.error("unexpected exception:",e);
+        } catch (InterruptedException e) {
+            logger.error("unexpected exception:",e);
+        } catch (MemcachedException e) {
+            logger.error("unexpected exception:",e);
+        }
+        return null;
     }
 
- 
-	
-	public MemCachedClient getMemCachedClient(){
-		return memCachedClient;
-	}
- 
 
- 
-
- 
+    public MemcachedClient getMemcachedClient() {
+        return memcachedClient;
+    }
 }
