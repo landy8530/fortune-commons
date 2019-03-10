@@ -1,4 +1,4 @@
-package org.landy.commons.datacache.help;
+package org.landy.commons.core.help;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +21,7 @@ public abstract class AbstractApplicationContextHelper implements ApplicationCon
         return ApplicationContextHolder.accessApplicationContext();
     }
 
-    public static Object getBean(String beanName) {
-        return accessApplicationContext().getBean(beanName);
+    public static <T> T getBean(String beanName,Class<T> requiredType) {
+        return accessApplicationContext().getBean(beanName,requiredType);
     }
 }

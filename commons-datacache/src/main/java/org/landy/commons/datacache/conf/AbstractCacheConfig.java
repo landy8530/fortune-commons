@@ -36,6 +36,8 @@ public abstract class AbstractCacheConfig {
     private boolean loadFlag;
     @Value("${data.cache.common.clusterFlag}")
     private boolean clusterFlag;
+    @Value("${data.cache.common.authFlag}")
+    private boolean authFlag;
 
     public String getHubCacheServer() {
         return hubCacheServer;
@@ -115,5 +117,13 @@ public abstract class AbstractCacheConfig {
 
     public void setClusterFlag(boolean clusterFlag) {
         this.clusterFlag = clusterFlag;
+    }
+
+    public boolean isAuthFlag() {
+        return authFlag;
+    }
+
+    public void setAuthFlag(boolean authFlag) {
+        this.authFlag = authFlag;
     }
 }

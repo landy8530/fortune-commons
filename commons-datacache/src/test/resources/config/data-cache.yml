@@ -10,12 +10,14 @@ data:
       cacheKeyPrefix: "fortune_"
       loadFlag: true
       #是否集群,如果集群，则使用各自缓存中间件的集群配置
-      clusterFlag: true
+      clusterFlag: false
+      #是否需要安全权限认证
+      authFlag: false
     server:
-      host: 127.0.0.1
-      port: 28028
-      account: fortune
-      password: fortune
+      host: 119.23.49.83
+      port: 11234
+      account: memcached
+      password: 123456
 
 
 #MongoDB配置

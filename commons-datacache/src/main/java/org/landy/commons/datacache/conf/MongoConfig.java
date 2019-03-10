@@ -7,18 +7,19 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 
-@Configuration
-//@ComponentScan("org.landy.commons.datacache")
+@Configuration(MongoConfig.BEAN_NAME)
+//@ConditionalOnProperty(prefix = "data.cache.common",name = "cacheStrategy",havingValue = "mongodb")
 public class MongoConfig extends AbstractCacheConfig {
-
+    public  static final String BEAN_NAME = "mongoConfig";
+    public  static final String BEAN_NAME_MONGO_TEMPLATE = "mongoTemplate";
     private static final String MONGODB_PREFIX = "mongodb://";
 
     @Value("${mongodb.database}")
@@ -54,8 +55,11 @@ public class MongoConfig extends AbstractCacheConfig {
         //https://docs.mongodb.com/manual/reference/connection-string/#connections-connection-examples
         //mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database.collection][?options]]
         //mongodb://sysop:moon@localhost/records
-        String connString = MONGODB_PREFIX + super.getHubCacheAccount() + ":" + super.getHubCachePassword() +
-                            "@" + super.getHubCacheServer() + ":" +super.getHubCachePort() + "/" + mongoDBName;
+        String connString = MONGODB_PREFIX + super.getHubCacheServer() + ":" +super.getHubCachePort() + "/" + mongoDBName;
+        if(super.isAuthFlag()) {
+            connString = MONGODB_PREFIX + super.getHubCacheAccount() + ":" + super.getHubCachePassword() +
+                    "@" + super.getHubCacheServer() + ":" +super.getHubCachePort() + "/" + mongoDBName;
+        }
         ConnectionString connectionString = new ConnectionString(connString);
         return connectionString;
     }

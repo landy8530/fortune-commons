@@ -15,6 +15,7 @@ import org.landy.commons.core.utils.StringUtil;
 import org.landy.commons.datacache.exception.DataCacheConfigException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,8 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-//@ComponentScan("org.landy.commons.datacache")
+//@ConditionalOnProperty(prefix = "data.cache.common",name = "cacheStrategy",havingValue = "memcached")
 public class MemCachedConfig extends AbstractCacheConfig {
+    public static final String BEAN_NAME = "memCachedConfig";
 
     @Autowired
     private Settings settings;
@@ -123,7 +125,9 @@ public class MemCachedConfig extends AbstractCacheConfig {
         // server's weights
         factoryBean.setWeights(weights);
         // AuthInfo map,only valid on 1.2.5 or later version
-        factoryBean.setAuthInfoMap(authInfoMap);
+        if(super.isAuthFlag()) {
+            factoryBean.setAuthInfoMap(authInfoMap);
+        }
         // nio connection pool size
         factoryBean.setConnectionPoolSize(connectionPoolSize);
         // Use binary protocol,default is TextCommandFactory
@@ -178,27 +182,31 @@ public class MemCachedConfig extends AbstractCacheConfig {
                     serverList.add(server);
                     accounts.add(account);
                     weights.add(Integer.valueOf(weight));
-                    String[] accountArr = StringUtils.split(account,ACCOUNT_PASSWORD_DELIMITER);
-                    if(accountArr != null && accountArr.length == 2) {
-                        String username = accountArr[0];
-                        String password = accountArr[1];
-                        buildAuthInfo(server,username,password);
+                    if(super.isAuthFlag()) {
+                        String[] accountArr = StringUtils.split(account,ACCOUNT_PASSWORD_DELIMITER);
+                        if(accountArr != null && accountArr.length == 2) {
+                            String username = accountArr[0];
+                            String password = accountArr[1];
+                            buildAuthInfo(server,username,password);
+                        }
                     }
                 });
             }
         } else {
             String server = super.getHubCacheServer() + SERVER_PORT_DELIMITER + super.getHubCachePort();
             serverList.add(server);
-            String username = super.getHubCacheAccount();
-            String password = super.getHubCachePassword();
-            buildAuthInfo(server,username,password);
+            if(super.isAuthFlag()) {
+                String username = super.getHubCacheAccount();
+                String password = super.getHubCachePassword();
+                buildAuthInfo(server,username,password);
+            }
         }
         servers = StringUtil.listToString(serverList,SERVERS_DELIMITER);
     }
 
     public void buildAuthInfo(String server,String username,String password) {
         InetSocketAddress socketAddress = AddrUtil.getOneAddress(server);
-        AuthInfo authInfo = AuthInfo.typical(username,password); //CRAM-MD5 or PLAIN auth
+        AuthInfo authInfo = AuthInfo.plain(username,password); //PLAIN auth
         authInfoMap.put(socketAddress,authInfo);
     }
 }
