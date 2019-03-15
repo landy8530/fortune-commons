@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-//@ConditionalOnProperty(prefix = "data.cache.common",name = "cacheStrategy",havingValue = "memcached")
+@ConditionalOnProperty(value = "data.cache.strategy",havingValue = "memcached")
 public class MemCachedConfig extends AbstractCacheConfig {
     public static final String BEAN_NAME = "memCachedConfig";
 

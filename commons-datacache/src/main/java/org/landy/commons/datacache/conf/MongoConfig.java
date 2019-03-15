@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDbFactory;
 
 @Configuration(MongoConfig.BEAN_NAME)
-//@ConditionalOnProperty(prefix = "data.cache.common",name = "cacheStrategy",havingValue = "mongodb")
+@ConditionalOnProperty(value = "data.cache.strategy",havingValue = "mongodb")
 public class MongoConfig extends AbstractCacheConfig {
     public  static final String BEAN_NAME = "mongoConfig";
     public  static final String BEAN_NAME_MONGO_TEMPLATE = "mongoTemplate";

@@ -14,7 +14,7 @@ data:
       #是否需要安全权限认证
       authFlag: false
     server:
-      host: 119.23.49.83
+      host: 127.0.0.1
       port: 11234
       account: memcached
       password: 123456
@@ -33,7 +33,7 @@ memcache:
   #server 连接池大小
   connectionPoolSize: 2
   #Memcached缓存过期时间(s)
-  expiredTime: 30
+  expiredTime: 0
   #集群配置格式：account:password@host:port@weight
   cluster:
     - fortune1:fortune1@127.0.0.1:11211@1

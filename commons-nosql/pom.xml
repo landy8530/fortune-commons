@@ -17,6 +17,7 @@
         <!--redis-->
         <!--https://github.com/xetorthio/jedis-->
         <jedis.version>3.0.1</jedis.version>
+        <commons.pool2.version>2.4.3</commons.pool2.version>
         <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
     </properties>
 
@@ -69,6 +70,17 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-pool2</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons.pool2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
