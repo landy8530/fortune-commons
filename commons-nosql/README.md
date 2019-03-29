@@ -1,5 +1,5 @@
 # Commons NOSQL Component
-## MongoDB
+## 1. MongoDB
 
 > The Spring Data MongoDB 2.x binaries require JDK level 8.0 and above and [Spring Framework](https://spring.io/docs) 5.1.5.RELEASE and above.
 >
@@ -43,9 +43,11 @@
     <scope>compile</scope>
 </dependency>
 ```
-## MemCache
+## 2. MemCache
 
-## Redis
+## 3. Redis
+
+### 3.1 Maven依赖
 
 > Spring Data Redis 2.x binaries require JDK level 8.0 and above and Spring Framework 5.1.5.RELEASE and above.
 > 
@@ -90,3 +92,7 @@ Redis 依赖Maven坐标
     </exclusions>
 </dependency>
 ```
+
+### 3.2 Jedis旧版本问题
+
+Jedis版本为2.2.1会出现如下问题，**Jedis对象正好有一个名字叫做shutdown的方法，虽然Jedis对象没有指定destoryMethod，但是被Spring 自动推断注册成为了DisposableBean！！！并且把shutdown()方法注册为destoryMethod，在程序运行结束的时候会调用shutdown()，发送SHUTDOWN关闭了Redis服务器！！！**
