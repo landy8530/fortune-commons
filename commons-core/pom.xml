@@ -11,6 +11,17 @@
 
     <artifactId>commons-core</artifactId>
 
+    <dependencies>
+        <!--Spring 3.2以后 Spring Framework已经包含了cglib的jar包，可不必手动引入 -->
+        <!--<dependency>-->
+            <!--<groupId>cglib</groupId>-->
+            <!--<artifactId>cglib</artifactId>-->
+            <!--<version>3.2.10</version>-->
+            <!--<type>jar</type>-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+    </dependencies>
+
     <build>
         <finalName>commons-core</finalName>
     </build>
