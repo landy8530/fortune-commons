@@ -3,12 +3,13 @@ package org.landy.commons.core.domain;
 import java.sql.Date;
 import java.util.List;
 
-public class Root {
+public class RootCopier {
+
     private Long id;
     private List<Child> list;
     private Date date;
 
-    private int index;
+    private Integer index;
 
     public Long getId() {
         return id;
@@ -34,11 +35,11 @@ public class Root {
         this.date = date;
     }
 
-    public int getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
-    public void setIndex(int index) {
+    public void setIndex(Integer index) {
         this.index = index;
     }
 }

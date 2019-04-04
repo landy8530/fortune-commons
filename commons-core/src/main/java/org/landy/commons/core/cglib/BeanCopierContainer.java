@@ -16,17 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+* 此处初始化的BeanCopier只能是相同Class类型的两个实例进行BeanCopy的操作,
+* 并且是未使用Converter类
+* @author: Landy
+* @date:   2019/4/4 22:42
+* @version: 1.0
+*/
 public class BeanCopierContainer {
 
-    private Logger log= LoggerFactory.getLogger(BeanCopierContainer.class);
+    private Logger LOGGER = LoggerFactory.getLogger(BeanCopierContainer.class);
 
     private ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
     private static final String RESOURCE_PATTERN = "/**/*.class";
-    private List<String> packagesToScanList=new ArrayList<String>();
-    private static ConcurrentHashMap<String ,BeanCopier> MyBeanCopyContainerMap=new ConcurrentHashMap<>();
+    private List<String> packagesToScanList = new ArrayList<String>();
+    private static ConcurrentHashMap<String ,BeanCopier> MyBeanCopyContainerMap = new ConcurrentHashMap<>();
+
 
     public void init(){
-        log.info("创建模型的BeanCopier,start...");
+        LOGGER.info("创建模型的BeanCopier,start...");
         try {
             for (String pkg : packagesToScanList) {
                 String pattern = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(pkg) + RESOURCE_PATTERN;
@@ -42,13 +50,13 @@ public class BeanCopierContainer {
                     }
                 }
             }
-            log.info("创建模型的BeanCopier,end;size="+ BeanCopierContainer.MyBeanCopyContainerMap.size());
+            LOGGER.info("创建模型的BeanCopier,end;size="+ BeanCopierContainer.MyBeanCopyContainerMap.size());
         }
         catch (IOException ex) {
-            log.error("MY BEAN COPY 初始化失败");
+            LOGGER.error("MY BEAN COPY 初始化失败");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            log.error(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
     }
 

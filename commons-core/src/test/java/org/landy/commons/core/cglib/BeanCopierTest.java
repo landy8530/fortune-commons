@@ -8,7 +8,7 @@ import org.springframework.cglib.beans.BeanCopier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeanCopyTest {
+public class BeanCopierTest {
 
     public static void main(String[] args) {
         Child child = new Child();

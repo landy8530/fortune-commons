@@ -1,7 +1,7 @@
 package org.landy.commons.datacache.plugins.mongo;
 
 import org.bson.Document;
-import org.landy.commons.core.utils.DateUtil;
+import org.landy.commons.core.util.DateUtil;
 import org.landy.commons.datacache.data.MyCustomCacheData;
 import org.landy.commons.datacache.plugins.support.FetchOperator;
 import org.landy.commons.nosql.mongodb.dao.impl.NativeMongoDaoImpl;

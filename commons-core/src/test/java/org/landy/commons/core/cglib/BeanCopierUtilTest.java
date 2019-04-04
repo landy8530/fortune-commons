@@ -5,8 +5,9 @@ import org.junit.runner.RunWith;
 import org.landy.commons.core.conf.BeanCopierConfiguration;
 import org.landy.commons.core.domain.Child;
 import org.landy.commons.core.domain.Root;
+import org.landy.commons.core.domain.RootCopier;
 import org.landy.commons.core.setting.conf.SettingsConfiguration;
-import org.landy.commons.core.utils.BeanCopyUtil;
+import org.landy.commons.core.util.BeanCopierUtil;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -19,10 +20,10 @@ import java.util.List;
         SettingsConfiguration.class,
         BeanCopierConfiguration.class
 })
-public class BeanCopyUtilTest {
+public class BeanCopierUtilTest {
 
     @Test
-    public void test() {
+    public void copyUniformPropertiesTest() {
 
         Child child = new Child();
         child.setId(1L);
@@ -44,11 +45,38 @@ public class BeanCopyUtilTest {
 
         Root copyRoot = new Root();
 
-        BeanCopyUtil.copyProperties(root,copyRoot);
+        BeanCopierUtil.copyUniformProperties(root,copyRoot);
 
         System.out.println(copyRoot.getList().size());
     }
 
+    @Test
+    public void copyPropertiesTest() {
+
+        Child child = new Child();
+        child.setId(1L);
+        child.setName("name1");
+        child.setDate(new Date());
+        List<Child> list = new ArrayList<>();
+        list.add(child);
+
+        child = new Child();
+        child.setId(2L);
+        child.setName("name2");
+        child.setDate(new Date());
+        list.add(child);
+
+        Root root = new Root();
+        root.setId(2L);
+        root.setDate(new java.sql.Date(System.currentTimeMillis()));
+        root.setList(list);
+        root.setIndex(100);
+        RootCopier copyRoot = new RootCopier();
+
+        BeanCopierUtil.copyProperties(root,copyRoot);
+
+        System.out.println(copyRoot.getIndex());
+    }
 
 }
 

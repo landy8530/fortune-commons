@@ -17,7 +17,14 @@ public class BeanCopierConfiguration {
     private Settings settings;
 
     private List<String> packagesToScanList;
-
+    
+    /**
+     * BeanCopierContainer容器初始化配置Bean
+     * @author      Landy
+     * @return      BeanCopierContainer
+     * @throws      
+     * @date        2019/4/4 22:57
+    */
     @Bean
     public BeanCopierContainer beanCopierContainer() {
         packagesToScanList = settings.getAsList(BEAN_COPY_PATH_KEY);
