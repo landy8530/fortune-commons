@@ -1,4 +1,4 @@
-package org.landy.commons.core.utils.concurrent.atomic;
+package org.landy.commons.core.util.concurrent.atomic;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

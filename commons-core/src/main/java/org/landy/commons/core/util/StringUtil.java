@@ -1,4 +1,4 @@
-package org.landy.commons.core.utils;
+package org.landy.commons.core.util;
 
 import java.util.List;
 import java.util.Map;

@@ -4,7 +4,7 @@ import org.landy.commons.core.setting.exception.SettingsException;
 import org.landy.commons.core.setting.loader.SettingsLoader;
 import org.landy.commons.core.setting.loader.SettingsLoaderFactory;
 import org.landy.commons.core.setting.util.StreamUtil;
-import org.landy.commons.core.utils.StringUtil;
+import org.landy.commons.core.util.StringUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
