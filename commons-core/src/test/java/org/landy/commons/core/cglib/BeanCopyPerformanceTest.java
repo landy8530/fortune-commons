@@ -42,6 +42,7 @@ public class BeanCopyPerformanceTest {
     }
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        System.gc();
         long startTime = System.currentTimeMillis();
         for(int i=0;i<COUNT;i++) {
             Root copyRoot = new Root();
