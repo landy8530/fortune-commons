@@ -1,0 +1,4 @@
+#Bean Copy预加载BeanCopier的包路径列表
+model.package.path:
+  - org.landy.commons.core.domain
+  - org.landy.commons.core.model

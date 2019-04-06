@@ -1,4 +1,4 @@
-package org.landy.commons.core.utils;
+package org.landy.commons.core.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

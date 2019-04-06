@@ -11,7 +11,7 @@ import net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.landy.commons.core.setting.Settings;
-import org.landy.commons.core.utils.StringUtil;
+import org.landy.commons.core.util.StringUtil;
 import org.landy.commons.datacache.exception.DataCacheConfigException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
