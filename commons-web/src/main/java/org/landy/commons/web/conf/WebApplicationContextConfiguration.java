@@ -1,19 +1,27 @@
-package org.landy.commons.datacache;
+package org.landy.commons.web.conf;
 
+import org.landy.commons.datacache.DataCacheFacade;
 import org.landy.commons.datacache.adapter.CacheDataLoadAdapter;
+import org.landy.commons.web.loader.WebContextLoader;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author: Landy
+ * @date: 2019/4/7 00:04
+ * @description: WebApplicationContext配置类
+ */
 @Configuration
-//@ComponentScan("org.landy.commons.datacache")
-public class DataCacheConfig {
+@Import({ApplicationContextConfiguration.class})
+public class WebApplicationContextConfiguration {
 
+    // 配置DataCacheFacade
     @Bean(name = DataCacheFacade.BEAN_NAME_DATA_CACHE_FACADE)
     public DataCacheFacade dataCacheFacade() {
         DataCacheFacade dataCacheFacade = new DataCacheFacade();
@@ -48,6 +56,12 @@ public class DataCacheConfig {
         public List<String> getStoreKeys() {
             return keys;
         }
+    }
+
+    // 配置WebContextLoader
+    @Bean(name = WebContextLoader.BEAN_NAME_WEB_CONTEXT_LOADER)
+    public WebContextLoader webContextLoader() {
+        return new WebContextLoader();
     }
 
 }

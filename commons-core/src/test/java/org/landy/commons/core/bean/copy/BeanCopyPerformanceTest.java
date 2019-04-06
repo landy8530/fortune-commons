@@ -1,4 +1,4 @@
-package org.landy.commons.core.cglib;
+package org.landy.commons.core.bean.copy;
 
 import org.landy.commons.core.domain.Child;
 import org.landy.commons.core.domain.Root;

@@ -1,5 +1,6 @@
-package org.landy.commons.core.setting.conf;
+package org.landy.commons.core.conf;
 
+import org.landy.commons.core.constants.Constants;
 import org.landy.commons.core.setting.Settings2PropertiesFactoryBean;
 import org.landy.commons.core.setting.SettingsFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 public class SettingsConfiguration {
-    private static final String FILE_ENCODING = "UTF-8";
+    private static final String FILE_ENCODING = Constants.ENCODING_UTF_8;
     private static final String PROPERTY_SOURCE_KEY_DATA_CACHE = "data-cache";
 
     @Bean(name="settingsFactoryBean")
