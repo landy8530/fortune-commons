@@ -9,7 +9,7 @@ import com.itextpdf.tool.xml.Tag;
 import com.itextpdf.tool.xml.css.CSS;
 import com.itextpdf.tool.xml.css.FontSizeTranslator;
 import com.itextpdf.tool.xml.css.apply.ChunkCssApplier;
-import org.landy.commons.core.utils.StringUtil;
+import org.landy.commons.core.util.StringUtil;
 
 import java.util.Map;
 

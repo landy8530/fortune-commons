@@ -90,7 +90,7 @@ public class WebContextLoader extends AbstractApplicationContextHelper implement
      * @return 绝对路径
      */
     public String getRootPath() {
-        String rootPath = this.getServletContext().getRealPath(pageRootPath);
+        String rootPath = getRealPath(pageRootPath);
         rootPath = rootPath.replaceAll("\\\\", pageRootPath);
         rootPath += pageRootPath;
         return rootPath;
