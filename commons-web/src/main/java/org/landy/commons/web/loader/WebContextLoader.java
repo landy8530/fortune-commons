@@ -1,5 +1,6 @@
 package org.landy.commons.web.loader;
 
+import org.landy.commons.core.constants.Constants;
 import org.landy.commons.core.help.AbstractApplicationContextHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class WebContextLoader extends AbstractApplicationContextHelper implement
     /**
      * jsp页面跟路径
      */
-    private String pageRootPath = "/";
+    private String pageRootPath = Constants.SLASH;
     /**
      * 系统包名的前缀
      */
@@ -90,9 +91,9 @@ public class WebContextLoader extends AbstractApplicationContextHelper implement
      * @return 绝对路径
      */
     public String getRootPath() {
-        String rootPath = getRealPath(pageRootPath);
-        rootPath = rootPath.replaceAll("\\\\", pageRootPath);
-        rootPath += pageRootPath;
+        String rootPath = getRealPath(Constants.SLASH);
+        rootPath = rootPath.replaceAll("\\\\", Constants.SLASH);
+        rootPath += Constants.SLASH;
         return rootPath;
     }
 

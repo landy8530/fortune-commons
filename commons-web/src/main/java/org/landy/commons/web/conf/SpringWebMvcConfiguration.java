@@ -1,4 +1,4 @@
-package org.landy.commons.web.conf.web;
+package org.landy.commons.web.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

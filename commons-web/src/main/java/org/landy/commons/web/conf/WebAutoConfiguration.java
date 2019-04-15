@@ -1,7 +1,6 @@
-package org.landy.commons.web.conf.web;
+package org.landy.commons.web.conf;
 
 import org.landy.commons.core.constants.Constants;
-import org.landy.commons.web.conf.WebApplicationContextConfiguration;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

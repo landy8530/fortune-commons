@@ -1,5 +1,6 @@
 package org.landy.commons.web.conf;
 
+import org.landy.commons.core.constants.Constants;
 import org.landy.commons.datacache.DataCacheFacade;
 import org.landy.commons.datacache.adapter.CacheDataLoadAdapter;
 import org.landy.commons.web.loader.WebContextLoader;
@@ -16,7 +17,7 @@ import java.util.Map;
 /**
  * @author: Landy
  * @date: 2019/4/7 00:04
- * @description: WebApplicationContext配置类
+ * @description: WebApplicationContext配置类,需要根据具体的业务逻辑进行配置，比如缓存门面类的配置
  */
 @Configuration
 @Import({ApplicationContextConfiguration.class})
@@ -25,7 +26,7 @@ public class WebApplicationContextConfiguration {
      * jsp页面跟路径
      */
     @Value("${page.root.path}")
-    private String pageRootPath = "/";
+    private String pageRootPath = Constants.SLASH;
     /**
      * 系统包名的前缀
      */
