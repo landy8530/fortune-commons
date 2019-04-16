@@ -20,8 +20,8 @@ import java.util.List;
 @ComponentScan("org.landy.commons")
 @Import({SettingsConfiguration.class,  // common settings configuration
         DataCacheConfiguration.class,  // common data cache component configuration
-        BeanCopierConfiguration.class, // Bean copier component configuration
-        FreemarkerConfiguration.class}) // Freemarker component configuration
+        BeanCopierConfiguration.class // Bean copier component configuration
+        })
 public class ApplicationContextConfiguration {
     @Autowired
     DataCacheFacade dataCacheFacade;

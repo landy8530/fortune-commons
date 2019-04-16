@@ -1,6 +1,7 @@
-package org.landy.commons.web.conf;
+package org.landy.commons.web.springmvc.conf;
 
 import org.landy.commons.core.constants.Constants;
+import org.landy.commons.web.conf.WebApplicationContextConfiguration;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -86,4 +87,13 @@ public class WebAutoConfiguration extends
     protected String getServletName() {
         return "app";
     }
+
+    /**
+     * 重写创建DispatcherServlet
+     * @param servletAppContext
+     * @return
+     */
+//    protected FrameworkServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
+//        return new FortuneDispatcherServlet(servletAppContext);
+//    }
 }

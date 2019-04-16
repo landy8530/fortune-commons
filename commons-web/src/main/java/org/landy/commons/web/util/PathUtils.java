@@ -18,19 +18,19 @@ public class PathUtils {
      */
     private static final String PAGE_JSP_SUFFIX = ".jsp";
 
-    private static final String STRANDARD_ACTION_PKG_NAME = ".action.";
+    private static final String STANDARD_ACTION_PKG_NAME = ".action.";
 
 
     private static String getPathFromPkgPathName(String pkgName) {
-        if (pkgName.contains(STRANDARD_ACTION_PKG_NAME)) {
-            String path = pkgName.substring(pkgName.lastIndexOf(STRANDARD_ACTION_PKG_NAME) + STRANDARD_ACTION_PKG_NAME.length());
+        if (pkgName.contains(STANDARD_ACTION_PKG_NAME)) {
+            String path = pkgName.substring(pkgName.lastIndexOf(STANDARD_ACTION_PKG_NAME) + STANDARD_ACTION_PKG_NAME.length());
             path = path.replaceAll("\\.", Constants.SLASH);
             if (path.lastIndexOf("\\") == -1) {
                 path = path + Constants.SLASH;
             }
             return path;
         } else {
-            LOG.error("action的路径不标准，未含有【" + STRANDARD_ACTION_PKG_NAME + "】，无法解析");
+            LOG.error("action的路径不标准，未含有【" + STANDARD_ACTION_PKG_NAME + "】，无法解析");
         }
         return Constants.SLASH;
     }
@@ -65,7 +65,7 @@ public class PathUtils {
     }
 
     /**
-     * 获取<b>文件</b>的路径，按文件的层次，将文件名放在最后一个参数，返回参数如：zzz//zzz///zzz/zbs.txt==>zzz/zzz/zzz/zbs.txt
+     * 获取<b>文件</b>的路径，按文件的层次，将文件名放在最后一个参数，返回参数如：zzz//zzz///zzz/lyx.txt==>zzz/zzz/zzz/lyx.txt
      * 动态参数，清洗掉多个反斜杠问题
      *
      * @param pathArrays 多个路径的传入
@@ -77,19 +77,12 @@ public class PathUtils {
             sb.append(path).append(Constants.SLASH);
         }
         String url = sb.substring(0, sb.length() - 1);
-        String strUrl = "";
-        if (url.startsWith(Constants.HTTP_STR) || url.startsWith(Constants.HTTP_STR.toUpperCase())) {
-            strUrl = url.substring(Constants.HTTP_STR.length(), url.length());
-            strUrl = strUrl.replaceAll("/++", "/");
-            url = Constants.HTTP_STR + strUrl;
-        } else {
-            url = url.replaceAll("/++", "/");
-        }
-        return url;
+
+        return buildUrl(url);
     }
 
     /**
-     * 获取<b>文件夹</b>的路径, 按文件夹的层次，返回参数如：zzz//zzz///zzz//zbs//==>zzz/zzz/zzz/zbs/ OR zzz//zzz///zzz//zbs==>zzz/zzz/zzz/zbs/
+     * 获取<b>文件夹</b>的路径, 按文件夹的层次，返回参数如：zzz//zzz///zzz//lyx//==>zzz/zzz/zzz/lyx/ OR zzz//zzz///zzz//lyx==>zzz/zzz/zzz/lyx/
      *
      * @param folderPathArrays
      * @return
@@ -101,15 +94,18 @@ public class PathUtils {
         }
         String url = sb.toString();
 
-        String strUrl = "";
+        return buildUrl(url);
+    }
+
+    private static String buildUrl(String url) {
+        String strUrl;
         if (url.startsWith(Constants.HTTP_STR) || url.startsWith(Constants.HTTP_STR.toUpperCase())) {
-            strUrl = url.substring(Constants.HTTP_STR.length(), url.length());
-            strUrl = strUrl.replaceAll("/++", "/");
+            strUrl = url.substring(Constants.HTTP_STR.length());
+            strUrl = strUrl.replaceAll("/++", Constants.SLASH);
             url = Constants.HTTP_STR + strUrl;
         } else {
-            url = url.replaceAll("/++", "/");
+            url = url.replaceAll("/++", Constants.SLASH);
         }
         return url;
     }
-
 }

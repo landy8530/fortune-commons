@@ -20,7 +20,10 @@ import java.util.Map;
  * @description: WebApplicationContext配置类,需要根据具体的业务逻辑进行配置，比如缓存门面类的配置
  */
 @Configuration
-@Import({ApplicationContextConfiguration.class})
+@Import({ApplicationContextConfiguration.class,
+        FreemarkerConfiguration.class, // Freemarker component configuration
+        ExportAttachmentHandlerConfiguration.class //Export component
+})
 public class WebApplicationContextConfiguration {
     /**
      * jsp页面跟路径

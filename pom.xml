@@ -17,6 +17,8 @@
         <module>commons-nosql</module>
         <module>commons-export</module>
         <module>commons-web</module>
+        <module>commons-web-springmvc</module>
+        <module>fortune-commons-example</module>
     </modules>
 
     <properties>

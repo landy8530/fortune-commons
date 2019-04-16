@@ -1,4 +1,4 @@
-package org.landy.commons.web.conf;
+package org.landy.commons.web.springmvc.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@ComponentScan("org.landy.commons.web.controller")
+@ComponentScan("org.landy.commons.web.springmvc.controller")
 @Configuration
 public class SpringWebMvcConfiguration {
 

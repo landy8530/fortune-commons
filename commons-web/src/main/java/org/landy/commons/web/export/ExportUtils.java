@@ -1,5 +1,6 @@
 package org.landy.commons.web.export;
 
+import org.landy.commons.core.constants.Constants;
 import org.landy.commons.web.util.PathUtils;
 import org.springframework.util.StringUtils;
 
@@ -58,11 +59,11 @@ public class ExportUtils {
 
         if (StringUtils.isEmpty(exportFileName)) {
             exportFileName = defaultFilePath;
-            if (exportFileName.lastIndexOf("/") > 0) {
-                exportFileName = exportFileName.substring(exportFileName.lastIndexOf("/") + 1);
+            if (exportFileName.lastIndexOf(Constants.SLASH) > 0) {
+                exportFileName = exportFileName.substring(exportFileName.lastIndexOf(Constants.SLASH) + 1);
             }
         } else {
-            String path = defaultFilePath.substring(0, defaultFilePath.lastIndexOf("/") + 1);
+            String path = defaultFilePath.substring(0, defaultFilePath.lastIndexOf(Constants.SLASH) + 1);
             exportFileName = PathUtils.getFilePath(path, exportFileName);
 
         }
