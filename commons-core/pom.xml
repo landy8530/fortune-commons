@@ -11,6 +11,10 @@
 
     <artifactId>commons-core</artifactId>
 
+    <properties>
+        <freemarker.version>2.3.28</freemarker.version>
+    </properties>
+
     <dependencies>
         <!--Spring 3.2以后 Spring Framework已经包含了cglib的jar包，可不必手动引入-->
         <dependency>
@@ -20,6 +24,14 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
+        <!-- freemarker start -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
+        </dependency>
+        <!-- freemarker end -->
     </dependencies>
 
     <build>

@@ -3,7 +3,7 @@ package org.landy.commons.core.setting;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.landy.commons.core.setting.conf.SettingsConfiguration;
+import org.landy.commons.core.conf.SettingsConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;

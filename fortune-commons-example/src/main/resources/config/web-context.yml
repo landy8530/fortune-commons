@@ -1,0 +1,4 @@
+package.name.prefix: org.landy.commons
+page.root.path: /WEB-INF/pages
+controller.packages:
+  - org.landy.commons.web.controller
