@@ -1,7 +1,8 @@
-package org.landy.common.web;
+package org.landy.common.web.controller;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.landy.commons.web.conf.WebApplicationContextConfiguration;
+import org.landy.commons.web.springmvc.conf.WebApplicationContextConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -18,6 +19,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 }) //加载Spring配置文件
 public class ExportTest {
 
+    @Test
+    public void test() {
 
+    }
 
 }

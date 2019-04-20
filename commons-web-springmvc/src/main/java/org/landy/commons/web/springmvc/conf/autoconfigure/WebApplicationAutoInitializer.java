@@ -1,20 +1,28 @@
-package org.landy.commons.web.springmvc.conf;
+package org.landy.commons.web.springmvc.conf.autoconfigure;
 
 import org.landy.commons.core.constants.Constants;
-import org.landy.commons.web.conf.WebApplicationContextConfiguration;
+import org.landy.commons.web.springmvc.conf.SpringWebMvcConfiguration;
+import org.landy.commons.web.springmvc.conf.WebApplicationContextConfiguration;
+import org.springframework.web.SpringServletContainerInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContainerInitializer;
 
 /**
  * Web 自动装配
+ * 注意，这个类不需要使用web.xml配置加载，它会由Spring MVC的机制加载，
+ * 或许你会惊讶，它为什么会自动加载呢？
+ * 那是因为在spring 3.1之后，它给了我们一个类，
+ * SpringServletContainerInitializer，那么这个类就继承了Servlet规范的ServletContainerInitializer，
+ * 按照Servlet的规范，Java Web容器启动的时候，就会加载实现这个类的方法，
+ * 于是在Java Web容器初始化的时候，这个类就会被我们加载进来了。
+ * @see SpringServletContainerInitializer
+ * @see ServletContainerInitializer
  */
-//@EnableWebMvc
-//@ComponentScan("org.landy.jsp.in.spring.web.controller")
-//@Configuration
-public class WebAutoConfiguration extends
+public class WebApplicationAutoInitializer extends
         AbstractAnnotationConfigDispatcherServletInitializer {
 
     /**
@@ -88,12 +96,4 @@ public class WebAutoConfiguration extends
         return "app";
     }
 
-    /**
-     * 重写创建DispatcherServlet
-     * @param servletAppContext
-     * @return
-     */
-//    protected FrameworkServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
-//        return new FortuneDispatcherServlet(servletAppContext);
-//    }
 }
