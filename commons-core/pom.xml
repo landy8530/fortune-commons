@@ -5,11 +5,11 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.landy</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>commons-core</artifactId>
+    <version>${fortune.commons.core.version}</version>
 
     <dependencies>
         <!--Spring 3.2以后 Spring Framework已经包含了cglib的jar包，可不必手动引入-->

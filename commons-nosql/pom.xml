@@ -5,9 +5,13 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.landy</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>commons-nosql</artifactId>
+    <version>${fortune.commons.nosql.version}</version>
+    <name>commons-nosql</name>
+    <packaging>jar</packaging>
 
     <properties>
         <!--<mongodb.version>2.9.3</mongodb.version>-->
@@ -21,13 +25,11 @@
         <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
     </properties>
 
-    <artifactId>commons-nosql</artifactId>
-
     <dependencies>
         <dependency>
             <groupId>org.landy</groupId>
             <artifactId>commons-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${fortune.commons.core.version}</version>
         </dependency>
         <!--mongodb驱动包：包括bson，mongo-java-drive和mongo-java-core-->
         <dependency>
