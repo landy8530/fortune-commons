@@ -7,12 +7,12 @@
   <parent>
     <groupId>org.landy</groupId>
     <artifactId>fortune-commons</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
 
   <groupId>org.landy</groupId>
   <artifactId>commons-datacache</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>${fortune.commons.datacache.version}</version>
   <name>commons-datacache</name>
   <packaging>jar</packaging>
 
@@ -33,12 +33,12 @@
     <dependency>
       <groupId>org.landy</groupId>
       <artifactId>commons-core</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${fortune.commons.datacache.version}</version>
     </dependency>
     <dependency>
       <groupId>org.landy</groupId>
       <artifactId>commons-nosql</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${fortune.commons.nosql.version}</version>
     </dependency>
     <!--MemCache-->
     <dependency>
