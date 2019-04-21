@@ -2,7 +2,7 @@ package org.landy.commons.web.springmvc.conf.autoconfigure;
 
 import org.landy.commons.core.constants.Constants;
 import org.landy.commons.web.springmvc.conf.SpringWebMvcConfiguration;
-import org.landy.commons.web.springmvc.conf.WebApplicationContextConfiguration;
+import org.landy.commons.web.springmvc.conf.RootApplicationContextConfiguration;
 import org.springframework.web.SpringServletContainerInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -67,7 +67,7 @@ public class WebApplicationAutoInitializer extends
      * @return
      */
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{WebApplicationContextConfiguration.class};
+        return new Class[]{RootApplicationContextConfiguration.class};
     }
 
     /***

@@ -46,7 +46,12 @@
         <slf4j.version>1.7.5</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <logback.version>1.2.3</logback.version>
-
+        <!--Jackson-->
+        <jackson.version>2.9.8</jackson.version>
+        <!--freemarker-->
+        <freemarker.version>2.3.28</freemarker.version>
+        <!--cglib-->
+        <cglib.version>3.2.10</cglib.version>
         <!--test-->
         <junit.version>4.12</junit.version>
     </properties>
