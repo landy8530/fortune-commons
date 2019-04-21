@@ -26,7 +26,7 @@ import java.util.Map;
 @EnableAspectJAutoProxy // 相当于 xml 中的 <aop:aspectj-autoproxy/>
 @EnableTransactionManagement // 开启注解事务
 @Import({ApplicationContextConfiguration.class})
-public class WebApplicationContextConfiguration {
+public class RootApplicationContextConfiguration {
 
     // 配置DataCacheFacade
     @Bean(name = DataCacheFacade.BEAN_NAME_DATA_CACHE_FACADE)
