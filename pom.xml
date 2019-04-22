@@ -6,7 +6,7 @@
 
     <groupId>org.landy</groupId>
     <artifactId>fortune-commons</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
     <name>fortune-commons</name>
     <description>整合各种常见的公共组件</description>
