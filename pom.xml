@@ -22,12 +22,12 @@
     </modules>
 
     <properties>
-        <fortune.commons.datacache.version>1.0.1</fortune.commons.datacache.version>
-        <fortune.commons.core.version>1.0.1</fortune.commons.core.version>
-        <fortune.commons.nosql.version>1.0.1</fortune.commons.nosql.version>
-        <fortune.commons.export.version>1.0.1</fortune.commons.export.version>
-        <fortune.commons.web.version>1.0.1</fortune.commons.web.version>
-        <fortune.commons.web.springmvc.version>1.0.1</fortune.commons.web.springmvc.version>
+        <fortune.commons.datacache.version>1.0.2</fortune.commons.datacache.version>
+        <fortune.commons.core.version>1.0.2</fortune.commons.core.version>
+        <fortune.commons.nosql.version>1.0.2</fortune.commons.nosql.version>
+        <fortune.commons.export.version>1.0.2</fortune.commons.export.version>
+        <fortune.commons.web.version>1.0.2</fortune.commons.web.version>
+        <fortune.commons.web.springmvc.version>1.0.2</fortune.commons.web.springmvc.version>
         <!--system-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
