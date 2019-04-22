@@ -5,6 +5,7 @@ import org.landy.commons.web.conf.ExportAttachmentHandlerConfiguration;
 import org.landy.commons.web.conf.FreemarkerConfiguration;
 import org.landy.commons.web.conf.WebContextLoaderConfiguration;
 import org.landy.commons.web.springmvc.interceptor.UserExportInterceptor;
+import org.landy.commons.web.springmvc.load.ControllerConfigurationLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -95,13 +96,12 @@ public class SpringWebMvcConfiguration implements WebMvcConfigurer /**WebMvcConf
 
     //配置预加载所有Controller所在的包
     //Action 路径扫描加载，Action Form 的属性预加载
-//    @Bean
-//    public ControllerConfigurationLoader controllerConfigurationLoader() {
-//        this.basePackage = settings.getAsList(CONTROLLER_PACKAGE_LIST);
-//        ControllerConfigurationLoader controllerConfigurationLoader = new ControllerConfigurationLoader(basePackage);
-//        controllerConfigurationLoader.init();
-//        return controllerConfigurationLoader;
-//    }
+    @Bean
+    public ControllerConfigurationLoader controllerConfigurationLoader() {
+        this.basePackage = settings.getAsList(CONTROLLER_PACKAGE_LIST);
+        ControllerConfigurationLoader controllerConfigurationLoader = new ControllerConfigurationLoader(basePackage);
+        return controllerConfigurationLoader;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

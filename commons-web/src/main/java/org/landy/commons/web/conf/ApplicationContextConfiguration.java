@@ -15,7 +15,9 @@ import org.springframework.context.annotation.Import;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Application Context上下文基本配置
+ */
 @Configuration
 @ComponentScan("org.landy.commons")
 @Import({SettingsConfiguration.class,  // common settings configuration
@@ -23,16 +25,5 @@ import java.util.List;
         BeanCopierConfiguration.class // Bean copier component configuration
         })
 public class ApplicationContextConfiguration {
-    @Autowired
-    DataCacheFacade dataCacheFacade;
-
-    @Bean
-    public BeanInitializeCompletedListener beanInitializeCompletedListener() {
-        BeanInitializeCompletedListener beanInitializeCompletedListener = new BeanInitializeCompletedListener();
-        List<AbstractApplicationContextHelper> initSysHelperBeanList = new ArrayList<>();
-        initSysHelperBeanList.add(dataCacheFacade);
-        beanInitializeCompletedListener.setInitSysHelperBeanList(initSysHelperBeanList);
-        return beanInitializeCompletedListener;
-    }
 
 }

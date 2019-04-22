@@ -1,5 +1,6 @@
 package org.landy.commons.web.springmvc.load;
 
+import org.landy.commons.core.help.AbstractApplicationContextHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -7,8 +8,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.*;
 
 import java.util.Arrays;
@@ -19,10 +18,8 @@ import java.util.List;
  * @date: 2019/4/20 15:43
  * @description:
  */
-public class ControllerConfigurationLoader implements ApplicationContextAware, BeanFactoryAware {
+public class ControllerConfigurationLoader extends AbstractApplicationContextHelper implements BeanFactoryAware {
     private Logger LOGGER = LoggerFactory.getLogger(ControllerConfigurationLoader.class);
-
-    private ApplicationContext applicationContext;
 
     private DefaultListableBeanFactory beanFactory;
 
@@ -61,10 +58,5 @@ public class ControllerConfigurationLoader implements ApplicationContextAware, B
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = (DefaultListableBeanFactory) beanFactory;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
     }
 }

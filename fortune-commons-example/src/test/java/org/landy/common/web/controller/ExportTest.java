@@ -13,7 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * @description:
  */
 @RunWith(SpringJUnit4ClassRunner.class) //调用Spring单元测试类
-@WebAppConfiguration  //调用Java Web组件，如自动注入ServletContext Bean等
+@WebAppConfiguration  //调用Java Web组件，如自动注入ServletContext Bean等,即自动加载WebApplicationAutoInitializer类的初始化动作
 @ContextConfiguration(classes = {
         RootApplicationContextConfiguration.class
 }) //加载Spring配置文件
