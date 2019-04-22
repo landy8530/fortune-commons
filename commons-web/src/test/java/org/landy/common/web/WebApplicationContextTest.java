@@ -2,12 +2,15 @@ package org.landy.common.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.landy.commons.core.help.AbstractApplicationContextHelper;
+import org.landy.commons.core.help.BeanInitializeCompletedListener;
 import org.landy.commons.datacache.DataCacheFacade;
 import org.landy.commons.datacache.adapter.CacheDataLoadAdapter;
 import org.landy.commons.web.conf.ApplicationContextConfiguration;
 import org.landy.commons.web.conf.ExportAttachmentHandlerConfiguration;
 import org.landy.commons.web.conf.FreemarkerConfiguration;
 import org.landy.commons.web.conf.WebContextLoaderConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,6 +25,7 @@ import java.util.Map;
 @RunWith(SpringJUnit4ClassRunner.class) //调用Spring单元测试类
 @WebAppConfiguration  //调用Java Web组件，如自动注入ServletContext Bean等
 @ContextConfiguration(classes = {
+        BeanInitializedCompletedConfiguration.class,
         ApplicationContextConfiguration.class,
         ExportAttachmentHandlerConfiguration.class,
         FreemarkerConfiguration.class,
@@ -74,5 +78,20 @@ class DataCachedConfiguration {
         public List<String> getStoreKeys() {
             return keys;
         }
+    }
+}
+
+@Configuration
+class BeanInitializedCompletedConfiguration {
+    @Autowired
+    DataCacheFacade dataCacheFacade;
+
+    @Bean
+    public BeanInitializeCompletedListener beanInitializeCompletedListener() {
+        BeanInitializeCompletedListener beanInitializeCompletedListener = new BeanInitializeCompletedListener();
+        List<AbstractApplicationContextHelper> initSysHelperBeanList = new ArrayList<>();
+        initSysHelperBeanList.add(dataCacheFacade);
+        beanInitializeCompletedListener.setInitSysHelperBeanList(initSysHelperBeanList);
+        return beanInitializeCompletedListener;
     }
 }

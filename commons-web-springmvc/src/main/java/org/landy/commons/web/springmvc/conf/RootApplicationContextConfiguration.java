@@ -2,9 +2,6 @@ package org.landy.commons.web.springmvc.conf;
 
 import org.landy.commons.datacache.DataCacheFacade;
 import org.landy.commons.datacache.adapter.CacheDataLoadAdapter;
-import org.landy.commons.web.conf.ApplicationContextConfiguration;
-import org.landy.commons.web.conf.ExportAttachmentHandlerConfiguration;
-import org.landy.commons.web.conf.FreemarkerConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -25,7 +22,7 @@ import java.util.Map;
 @Configuration
 @EnableAspectJAutoProxy // 相当于 xml 中的 <aop:aspectj-autoproxy/>
 @EnableTransactionManagement // 开启注解事务
-@Import({ApplicationContextConfiguration.class})
+@Import({BeanInitializeCompletedConfiguration.class})
 public class RootApplicationContextConfiguration {
 
     // 配置DataCacheFacade
