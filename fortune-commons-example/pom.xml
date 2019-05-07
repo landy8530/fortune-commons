@@ -17,6 +17,13 @@
             <artifactId>commons-web-springmvc</artifactId>
             <version>${fortune.commons.web.springmvc.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
 
 </project>
