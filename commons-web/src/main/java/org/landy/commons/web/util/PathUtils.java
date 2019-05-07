@@ -18,7 +18,7 @@ public class PathUtils {
      */
     private static final String PAGE_JSP_SUFFIX = ".jsp";
 
-    private static final String STANDARD_ACTION_PKG_NAME = ".action.";
+    private static final String STANDARD_ACTION_PKG_NAME = ".controller.";
 
 
     private static String getPathFromPkgPathName(String pkgName) {
@@ -30,7 +30,7 @@ public class PathUtils {
             }
             return path;
         } else {
-            LOG.error("action的路径不标准，未含有【" + STANDARD_ACTION_PKG_NAME + "】，无法解析");
+            LOG.error("controller的路径不标准，未含有【" + STANDARD_ACTION_PKG_NAME + "】，无法解析");
         }
         return Constants.SLASH;
     }
@@ -48,10 +48,10 @@ public class PathUtils {
         String path = getPathFromPkgPathName(pkgName);
         String actionSimpleClassName = actionClazz.getSimpleName();
         if (LOG.isDebugEnabled()) {
-            LOG.debug("上级路径：" + path + "actionName=" + actionSimpleClassName + ",method=" + methodName);
+            LOG.debug("上级路径：" + path + "controllerName=" + actionSimpleClassName + ",method=" + methodName);
         }
-        if (actionSimpleClassName.contains("Action")) {
-            String name = actionSimpleClassName.substring(0, actionSimpleClassName.indexOf("Action"));
+        if (actionSimpleClassName.contains("Controller")) {
+            String name = actionSimpleClassName.substring(0, actionSimpleClassName.indexOf("Controller"));
             name = name.substring(0, 1).toLowerCase() + name.substring(1);
             path = path + name + Constants.SLASH + methodName;
             if (LOG.isDebugEnabled()) {
@@ -59,7 +59,7 @@ public class PathUtils {
             }
             return path;
         } else {
-            LOG.error("Action名称不合规范，没含有【action" + "】,无法进行解析路径");
+            LOG.error("Controller名称不合规范，没含有【controller】,无法进行解析路径");
             return "";
         }
     }
