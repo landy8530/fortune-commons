@@ -21,7 +21,7 @@
 
 ### 工程说明
 
-目前最新版本为v1.0.x，含有以下子工程（子模块），分别说明如下：
+目前最新版本为v1.0.x，含有以下子工程（子模块），分别说明如下(也可参考[wiki](<https://github.com/landy8530/fortune-commons/wiki>))：
 
 #### commons-core
 
@@ -60,6 +60,7 @@ NoSql模拟关系型数据库的CRUD操作，目前有Mongodb实现。
 
 1. 代码大多是手敲，所以难免会有错误，你可以帮我Bug，提交issues或者PR。
 2. 很多知识点我可能没有涉及到，所以你可以对其他知识点进行补充或者加入其他的组件。
+3. 为了使项目更加的透明化，便利化，也可以参与[wiki](<https://github.com/landy8530/fortune-commons/wiki>)的编写工作。
 
 ## 为什么要做这个开源组件？
 
