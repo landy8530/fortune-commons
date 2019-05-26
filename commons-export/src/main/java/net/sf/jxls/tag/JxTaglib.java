@@ -1,7 +1,7 @@
 package net.sf.jxls.tag;
 
-import org.landy.commons.export.excel.jxls.tag.DateTimeTag;
-import org.landy.commons.export.excel.jxls.tag.MapTag;
+import org.fortune.commons.export.excel.jxls.tag.DateTimeTag;
+import org.fortune.commons.export.excel.jxls.tag.MapTag;
 
 import java.util.HashMap;
 import java.util.Map;

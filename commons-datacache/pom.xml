@@ -5,12 +5,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.landy</groupId>
+    <groupId>org.fortune</groupId>
     <artifactId>fortune-commons</artifactId>
     <version>1.0.2</version>
   </parent>
 
-  <groupId>org.landy</groupId>
+  <groupId>org.fortune</groupId>
   <artifactId>commons-datacache</artifactId>
   <version>${fortune.commons.datacache.version}</version>
   <name>commons-datacache</name>
@@ -31,12 +31,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.landy</groupId>
+      <groupId>org.fortune</groupId>
       <artifactId>commons-core</artifactId>
       <version>${fortune.commons.datacache.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.landy</groupId>
+      <groupId>org.fortune</groupId>
       <artifactId>commons-nosql</artifactId>
       <version>${fortune.commons.nosql.version}</version>
     </dependency>

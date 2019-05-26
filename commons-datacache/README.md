@@ -154,7 +154,7 @@ mongo.databaseName=test
 
 ```java
 @Configuration
-@ComponentScan("org.landy.commons.datacache")
+@ComponentScan("org.fortune.commons.datacache")
 public class MongoConfig extends AbstractCacheConfig {
 
     private static final String MONGODB_PREFIX = "mongodb://";

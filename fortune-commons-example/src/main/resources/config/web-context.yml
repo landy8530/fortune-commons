@@ -1,4 +1,4 @@
-package.name.prefix: org.landy.commons
+package.name.prefix: org.fortune.commons
 page.root.path: /WEB-INF/pages
 controller.packages:
-  - org.landy.commons.web.controller
+  - org.fortune.commons.web.controller
