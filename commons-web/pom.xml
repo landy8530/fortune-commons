@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>fortune-commons</artifactId>
-        <groupId>org.landy</groupId>
+        <groupId>org.fortune</groupId>
         <version>1.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.landy</groupId>
+    <groupId>org.fortune</groupId>
     <artifactId>commons-web</artifactId>
     <version>${fortune.commons.web.version}</version>
     <name>commons-web</name>
@@ -16,12 +16,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.landy</groupId>
+            <groupId>org.fortune</groupId>
             <artifactId>commons-datacache</artifactId>
             <version>${fortune.commons.datacache.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.landy</groupId>
+            <groupId>org.fortune</groupId>
             <artifactId>commons-export</artifactId>
             <version>${fortune.commons.export.version}</version>
         </dependency>
