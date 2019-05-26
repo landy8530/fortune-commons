@@ -1,6 +1,49 @@
 # Fortune Commons Component
 
-## 版本说明
+## 项目介绍
+
+### 项目特色
+
+项目深受Java 劝退师，Apache 和 Spring Cloud 等知名开源架构成员[小马哥](<https://segmentfault.com/u/mercyblitz>)（Github:[mercyblitz](<https://github.com/mercyblitz>)）的思想影响，本项目采用了现在普遍采用的自动化配置、注解化开发等特点，开发过程非常的遍历。代码如下所示：
+
+```Java
+/**
+ * @author: Landy
+ * @date: 2019/4/7 00:04
+ * @description: WebApplicationContext配置类,需要根据具体的业务逻辑进行配置，比如缓存门面类的配置
+ * 需要在web端工程里具体配置
+ */
+@Configuration
+@EnableAspectJAutoProxy // 相当于 xml 中的 <aop:aspectj-autoproxy/>
+@EnableTransactionManagement // 开启注解事务
+@Import({BeanInitializeCompletedConfiguration.class})
+public class RootApplicationContextConfiguration {
+
+    // 配置DataCacheFacade
+    @Bean(name = DataCacheFacade.BEAN_NAME_DATA_CACHE_FACADE)
+    public DataCacheFacade dataCacheFacade() {
+        DataCacheFacade dataCacheFacade = new DataCacheFacade();
+        List<CacheDataLoadAdapter> cacheDataAdapterList = new ArrayList<>();
+        cacheDataAdapterList.add(new CodeCacheDataLoadAdapter());
+        dataCacheFacade.setCacheDataAdapterList(cacheDataAdapterList);
+        return dataCacheFacade;
+    }
+
+    public class CodeCacheDataLoadAdapter extends CacheDataLoadAdapter {
+        private List<String> keys=new ArrayList<String>();
+        @Override
+        public boolean loadData() {
+            ...
+            return true;
+        }
+
+        @Override
+        public List<String> getStoreKeys() {
+            return keys;
+        }
+    }
+}
+```
 
 ### 版本约束
 
