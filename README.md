@@ -45,6 +45,10 @@ public class RootApplicationContextConfiguration {
 }
 ```
 
+### 项目名称
+
+由于绝大多数程序员都是命苦的娃，都希望有朝一日能够通过代码改变自己的命运，所以我为此项目定了一个fortune的名称，希望我们大家都能够通过代码改变世界（哈哈）！
+
 ### 版本约束
 
 - Spring：5.x+ 
