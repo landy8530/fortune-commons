@@ -4,7 +4,7 @@
 
 ### 项目特色
 
-项目深受Java 劝退师，Apache 和 Spring Cloud 等知名开源架构成员[小马哥](<https://segmentfault.com/u/mercyblitz>)（Github:[mercyblitz](<https://github.com/mercyblitz>)）的思想影响，本项目采用了现在普遍采用的自动化配置、注解化开发等特点，开发过程非常的遍历。代码如下所示：
+项目深受Java 劝退师，Apache 和 Spring Cloud 等知名开源架构成员[小马哥](<https://segmentfault.com/u/mercyblitz>)（Github:[mercyblitz](<https://github.com/mercyblitz>)）的思想影响，本项目采用了现在普遍采用的自动化配置、注解化开发等特点，开发过程非常的便利。代码如下所示：
 
 ```Java
 /**
