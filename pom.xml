@@ -19,6 +19,9 @@
         <module>commons-web</module>
         <module>commons-web-springmvc</module>
         <module>fortune-commons-example</module>
+        <module>commons-doc-client</module>
+        <module>commons-doc-server</module>
+        <module>commons-doc-common</module>
     </modules>
 
     <properties>
@@ -28,6 +31,12 @@
         <fortune.commons.export.version>1.0.2</fortune.commons.export.version>
         <fortune.commons.web.version>1.0.2</fortune.commons.web.version>
         <fortune.commons.web.springmvc.version>1.0.2</fortune.commons.web.springmvc.version>
+        <!-- 文件服务公共模块 -->
+        <fortune.commons.doc.common.version>1.0.2</fortune.commons.doc.common.version>
+        <!-- 文件服务客户端 -->
+        <fortune.commons.doc.client.version>1.0.2</fortune.commons.doc.client.version>
+        <!-- 文件服务服务端 -->
+        <fortune.commons.doc.server.version>1.0.2</fortune.commons.doc.server.version>
         <!--system-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -260,4 +269,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

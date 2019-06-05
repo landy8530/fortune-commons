@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fortune-commons</artifactId>
+        <groupId>org.fortune</groupId>
+        <version>1.0.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.fortune</groupId>
+    <artifactId>commons-doc-client</artifactId>
+    <version>${fortune.commons.doc.client.version}</version>
+    <name>commons-doc-client</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.fortune</groupId>
+            <artifactId>commons-doc-common</artifactId>
+            <version>${fortune.commons.doc.common.version}</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <finalName>commons-doc-client</finalName>
+    </build>
+</project>
