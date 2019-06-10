@@ -93,7 +93,7 @@ public class WebApplicationAutoInitializer extends
 
     @Override
     protected String getServletName() {
-        return "app";
+        return "doc-server";
     }
 
 }

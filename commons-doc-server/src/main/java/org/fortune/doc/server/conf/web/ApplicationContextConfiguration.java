@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
  * Application Context上下文基本配置
  */
 @Configuration
-@ComponentScan("org.fortune.commons")
+@ComponentScan("org.fortune.doc")
 @Import({SettingsConfiguration.class,  // common settings configuration
         BeanCopierConfiguration.class // Bean copier component configuration
         })

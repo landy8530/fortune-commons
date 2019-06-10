@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2019/4/22 10:28
  */
 @Configuration
-@ComponentScan("org.fortune.commons")
+@ComponentScan("org.fortune.doc")
 @Import({ApplicationContextConfiguration.class,  // common Application context configuration
         })
 public class BeanInitializeCompletedConfiguration {
