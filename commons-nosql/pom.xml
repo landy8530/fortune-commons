@@ -5,43 +5,28 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.fortune</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-nosql</artifactId>
-    <version>${fortune.commons.nosql.version}</version>
+    <version>1.0.3</version>
     <name>commons-nosql</name>
     <packaging>jar</packaging>
-
-    <properties>
-        <!--<mongodb.version>2.9.3</mongodb.version>-->
-        <mongodb.version>3.10.1</mongodb.version>
-        <spring.data.mongo.version>2.1.5.RELEASE</spring.data.mongo.version>
-
-        <!--redis-->
-        <!--https://github.com/xetorthio/jedis-->
-        <jedis.version>3.0.1</jedis.version>
-        <commons.pool2.version>2.4.3</commons.pool2.version>
-        <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
             <artifactId>commons-core</artifactId>
-            <version>${fortune.commons.core.version}</version>
         </dependency>
         <!--mongodb驱动包：包括bson，mongo-java-drive和mongo-java-core-->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver</artifactId>
-            <version>${mongodb.version}</version>
         </dependency>
         <!--mongodb Spring核心包-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
-            <version>${spring.data.mongo.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.mongodb</groupId>
@@ -57,8 +42,6 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
-            <version>${spring.data.mongo.version}</version>
-            <scope>compile</scope>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>org.projectlombok</groupId>-->
@@ -71,7 +54,6 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>${jedis.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
@@ -82,12 +64,10 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
-            <version>${commons.pool2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
-            <version>${spring.data.redis.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>

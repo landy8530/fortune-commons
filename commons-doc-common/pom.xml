@@ -5,55 +5,43 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.fortune</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fortune</groupId>
     <artifactId>commons-doc-common</artifactId>
-    <version>${fortune.commons.doc.common.version}</version>
+    <version>1.0.3</version>
     <name>commons-doc-common</name>
     <packaging>jar</packaging>
-
-    <properties>
-        <io.netty.version>3.6.3.Final</io.netty.version>
-        <fastjson.version>1.2.58</fastjson.version>
-        <thumbnailator.version>0.4.3</thumbnailator.version>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
             <artifactId>commons-core</artifactId>
-            <version>${fortune.commons.core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty</artifactId>
-            <version>${io.netty.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
         </dependency>
         <!-- 生成缩略图工具 -->
         <dependency>
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>
-            <version>${thumbnailator.version}</version>
         </dependency>
 
         <!--web mvc 中HTTP JSON转换器-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 

@@ -5,28 +5,50 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.fortune</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>org.fortune</groupId>
     <artifactId>commons-web-springmvc</artifactId>
+    <version>1.0.3</version>
+    <name>commons-web-springmvc</name>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
             <artifactId>commons-web</artifactId>
-            <version>${fortune.commons.web.version}</version>
         </dependency>
         <!--web mvc 中HTTP JSON转换器-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- javax-servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--spring单元测试依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
