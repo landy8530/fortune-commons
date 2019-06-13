@@ -31,6 +31,7 @@ public class UploadDocServerHandler extends AbstractDocServerHandler {
 
     public UploadDocServerHandler(Account account) {
         super(account);
+        createSaveDir();
     }
 
     public Result process(RequestParam reqParams) {

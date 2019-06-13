@@ -204,6 +204,10 @@ public class DocServerHandler extends SimpleChannelUpstreamHandler {
                 .append("<CENTER>POST FORM<HR WIDTH=\"75%\" NOSHADE color=\"blue\"></CENTER>");
         this.responseContent
                 .append("<FORM ACTION=\"/formpost\" METHOD=\"POST\">");
+
+        this.responseContent.append("<input type=hidden name=\"" + Constants.ACTION_KEY + "\" value=\""
+                + DocOperationType.UPLOAD_FILE.getValue() + "\">");
+
         this.responseContent
                 .append("<input type=hidden name=getform value=\"POST\">");
         this.responseContent.append("<table border=\"0\">");
