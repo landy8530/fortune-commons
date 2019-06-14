@@ -20,6 +20,19 @@
             <artifactId>commons-doc-common</artifactId>
         </dependency>
 
+        <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--spring单元测试依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

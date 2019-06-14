@@ -124,10 +124,10 @@ public class DocClient {
             strThumbMark = Constants.THUMB_MARK_YES;
         }
         //具体处理上传文件逻辑
-        uploadFile(bootstrap, DocClientContainer.getHost(),
-                DocClientContainer.getPort(), file, fileName, strThumbMark,
-                DocClientContainer.getUserName(),
-                DocClientContainer.getPassword());
+        uploadFile(bootstrap, DocClientContainer.getInstance().getHost(),
+                DocClientContainer.getInstance().getPort(), file, fileName, strThumbMark,
+                DocClientContainer.getInstance().getUserName(),
+                DocClientContainer.getInstance().getPassword());
         Result result = clientPipelineFactory.getResult();
         if ((result != null) && (result.isCode())) {
             return result.getFilePath();
@@ -174,8 +174,8 @@ public class DocClient {
                                      String pwd) {
         DocClientPipelineFactory clientPipelineFactory = new DocClientPipelineFactory();
         ClientBootstrap bootstrap = createClientBootstrap(clientPipelineFactory);
-        deleteFile(bootstrap, DocClientContainer.getHost(),
-                DocClientContainer.getPort(), filePath, userName, pwd);
+        deleteFile(bootstrap, DocClientContainer.getInstance().getHost(),
+                DocClientContainer.getInstance().getPort(), filePath, userName, pwd);
         Result result = clientPipelineFactory.getResult();
         if ((result != null) && (result.isCode())) {
             return result.isCode();
@@ -189,7 +189,7 @@ public class DocClient {
      * @author:landyChris
      */
     public static boolean deleteFile(String filePath) {
-        return deleteFile(filePath,DocClientContainer.getUserName(), DocClientContainer.getPassword());
+        return deleteFile(filePath,DocClientContainer.getInstance().getUserName(), DocClientContainer.getInstance().getPassword());
     }
 
     private static void replaceFile(ClientBootstrap bootstrap, String host,
@@ -229,10 +229,10 @@ public class DocClient {
     public static boolean replaceFile(File file, String filePath) {
         DocClientPipelineFactory clientPipelineFactory = new DocClientPipelineFactory();
         ClientBootstrap bootstrap = createClientBootstrap(clientPipelineFactory);
-        replaceFile(bootstrap, DocClientContainer.getHost(),
-                DocClientContainer.getPort(), file, filePath,
-                DocClientContainer.getUserName(),
-                DocClientContainer.getPassword());
+        replaceFile(bootstrap, DocClientContainer.getInstance().getHost(),
+                DocClientContainer.getInstance().getPort(), file, filePath,
+                DocClientContainer.getInstance().getUserName(),
+                DocClientContainer.getInstance().getPassword());
         Result result = clientPipelineFactory.getResult();
         if ((result != null) && (result.isCode())) {
             return result.isCode();
@@ -280,8 +280,8 @@ public class DocClient {
                                              String pwd) {
         DocClientPipelineFactory clientPipelineFactory = new DocClientPipelineFactory();
         ClientBootstrap bootstrap = createClientBootstrap(clientPipelineFactory);
-        createThumbPicture(bootstrap, DocClientContainer.getHost(),
-                DocClientContainer.getPort(), filePath, userName, pwd);
+        createThumbPicture(bootstrap, DocClientContainer.getInstance().getHost(),
+                DocClientContainer.getInstance().getPort(), filePath, userName, pwd);
         Result result = clientPipelineFactory.getResult();
         if ((result != null) && (result.isCode())) {
             return result.isCode();
@@ -296,8 +296,8 @@ public class DocClient {
      */
     public static boolean createThumbPicture(String filePath) {
         return createThumbPicture(filePath,
-                DocClientContainer.getUserName(),
-                DocClientContainer.getPassword());
+                DocClientContainer.getInstance().getUserName(),
+                DocClientContainer.getInstance().getPassword());
     }
 
 }

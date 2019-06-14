@@ -1,6 +1,6 @@
 package org.fortune.doc.client;
 
-import java.util.ResourceBundle;
+import org.fortune.commons.core.help.ApplicationContextHelper;
 
 /**
  * @author: landy
@@ -8,32 +8,37 @@ import java.util.ResourceBundle;
  * @description:
  */
 public class DocClientContainer {
+    public static final String BEAN_NAME_DOC_CLIENT_CONTAINER = "docClientContainer";
 
-    private static ResourceBundle rb = null;
+    private static String userName ;
+    private static String password ;
+    private static String host ;
+    private static int port ;
 
-    static {
-        rb = ResourceBundle.getBundle("file-config");
+    public static DocClientContainer getInstance() {
+        return ApplicationContextHelper.accessApplicationContext().getBean(BEAN_NAME_DOC_CLIENT_CONTAINER,DocClientContainer.class);
     }
 
-    private static String userName = rb.getString("upload.userName");
-    private static String password = rb.getString("upload.password");
-    private static String host = rb.getString("upload.server.host");
-    private static int port = Integer
-            .parseInt(rb.getString("upload.server.port"));
+    public DocClientContainer(String userName, String password, String host, int port) {
+        this.userName = userName;
+        this.password = password;
+        this.host = host;
+        this.port = port;
+    }
 
-    public static String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public static String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public static String getHost() {
+    public String getHost() {
         return host;
     }
 
-    public static int getPort() {
+    public int getPort() {
         return port;
     }
 
