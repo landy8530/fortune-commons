@@ -60,9 +60,9 @@ public class RootApplicationContextConfiguration {
 
 | 版本 | 功能说明                                                     |
 | ---- | ------------------------------------------------------------ |
-| 1.x  | 数据缓存处理和excel/pdf导出组件，集成Spring MVC              |
-| 2.x  | 数据缓存处理和excel/pdf导出组件，集成Restful API             |
-| 3.x  | 数据缓存处理和excel/pdf导出组件，集成Restful API，并且计划加入Spring Boot/Spring Cloud等 |
+| 1.x  | 数据缓存处理和excel/pdf导出组件/文件上传服务组件，集成Spring MVC |
+| 2.x  | 数据缓存处理和excel/pdf导出组件/文件上传服务组件，集成Restful API |
+| 3.x  | 数据缓存处理和excel/pdf导出组件/文件上传服务组件，集成Restful API，并且计划加入Spring Boot/Spring Cloud等 |
 
 注意：以上各个版本都可以增加其他组件。
 
@@ -73,6 +73,28 @@ public class RootApplicationContextConfiguration {
 #### commons-core
 
 主要是本项目所需的一些核心功能实现，比如BeanCopier工具封装，读取yml文件工具，Freemarker解析实现，ApplicationContext工具类，Spring容器初始化后统一操作的listener实现以及其他一些工具类支持。
+
+#### commons-doc-common
+
+文件上传服务组件公共类库，依赖于module [fortune-commons-core].
+
+```xml
+<dependency>
+    <groupId>org.fortune</groupId>
+    <artifactId>commons-core</artifactId>
+</dependency>
+```
+
+#### commons-doc-client
+
+文件上传服务客户端，使用简单，只需要引入commons-doc-client，即可以实现文件的上传/替换/删除等操作。
+
+#### commons-doc-server
+
+文件上传服务服务端，实现方式计划采用以下两种方式实现：
+
+- 采用Netty实现文件的转储操作
+- 采用原生HTTP方式实现（利用Spring MVC）
 
 #### commons-datacache
 
@@ -105,7 +127,7 @@ NoSql模拟关系型数据库的CRUD操作，目前有Mongodb实现。
 
 ## 如何对该开源项目进行贡献
 
-1. 代码大多是手敲，所以难免会有错误，你可以帮我Bug，提交issues或者PR。
+1. 代码大多是手敲，所以难免会有错误，你可以帮我提交Bug issues或者PR。
 2. 很多知识点我可能没有涉及到，所以你可以对其他知识点进行补充或者加入其他的组件。
 3. 为了使项目更加的透明化，便利化，也可以参与[wiki](<https://github.com/landy8530/fortune-commons/wiki>)的编写工作。
 

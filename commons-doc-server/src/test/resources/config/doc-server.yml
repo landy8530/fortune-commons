@@ -3,15 +3,15 @@
 accounts:
   - userName: fortune
     password: fortune
-    rootPath: c:/tmp/up #上传文件的根目录,实际工作环境按照实际情况更改即可
+    rootPath: C:\06_temp\upload #上传文件的根目录,实际工作环境按照实际情况更改即可
     level: 1
     thumbHeight: 100
     thumbWidth: 100
   - userName: fortune0
     password: fortune0
-    rootPath: c:/tmp/up #上传文件的根目录,实际工作环境按照实际情况更改即可
+    rootPath: C:\06_temp\upload #上传文件的根目录,实际工作环境按照实际情况更改即可
     level: 1
     thumbHeight: 100
     thumbWidth: 100
 port: 9999 #端口号
-fileBaseDirectory: c:/tmp/up/tmp #临时文件的目录
+fileBaseDirectory: C:\06_temp\upload\tmp #临时文件的目录
