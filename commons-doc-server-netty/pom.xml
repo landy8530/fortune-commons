@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>fortune-commons</artifactId>
@@ -8,29 +8,17 @@
         <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.fortune</groupId>
-    <artifactId>commons-web-springmvc</artifactId>
+    <artifactId>commons-doc-server-netty</artifactId>
     <version>1.0.3</version>
-    <name>commons-web-springmvc</name>
-    <packaging>jar</packaging>
+    <name>commons-doc-server-netty</name>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
-            <artifactId>commons-web</artifactId>
+            <artifactId>commons-doc-common</artifactId>
         </dependency>
-        <!--web mvc 中HTTP JSON转换器-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-        <!-- javax-servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -50,6 +38,21 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
+
+    <build>
+        <finalName>commons-doc-server-netty</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

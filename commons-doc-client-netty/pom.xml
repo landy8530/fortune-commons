@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>fortune-commons</artifactId>
@@ -8,33 +8,16 @@
         <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.fortune</groupId>
-    <artifactId>commons-web-springmvc</artifactId>
+    <artifactId>commons-doc-client-netty</artifactId>
     <version>1.0.3</version>
-    <name>commons-web-springmvc</name>
+    <name>commons-doc-client-netty</name>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
-            <artifactId>commons-web</artifactId>
-        </dependency>
-        <!--web mvc 中HTTP JSON转换器-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-        <!-- javax-servlet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
+            <artifactId>commons-doc-common</artifactId>
         </dependency>
 
         <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
@@ -50,6 +33,10 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
+    <build>
+        <finalName>commons-doc-client-netty</finalName>
+    </build>
 </project>

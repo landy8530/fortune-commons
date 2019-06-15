@@ -5,25 +5,61 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.fortune</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>org.fortune</groupId>
     <artifactId>fortune-commons-example</artifactId>
+    <version>1.0.3</version>
+    <name>fortune-commons-example</name>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
             <artifactId>commons-web-springmvc</artifactId>
-            <version>${fortune.commons.web.springmvc.version}</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
 
+        <!-- javax-servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--spring单元测试依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <finalName>fortune-commons-example</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
