@@ -6,7 +6,7 @@
 
     <groupId>org.fortune</groupId>
     <artifactId>fortune-commons</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>pom</packaging>
     <name>fortune-commons</name>
     <description>整合各种常见的公共组件</description>
@@ -19,19 +19,30 @@
         <module>commons-web</module>
         <module>commons-web-springmvc</module>
         <module>fortune-commons-example</module>
+        <module>commons-doc-client-netty</module>
+        <module>commons-doc-server-netty</module>
+        <module>commons-doc-common</module>
     </modules>
 
     <properties>
-        <fortune.commons.datacache.version>1.0.2</fortune.commons.datacache.version>
-        <fortune.commons.core.version>1.0.2</fortune.commons.core.version>
-        <fortune.commons.nosql.version>1.0.2</fortune.commons.nosql.version>
-        <fortune.commons.export.version>1.0.2</fortune.commons.export.version>
-        <fortune.commons.web.version>1.0.2</fortune.commons.web.version>
-        <fortune.commons.web.springmvc.version>1.0.2</fortune.commons.web.springmvc.version>
         <!--system-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- fortune commons组件版本 -->
+        <fortune.commons.datacache.version>1.0.3</fortune.commons.datacache.version>
+        <fortune.commons.core.version>1.0.3</fortune.commons.core.version>
+        <fortune.commons.nosql.version>1.0.3</fortune.commons.nosql.version>
+        <fortune.commons.export.version>1.0.3</fortune.commons.export.version>
+        <fortune.commons.web.version>1.0.3</fortune.commons.web.version>
+        <fortune.commons.web.springmvc.version>1.0.3</fortune.commons.web.springmvc.version>
+        <!-- 文件服务公共模块 -->
+        <fortune.commons.doc.common.version>1.0.3</fortune.commons.doc.common.version>
+        <!-- 文件服务客户端 -->
+        <fortune.commons.doc.client.version>1.0.3</fortune.commons.doc.client.version>
+        <!-- 文件服务服务端 -->
+        <fortune.commons.doc.server.version>1.0.3</fortune.commons.doc.server.version>
 
         <!--Provided version-->
         <servlet.api.version>3.1.0</servlet.api.version>
@@ -60,204 +71,489 @@
         <cglib.version>3.2.10</cglib.version>
         <!--test-->
         <junit.version>4.12</junit.version>
+
+        <!--memCached 四种客户端版本，推荐：xmemcached-->
+        <!--https://www.cnblogs.com/EasonJim/p/7624822.html-->
+        <!--https://github.com/killme2008/xmemcached/wiki/Xmemcached%20%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97-->
+        <xmemcached.version>2.4.6</xmemcached.version>
+        <spymemcached.version>2.12.2</spymemcached.version>
+        <danga.memcached.version>2.6.6</danga.memcached.version>
+        <memcached.java.client.version>3.0.2</memcached.java.client.version>
+
+        <!-- jxls  -->
+        <jxls.version>1.0.6</jxls.version>
+        <jxl.version>2.6.12</jxl.version>
+        <!-- itextpdf -->
+        <itextpdf.version>5.5.13</itextpdf.version>
+        <!--中文支持包-->
+        <itext-asian.version>5.2.0</itext-asian.version>
+
+        <!--<mongodb.version>2.9.3</mongodb.version>-->
+        <mongodb.version>3.10.1</mongodb.version>
+        <spring.data.mongo.version>2.1.5.RELEASE</spring.data.mongo.version>
+        <!--redis-->
+        <!--https://github.com/xetorthio/jedis-->
+        <jedis.version>3.0.1</jedis.version>
+        <commons.pool2.version>2.4.3</commons.pool2.version>
+        <spring.data.redis.version>2.1.5.RELEASE</spring.data.redis.version>
+
+        <!-- netty -->
+        <io.netty.version>3.6.3.Final</io.netty.version>
+        <fastjson.version>1.2.58</fastjson.version>
+        <thumbnailator.version>0.4.3</thumbnailator.version>
+
     </properties>
 
-    <dependencies>
-        <!-- slf4j start -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <!-- slf4j 实现之一：logback -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <!-- slf4j 实现之二：slf4j-simple -->
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-simple</artifactId>-->
-        <!--<version>${slf4j.version}</version>-->
-        <!--</dependency>-->
-        <!--slf4j 实现之三：slf4j-log4j12-->
-        <!--<dependency>-->
-        <!--<groupId>log4j</groupId>-->
-        <!--<artifactId>log4j</artifactId>-->
-        <!--<version>${log4j.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-log4j12</artifactId>-->
-        <!--<version>${slf4j.version}</version>-->
-        <!--</dependency>-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 项目依赖 -->
+            <dependency>
+                <groupId>org.fortune</groupId>
+                <artifactId>commons-core</artifactId>
+                <version>${fortune.commons.datacache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fortune</groupId>
+                <artifactId>commons-nosql</artifactId>
+                <version>${fortune.commons.nosql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fortune</groupId>
+                <artifactId>commons-doc-common</artifactId>
+                <version>${fortune.commons.doc.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fortune</groupId>
+                <artifactId>commons-datacache</artifactId>
+                <version>${fortune.commons.datacache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fortune</groupId>
+                <artifactId>commons-export</artifactId>
+                <version>${fortune.commons.export.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fortune</groupId>
+                <artifactId>commons-web</artifactId>
+                <version>${fortune.commons.web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.fortune</groupId>
+                <artifactId>commons-web-springmvc</artifactId>
+                <version>${fortune.commons.web.springmvc.version}</version>
+            </dependency>
 
-        <!-- slf4j end -->
+            <!--Spring 3.2以后 Spring Framework已经包含了cglib的jar包，可不必手动引入-->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+            </dependency>
 
-        <!-- javax-servlet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet.api.version}</version>
-            <scope>provided</scope>
-        </dependency>
+            <!-- freemarker start -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+            <!-- slf4j start -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- slf4j 实现之一：logback -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <!-- slf4j end -->
 
-        <!-- apache commons -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>${commons.collections4.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons.lang3.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons.io.version}</version>
-        </dependency>
-        <!--<dependency>-->
+            <!-- javax-servlet -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- apache commons -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons.collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            <!--<dependency>-->
             <!--<groupId>commons-collections</groupId>-->
             <!--<artifactId>commons-collections</artifactId>-->
             <!--<version>3.2.1</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>${commons.beanutils.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-configuration2</artifactId>
-            <version>${commons.configuration2.version}</version>
-        </dependency>
+            <!--</dependency>-->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons.beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-configuration2</artifactId>
+                <version>${commons.configuration2.version}</version>
+            </dependency>
 
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <!-- aspectj -->
-        <!--Spring-aspects 实现类似 aspectj 注解方式的时候，借用了 aspectjweaver.jar 中定义的一些annotation 和 class，然而其并不使用 Aspectj 的字节码织入功能。-->
-        <!--Spring AOP使用JDK Proxy或者cglib实现代理类生成。对于有实现接口的类使用JDK Proxy，对于无接口的则是用cglib.通过-->
-        <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
-        <!--指定proxy-target-class为true可强制使用cglib.-->
-        <!--aspectjtools.jar包主要是提供赫赫有名的ajc编译器，可以在编译期将将java文件或者class文件或者aspect文件定义的切面织入到业务代码中。
-        通常这个东西会被封装进各种IDE插件或者自动化插件中。
-        -->
-        <!-- aspectjrt.jar包主要是提供运行时的一些注解，静态方法等等东西，通常我们要使用aspectJ的时候都要使用这个包。 -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
-        <!-- aspectjweaverjar包主要是提供了一个java agent用于在类加载期间织入切面(Load time weaving)。
-        并且提供了对切面语法的相关处理等基础方法，供ajc使用或者供第三方开发使用。这个包一般我们不需要显式引用，除非需要使用LTW。
-         -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
+            <!--MemCache-->
+            <dependency>
+                <groupId>com.googlecode.xmemcached</groupId>
+                <artifactId>xmemcached</artifactId>
+                <version>${xmemcached.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.spy</groupId>
+                <artifactId>spymemcached</artifactId>
+                <version>${spymemcached.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>danga</groupId>
+                <artifactId>memCached</artifactId>
+                <version>${danga.memcached.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.whalin</groupId>
+                <artifactId>Memcached-Java-Client</artifactId>
+                <version>${memcached.java.client.version}</version>
+            </dependency>
+            <!-- MemCache连接池依赖包-->
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>1.6</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${yaml.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty</artifactId>
+                <version>${io.netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- 生成缩略图工具 -->
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>${thumbnailator.version}</version>
+            </dependency>
 
-        <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
+            <!--web mvc 中HTTP JSON转换器-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
 
-        <!--spring单元测试依赖 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-oxm</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- aspectj -->
+            <!--Spring-aspects 实现类似 aspectj 注解方式的时候，借用了 aspectjweaver.jar 中定义的一些annotation 和 class，然而其并不使用 Aspectj 的字节码织入功能。-->
+            <!--Spring AOP使用JDK Proxy或者cglib实现代理类生成。对于有实现接口的类使用JDK Proxy，对于无接口的则是用cglib.通过-->
+            <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+            <!--指定proxy-target-class为true可强制使用cglib.-->
+            <!--aspectjtools.jar包主要是提供赫赫有名的ajc编译器，可以在编译期将将java文件或者class文件或者aspect文件定义的切面织入到业务代码中。
+            通常这个东西会被封装进各种IDE插件或者自动化插件中。
+            -->
+            <!-- aspectjrt.jar包主要是提供运行时的一些注解，静态方法等等东西，通常我们要使用aspectJ的时候都要使用这个包。 -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <!-- aspectjweaverjar包主要是提供了一个java agent用于在类加载期间织入切面(Load time weaving)。
+            并且提供了对切面语法的相关处理等基础方法，供ajc使用或者供第三方开发使用。这个包一般我们不需要显式引用，除非需要使用LTW。
+             -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
 
-    </dependencies>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${yaml.version}</version>
+            </dependency>
+
+            <!-- excel 操作 start -->
+            <!--http://jxls.sourceforge.net/-->
+            <!--2.x-->
+            <!--https://www.cnblogs.com/Crysta1/p/10250270.html-->
+            <!--http://www.cnblogs.com/jiangbei/p/7356712.html-->
+            <!--1.x-->
+            <!--https://blog.csdn.net/xiejx618/article/details/38906683-->
+            <dependency>
+                <groupId>net.sf.jxls</groupId>
+                <artifactId>jxls-core</artifactId>
+                <version>${jxls.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.jexcelapi</groupId>
+                <artifactId>jxl</artifactId>
+                <version>${jxl.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- excel 操作 end -->
+
+            <!-- PDF插件相关 start -->
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itextpdf</artifactId>
+                <version>${itextpdf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itext-asian</artifactId>
+                <version>${itext-asian.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf.tool</groupId>
+                <artifactId>xmlworker</artifactId>
+                <version>${itextpdf.version}</version>
+            </dependency>
+            <!--设置pdf文件密码，还要引入下面bcprov-jdk15on.jar包：-->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>1.54</version>
+            </dependency>
+            <!-- PDF插件相关end -->
+
+            <!--mongodb驱动包：包括bson，mongo-java-drive和mongo-java-core-->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver</artifactId>
+                <version>${mongodb.version}</version>
+            </dependency>
+            <!--mongodb Spring核心包-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>${spring.data.mongo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mongodb</groupId>
+                        <artifactId>mongo-java-driver</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.data</groupId>
+                        <artifactId>spring-data-commons</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--mongodb Spring依赖包-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-commons</artifactId>
+                <version>${spring.data.mongo.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!--<dependency>-->
+            <!--<groupId>org.projectlombok</groupId>-->
+            <!--<artifactId>lombok</artifactId>-->
+            <!--<version>1.18.6</version>-->
+            <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+
+            <!--redis-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-pool2</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons.pool2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-tx</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-oxm</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-aop</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-context-support</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!--spring单元测试依赖 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <finalName>fortune-commons</finalName>
-        <plugins>
-            <!-- 一个好习惯，就是在此配置JDK的版本，这样就可以方便代码迁移 By Landy 2019.01.04-->
-            <!--一般而言，target与source是保持一致的。但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中需要没有使用低版本jdk中不支持的语法)，会存在target不同于source的情况 。-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>1.8</source> <!-- 源代码使用的开发版本 -->
-                    <target>1.8</target> <!-- 需要生成的目标class文件的编译版本 -->
-                    <!-- 这下面的是可选项 -->
-                    <meminitial>128m</meminitial>
-                    <maxmem>512m</maxmem>
-                    <fork>true</fork> <!-- fork is enable,用于明确表示编译版本配置的可用 -->
-                    <compilerVersion>1.8</compilerVersion>
-                    <!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
-                    <!--<compilerArgument>-verbose -bootclasspath ${java.home}\lib\rt.jar</compilerArgument>-->
-                </configuration>
-            </plugin>
-        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!-- 一个好习惯，就是在此配置JDK的版本，这样就可以方便代码迁移 By Landy 2019.01.04-->
+                <!--一般而言，target与source是保持一致的。但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中需要没有使用低版本jdk中不支持的语法)，会存在target不同于source的情况 。-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                    <configuration>
+                        <source>1.8</source> <!-- 源代码使用的开发版本 -->
+                        <target>1.8</target> <!-- 需要生成的目标class文件的编译版本 -->
+                        <!-- 这下面的是可选项 -->
+                        <meminitial>128m</meminitial>
+                        <maxmem>512m</maxmem>
+                        <fork>true</fork> <!-- fork is enable,用于明确表示编译版本配置的可用 -->
+                        <compilerVersion>1.8</compilerVersion>
+                        <!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
+                        <!--<compilerArgument>-verbose -bootclasspath ${java.home}\lib\rt.jar</compilerArgument>-->
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <!--可以忽略web.xml的缺失检测-->
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <!--http://tomcat.apache.org/maven-plugin-2.2/ -->
+                <!--在Spring Boot中也有一个类似的插件：spring-boot-maven-plugin-->
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                    <executions>
+                        <execution>
+                            <id>tomcat-run</id>
+                            <goals>
+                                <goal>exec-war-only</goal>
+                            </goals>
+                            <phase>package</phase>
+                            <configuration>
+                                <path>/${project.build.finalName}</path><!-- 相当于ServletContext的path路径 -->
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+
     </build>
+
+
 </project>

@@ -5,30 +5,19 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.fortune</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-export</artifactId>
-    <version>${fortune.commons.export.version}</version>
+    <version>1.0.3</version>
     <name>commons-export</name>
     <packaging>jar</packaging>
     <description>通用导出组件</description>
-
-    <properties>
-        <!-- jxls  -->
-        <jxls.version>1.0.6</jxls.version>
-        <jxl.version>2.6.12</jxl.version>
-        <!-- itextpdf -->
-        <itextpdf.version>5.5.13</itextpdf.version>
-        <!--中文支持包-->
-        <itext-asian.version>5.2.0</itext-asian.version>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
             <artifactId>commons-core</artifactId>
-            <version>${fortune.commons.core.version}</version>
         </dependency>
         <!-- excel 操作 start -->
         <!--http://jxls.sourceforge.net/-->
@@ -40,12 +29,10 @@
         <dependency>
             <groupId>net.sf.jxls</groupId>
             <artifactId>jxls-core</artifactId>
-            <version>${jxls.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>
             <artifactId>jxl</artifactId>
-            <version>${jxl.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>log4j</artifactId>
@@ -59,17 +46,14 @@
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>${itextpdf.version}</version>
         </dependency>
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itext-asian</artifactId>
-            <version>${itext-asian.version}</version>
         </dependency>
         <dependency>
             <groupId>com.itextpdf.tool</groupId>
             <artifactId>xmlworker</artifactId>
-            <version>${itextpdf.version}</version>
         </dependency>
         <!--设置pdf文件密码，还要引入下面bcprov-jdk15on.jar包：-->
         <!--<dependency>-->
