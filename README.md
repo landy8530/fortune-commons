@@ -89,6 +89,11 @@ public class RootApplicationContextConfiguration {
 
 文件上传服务客户端，使用简单，只需要引入commons-doc-client，即可以实现文件的上传/替换/删除等操作。
 
+实现方式计划采用以下两种方式实现：
+
+- 采用Netty实现文件的转储操作
+- 采用原生HTTP方式实现（利用Spring MVC）
+
 #### commons-doc-server
 
 文件上传服务服务端，实现方式计划采用以下两种方式实现：

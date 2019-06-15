@@ -19,8 +19,8 @@
         <module>commons-web</module>
         <module>commons-web-springmvc</module>
         <module>fortune-commons-example</module>
-        <module>commons-doc-client</module>
-        <module>commons-doc-server</module>
+        <module>commons-doc-client-netty</module>
+        <module>commons-doc-server-netty</module>
         <module>commons-doc-common</module>
     </modules>
 
