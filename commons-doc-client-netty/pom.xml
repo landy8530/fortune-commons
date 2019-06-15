@@ -14,6 +14,8 @@
     <name>commons-doc-client-netty</name>
     <packaging>jar</packaging>
 
+    <description>文件服务组件客户端 Netty实现方式</description>
+
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>

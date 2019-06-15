@@ -8,22 +8,19 @@
         <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.fortune</groupId>
-    <artifactId>commons-doc-server-netty</artifactId>
+    <artifactId>commons-doc-client-http</artifactId>
     <version>1.0.3</version>
-    <name>commons-doc-server-netty</name>
-    <packaging>war</packaging>
-    <description>文件服务组件服务端 Netty实现方式</description>
+    <name>commons-doc-client-http</name>
+    <packaging>jar</packaging>
+
+    <description>文件服务组件客户端 Netty实现方式</description>
 
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
             <artifactId>commons-doc-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
@@ -39,21 +36,9 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-        <finalName>commons-doc-server-netty</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+        <finalName>commons-doc-client-http</finalName>
     </build>
-
 </project>

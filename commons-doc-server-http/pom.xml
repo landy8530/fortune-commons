@@ -8,12 +8,13 @@
         <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.fortune</groupId>
-    <artifactId>commons-doc-server-netty</artifactId>
-    <version>1.0.3</version>
-    <name>commons-doc-server-netty</name>
+    <artifactId>commons-doc-server-http</artifactId>
+    <version>${project.version}</version>
+    <name>commons-doc-server-http</name>
     <packaging>war</packaging>
-    <description>文件服务组件服务端 Netty实现方式</description>
+    <description>文件服务组件服务端 HTTP实现方式</description>
 
     <dependencies>
         <dependency>
@@ -39,11 +40,10 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-        <finalName>commons-doc-server-netty</finalName>
+        <finalName>commons-doc-server-http</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -55,5 +55,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -22,6 +22,8 @@
         <module>commons-doc-client-netty</module>
         <module>commons-doc-server-netty</module>
         <module>commons-doc-common</module>
+        <module>commons-doc-server-http</module>
+        <module>commons-doc-client-http</module>
     </modules>
 
     <properties>
