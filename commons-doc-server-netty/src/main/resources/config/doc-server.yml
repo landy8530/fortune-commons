@@ -14,4 +14,4 @@ accounts:
     thumbHeight: 100
     thumbWidth: 100
 port: 9999 #端口号
-fileBaseDirectory: C:\06_temp\upload\tmp #临时文件的目录
+fileBaseDirectory: C:\06_temp\up\tmp #临时文件的目录

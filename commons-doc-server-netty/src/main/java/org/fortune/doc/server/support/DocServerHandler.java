@@ -17,6 +17,7 @@ import org.jboss.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.net.URI;
 
 /**
@@ -283,6 +284,7 @@ public class DocServerHandler extends SimpleChannelUpstreamHandler {
     }
 
     static {
+        createFileBaseDirectoryIfNotExist();
         org.jboss.netty.handler.codec.http.multipart.DiskFileUpload.deleteOnExitTemporaryFile = false;
         org.jboss.netty.handler.codec.http.multipart.DiskFileUpload.baseDirectory = DocServerContainer
                 .getInstance().getFileBaseDirectory();
@@ -291,4 +293,12 @@ public class DocServerHandler extends SimpleChannelUpstreamHandler {
                 .getInstance().getFileBaseDirectory();
     }
 
+    //2019.06.16 修复【系统找不到指定路径】的异常问题
+    private static void createFileBaseDirectoryIfNotExist() {
+        String fileDir = DocServerContainer.getInstance().getFileBaseDirectory();
+        File dirFolder = new File(fileDir);
+
+        if (!dirFolder.exists())
+            dirFolder.mkdirs();
+    }
 }
