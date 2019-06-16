@@ -5,12 +5,12 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.fortune</groupId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fortune</groupId>
     <artifactId>commons-doc-server-netty</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <name>commons-doc-server-netty</name>
     <packaging>war</packaging>
     <description>文件服务组件服务端 Netty实现方式</description>

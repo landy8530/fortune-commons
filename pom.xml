@@ -6,7 +6,7 @@
 
     <groupId>org.fortune</groupId>
     <artifactId>fortune-commons</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <packaging>pom</packaging>
     <name>fortune-commons</name>
     <description>整合各种常见的公共组件</description>
@@ -31,20 +31,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler>1.8</maven.compiler>
 
         <!-- fortune commons组件版本 -->
-        <fortune.commons.datacache.version>1.0.3</fortune.commons.datacache.version>
-        <fortune.commons.core.version>1.0.3</fortune.commons.core.version>
-        <fortune.commons.nosql.version>1.0.3</fortune.commons.nosql.version>
-        <fortune.commons.export.version>1.0.3</fortune.commons.export.version>
-        <fortune.commons.web.version>1.0.3</fortune.commons.web.version>
-        <fortune.commons.web.springmvc.version>1.0.3</fortune.commons.web.springmvc.version>
+        <fortune.commons.core.version>${project.version}</fortune.commons.core.version>
+        <fortune.commons.datacache.version>${project.version}</fortune.commons.datacache.version>
+        <fortune.commons.nosql.version>${project.version}</fortune.commons.nosql.version>
+        <fortune.commons.export.version>${project.version}</fortune.commons.export.version>
+        <fortune.commons.web.version>${project.version}</fortune.commons.web.version>
+        <fortune.commons.web.springmvc.version>${project.version}</fortune.commons.web.springmvc.version>
         <!-- 文件服务公共模块 -->
-        <fortune.commons.doc.common.version>1.0.3</fortune.commons.doc.common.version>
-        <!-- 文件服务客户端 -->
-        <fortune.commons.doc.client.version>1.0.3</fortune.commons.doc.client.version>
-        <!-- 文件服务服务端 -->
-        <fortune.commons.doc.server.version>1.0.3</fortune.commons.doc.server.version>
+        <fortune.commons.doc.common.version>${project.version}</fortune.commons.doc.common.version>
 
         <!--Provided version-->
         <servlet.api.version>3.1.0</servlet.api.version>
@@ -108,11 +105,11 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- 项目依赖 -->
+            <!-- Own dependencies  -->
             <dependency>
                 <groupId>org.fortune</groupId>
                 <artifactId>commons-core</artifactId>
-                <version>${fortune.commons.datacache.version}</version>
+                <version>${fortune.commons.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.fortune</groupId>
@@ -500,9 +497,20 @@
 
     <build>
         <finalName>fortune-commons</finalName>
-
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
+                <!-- Maven版本管理插件 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
                 <!-- 一个好习惯，就是在此配置JDK的版本，这样就可以方便代码迁移 By Landy 2019.01.04-->
                 <!--一般而言，target与source是保持一致的。但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中需要没有使用低版本jdk中不支持的语法)，会存在target不同于source的情况 。-->
                 <plugin>
@@ -510,13 +518,13 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                     <configuration>
-                        <source>1.8</source> <!-- 源代码使用的开发版本 -->
-                        <target>1.8</target> <!-- 需要生成的目标class文件的编译版本 -->
+                        <source>${maven.compiler.source}</source> <!-- 源代码使用的开发版本 -->
+                        <target>${maven.compiler.target}</target> <!-- 需要生成的目标class文件的编译版本 -->
                         <!-- 这下面的是可选项 -->
                         <meminitial>128m</meminitial>
                         <maxmem>512m</maxmem>
                         <fork>true</fork> <!-- fork is enable,用于明确表示编译版本配置的可用 -->
-                        <compilerVersion>1.8</compilerVersion>
+                        <compilerVersion>${maven.compiler}</compilerVersion>
                         <!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
                         <!--<compilerArgument>-verbose -bootclasspath ${java.home}\lib\rt.jar</compilerArgument>-->
                     </configuration>
