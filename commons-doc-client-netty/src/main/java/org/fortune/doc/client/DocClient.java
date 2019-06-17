@@ -3,7 +3,7 @@ package org.fortune.doc.client;
 import org.fortune.doc.client.handler.*;
 import org.fortune.doc.client.support.DocClientPipelineFactory;
 import org.fortune.doc.common.domain.Constants;
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.result.Result;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFuture;

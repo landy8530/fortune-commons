@@ -15,3 +15,5 @@ accounts:
     thumbWidth: 100
 port: 9999 #端口号
 fileBaseDirectory: C:\06_temp\upload\tmp #临时文件的目录
+imagesBasePath: images #全路径由${accounts.rootPath} + ${imagesBasePath}
+attachmentBasePath: attaches #全路径由${accounts.rootPath} + ${attachmentBasePath}

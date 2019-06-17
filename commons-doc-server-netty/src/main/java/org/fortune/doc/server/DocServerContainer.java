@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fortune.commons.core.help.AbstractApplicationContextHelper;
-import org.fortune.doc.common.domain.Account;
+import org.fortune.doc.common.domain.account.Account;
 import org.fortune.doc.common.domain.Constants;
 
 import java.util.ArrayList;

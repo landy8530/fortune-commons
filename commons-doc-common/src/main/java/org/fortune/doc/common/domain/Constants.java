@@ -1,5 +1,7 @@
 package org.fortune.doc.common.domain;
 
+import org.fortune.doc.common.domain.account.Account;
+
 public final class Constants {
 	public static final String BACKSLASH = "/";
 	public static final String USER_NAME_KEY = "userName";
@@ -7,10 +9,19 @@ public final class Constants {
 	public static final String ACTION_KEY = "action";
 	public static final String FILE_PATH_KEY = "filePath";
 	public static final String FILE_NAME_KEY = "fileName";
+	public static final String FILE_DATA_KEY = "_FILE_DATA_";
 	public static final String THUMB_MARK_KEY = "thumbMark";
+	public static final String THUMB_MARK_VAL = "1";
 	public static final String THUMB_MARK_YES = "Y";
 	public static final String THUMB_MARK_NO = "N";
 	public static final String THUMB_SUFFIX = "_thumb";
+
+	public static final String URL_UPLOAD_IMAGE = "uploadImageDoc.do";
+	public static final String URL_REPLACE_IMAGE = "replaceImageDoc.do";
+	public static final String URL_DELETE_IMAGE = "deleteImageDoc.do";
+	public static final String URL_UPLOAD_ATTACH = "uploadAttachDoc.do";
+	public static final String URL_REPLACE_ATTACH = "replaceAttachDoc.do";
+	public static final String URL_DELETE_ATTACH = "deleteAttachDoc.do";
 
 	public static char[] LETTER_AND_NUMBER_CHAR = { 'a', 'b', 'c', 'd', 'e',
 			'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',

@@ -1,9 +1,9 @@
 package org.fortune.doc.server.handler;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fortune.doc.common.domain.Account;
+import org.fortune.doc.common.domain.account.Account;
 import org.fortune.doc.common.domain.Constants;
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.result.Result;
 import org.fortune.doc.common.utils.ThumbUtil;
 import org.fortune.doc.server.parse.RequestParam;
 import org.jboss.netty.handler.codec.http.multipart.FileUpload;
@@ -48,7 +48,7 @@ public class UploadDocServerHandler extends AbstractDocServerHandler {
         File newFile = new File(getRealSavePath());
         try {
             boolean bool = fileUpload.renameTo(newFile);
-            result.setCode(bool);
+            result.buildSuccess();
             result.setMsg("文件上传成功");
             LOGGER.info("文件上传成功,保存路径为:" + getSavePath() + ",真实路径为：" + getRealPath(getSavePath()));
             result.setFilePath(getSavePath());
@@ -58,7 +58,7 @@ public class UploadDocServerHandler extends AbstractDocServerHandler {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
-            result.setCode(false);
+            result.buildFailed();
             result.setMsg("存储文件报错" + e + ",acount:" + this.account);
             LOGGER.error("存储文件报错" + e + ",acount:" + this.account);
         }

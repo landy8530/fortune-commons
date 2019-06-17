@@ -1,6 +1,6 @@
 package org.fortune.doc.server.handler;
 
-import org.fortune.doc.common.domain.Account;
+import org.fortune.doc.common.domain.account.Account;
 
 /**
  * @author: landy

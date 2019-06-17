@@ -1,9 +1,9 @@
 package org.fortune.doc.server.handler;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fortune.doc.common.domain.Account;
+import org.fortune.doc.common.domain.account.Account;
 import org.fortune.doc.common.domain.Constants;
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.result.Result;
 import org.fortune.doc.common.enums.DocOperationType;
 import org.fortune.doc.server.parse.RequestParam;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class DeleteDocServerHandler extends AbstractDocServerHandler {
 
     public Result process(RequestParam reqParams) {
         Result result = new Result();
-        result.setCode(false);
+        result.buildFailed();
         result.setAction(DocOperationType.DELETE_FILE.getValue());
 
         if (StringUtils.isNotBlank(reqParams.getFilePath())) {
@@ -50,10 +50,10 @@ public class DeleteDocServerHandler extends AbstractDocServerHandler {
             if ((thumbFile.exists()) && (thumbFile.isFile()) && (bool)) {
                 thumbFile.delete();
             }
-            result.setCode(bool);
+            result.buildSuccess();
             result.setMsg("文件删除成功");
         }
-        if (!result.isCode()) {
+        if (!result.isSuccess()) {
             result.setMsg("文件删除失败");
         }
         return result;

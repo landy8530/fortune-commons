@@ -1,7 +1,7 @@
 package org.fortune.doc.server.conf.web;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.fortune.doc.common.domain.Account;
+import org.fortune.doc.common.domain.account.Account;
 import org.fortune.doc.server.DocServer;
 import org.fortune.doc.server.DocServerContainer;
 import org.springframework.context.annotation.Bean;

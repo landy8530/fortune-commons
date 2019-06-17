@@ -1,8 +1,8 @@
 package org.fortune.doc.server.handler.factory;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fortune.doc.common.domain.Account;
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.account.Account;
+import org.fortune.doc.common.domain.result.Result;
 import org.fortune.doc.common.enums.DocOperationType;
 import org.fortune.doc.common.utils.JsonUtil;
 import org.fortune.doc.server.DocServerContainer;
@@ -61,13 +61,13 @@ public class DocServerHandlerFactory {
         } else {
             result = new Result();
             result.setAction(DocOperationType.NULL.getValue());
-            result.setCode(false);
+            result.buildFailed();
             result.setMsg("密码错误");
         }
         if (result == null) {
             result = new Result();
             result.setAction(DocOperationType.NULL.getValue());
-            result.setCode(false);
+            result.buildFailed();
             result.setMsg("无效动作");
         }
 
