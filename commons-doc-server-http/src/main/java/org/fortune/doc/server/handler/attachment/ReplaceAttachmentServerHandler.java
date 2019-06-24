@@ -1,30 +1,24 @@
-package org.fortune.doc.server.handler.image;
+package org.fortune.doc.server.handler.attachment;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fortune.doc.common.domain.Constants;
 import org.fortune.doc.common.domain.account.DocAccountBean;
-import org.fortune.doc.common.domain.account.ImageDocThumbBean;
-import org.fortune.doc.common.domain.result.ImageDocResult;
-import org.fortune.doc.server.util.ImageUtils;
-import org.springframework.stereotype.Component;
+import org.fortune.doc.common.domain.result.AttachDocResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author: landy
- * @date: 2019/6/16 14:13
+ * @date: 2019/6/24 23:01
  * @description:
  */
-@Component
-public class ReplaceImageServerHandler extends ImageServerHandler {
+public class ReplaceAttachmentServerHandler extends AttachmentServerHandler {
 
-    public ImageDocResult doReplace(HttpServletRequest request) {
-        ImageDocResult result = new ImageDocResult();
+    public AttachDocResult doReplace(HttpServletRequest request) {
+        AttachDocResult result = new AttachDocResult();
         DocAccountBean accountBean = super.getAccount(request);
         if (accountBean == null) {
             result.buildFailed();
@@ -40,13 +34,11 @@ public class ReplaceImageServerHandler extends ImageServerHandler {
                     return result;
                 }
 
-                MultipartFile file = mreqeust.getFile(Constants.FILE_PATH_KEY);
+                MultipartFile file = mreqeust.getFile(Constants.FILE_DATA_KEY);
                 if (!file.isEmpty()) {
                     try {
-                        String rootPath = super.getImageRootPath();
+                        String rootPath = super.getAttachmentRootPath();
                         this.checkRootPath(rootPath);
-                        String fileExt = filePath.substring(filePath.lastIndexOf(".") + 1).toLowerCase();
-                        String srcfilePathName = filePath.substring(0, filePath.lastIndexOf("."));
                         String realPath = this.getRealPath(filePath);
                         File oldFile = new File(realPath);
                         if (!oldFile.exists() || !oldFile.isFile()) {
@@ -57,23 +49,9 @@ public class ReplaceImageServerHandler extends ImageServerHandler {
 
                         oldFile.delete();
                         file.transferTo(oldFile);
-                        List<ImageDocThumbBean> thumbBeans = accountBean.getThumbConfig();
-                        if (thumbBeans != null) {
-                            Iterator thumbBean = thumbBeans.iterator();
-
-                            while(thumbBean.hasNext()) {
-                                ImageDocThumbBean thumb = (ImageDocThumbBean)thumbBean.next();
-                                String thumbFilePath = this.getRealPath(srcfilePathName + thumb.getSuffix() + "." + fileExt);
-                                File thumbFile = new File(thumbFilePath);
-                                if (thumbFile.exists()) {
-                                    ImageUtils.ratioZoom2(oldFile, thumbFile, thumb.getRatio());
-                                }
-                            }
-                        }
-
                         result.setFilePath("");
                         result.buildSuccess();
-                    } catch (Exception ex) {
+                    } catch (Exception var10) {
                         result.buildFailed();
                     }
                 } else {

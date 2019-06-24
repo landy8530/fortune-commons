@@ -2,6 +2,8 @@ package org.fortune.doc.server.conf.web;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.fortune.doc.common.domain.account.Account;
+import org.fortune.doc.common.domain.account.DocAccountBean;
+import org.fortune.doc.common.domain.account.ImageDocThumbBean;
 import org.fortune.doc.server.DocServerContainer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -75,7 +77,7 @@ public class RootApplicationContextConfiguration {
                                 for(Node accNode : accountsValue) {
                                     if(accNode instanceof MappingNode) {
                                         List<NodeTuple> accNodes = ((MappingNode) accNode).getValue();
-                                        Account account = new Account();
+                                        DocAccountBean account = new DocAccountBean();
                                         for(NodeTuple accNodeTuple: accNodes) {
                                             ScalarNode accKeyNode = (ScalarNode)accNodeTuple.getKeyNode();
                                             ScalarNode accValueNode = (ScalarNode)accNodeTuple.getValueNode();
@@ -89,6 +91,18 @@ public class RootApplicationContextConfiguration {
                                                 e.printStackTrace();
                                             }
                                         }
+                                        //暂时不做配置缩略图
+                                        ImageDocThumbBean thumbBean = new ImageDocThumbBean();
+                                        thumbBean.setSuffix("_1");
+                                        thumbBean.setRatio(200d);
+                                        List<ImageDocThumbBean> thumbBeans = new ArrayList<>();
+                                        thumbBeans.add(thumbBean);
+                                        ImageDocThumbBean thumbBean2 = new ImageDocThumbBean();
+                                        thumbBean2.setSuffix("_2");
+                                        thumbBean2.setRatio(300d);
+                                        thumbBeans.add(thumbBean2);
+
+                                        account.setThumbConfig(thumbBeans);
                                         accounts.add(account);
                                     }
                                 }

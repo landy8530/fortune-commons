@@ -5,7 +5,6 @@ import org.fortune.doc.common.domain.Constants;
 import org.fortune.doc.common.domain.account.DocAccountBean;
 import org.fortune.doc.common.domain.account.ImageDocThumbBean;
 import org.fortune.doc.common.domain.result.ImageDocResult;
-import org.fortune.doc.server.handler.DocServerHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import java.util.List;
  * @description:
  */
 @Component
-public class DeleteImageServerHandler extends DocServerHandler {
+public class DeleteImageServerHandler extends ImageServerHandler {
 
     public ImageDocResult doDelete(HttpServletRequest request) {
         ImageDocResult result = new ImageDocResult();

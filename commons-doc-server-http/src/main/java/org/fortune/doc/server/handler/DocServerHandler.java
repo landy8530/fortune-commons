@@ -15,7 +15,7 @@ import java.io.File;
  * @date: 2019/6/16 11:35
  * @description:
  */
-public class DocServerHandler {
+public abstract class DocServerHandler {
     protected Logger LOGGER = LoggerFactory.getLogger(DocServerHandler.class);
 
     private DocAccountBean account;
@@ -28,8 +28,8 @@ public class DocServerHandler {
         return accountBean != null && accountBean.auth(password) ? accountBean : null;
     }
 
-    public String getImageRootPath() {
-        return this.account.getRootPath() + File.separator + DocServerContainer.getInstance().getImagesBasePath();
+    protected String getRootPath() {
+        return this.account.getRootPath() ;
     }
 
     protected void checkRootPath(String rootPath) {
@@ -41,14 +41,13 @@ public class DocServerHandler {
         }
     }
 
-    protected String getRealPath(String filePath) {
-        String realPath = this.getImageRootPath();
-        if (realPath.endsWith(File.separator)) {
-            realPath = realPath + filePath;
-        } else {
-            realPath = realPath + File.separator + filePath;
+    protected void checkStorePath(String storePath) {
+        File saveDirFile = new File(storePath);
+        if (!saveDirFile.exists()) {
+            saveDirFile.mkdirs();
         }
-        return realPath;
     }
+
+    protected abstract String getRealPath(String filePath) ;
 
 }
