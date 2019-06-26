@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.fortune.doc.common.domain.Constants;
 import org.fortune.doc.common.domain.account.DocAccountBean;
 import org.fortune.doc.common.domain.result.AttachDocResult;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -15,6 +16,7 @@ import java.io.File;
  * @date: 2019/6/24 23:01
  * @description:
  */
+@Component
 public class ReplaceAttachmentServerHandler extends AttachmentServerHandler {
 
     public AttachDocResult doReplace(HttpServletRequest request) {

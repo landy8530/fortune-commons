@@ -524,9 +524,13 @@
                         <meminitial>128m</meminitial>
                         <maxmem>512m</maxmem>
                         <fork>true</fork> <!-- fork is enable,用于明确表示编译版本配置的可用 -->
+                        <encoding>${project.build.sourceEncoding}</encoding>
                         <compilerVersion>${maven.compiler}</compilerVersion>
                         <!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
-                        <!--<compilerArgument>-verbose -bootclasspath ${java.home}\lib\rt.jar</compilerArgument>-->
+                        <compilerArguments>
+                            <verbose/>
+                            <bootclasspath>${env.JAVA_HOME}\jre\lib\rt.jar;${env.JAVA_HOME}\jre\lib\jce.jar</bootclasspath>
+                        </compilerArguments>
                     </configuration>
                 </plugin>
 

@@ -3,6 +3,7 @@ package org.fortune.doc.server.handler.attachment;
 import org.fortune.doc.common.domain.Constants;
 import org.fortune.doc.common.domain.account.DocAccountBean;
 import org.fortune.doc.common.domain.result.AttachDocResult;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -16,6 +17,7 @@ import java.util.Date;
  * @date: 2019/6/24 23:03
  * @description:
  */
+@Component
 public class UploadAttachmentServerHandler extends AttachmentServerHandler {
 
     public AttachDocResult doUpload(HttpServletRequest request) {

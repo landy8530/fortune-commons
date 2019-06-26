@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.fortune.doc.common.domain.Constants;
 import org.fortune.doc.common.domain.account.DocAccountBean;
 import org.fortune.doc.common.domain.result.AttachDocResult;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -13,6 +14,7 @@ import java.io.File;
  * @date: 2019/6/24 22:49
  * @description:
  */
+@Component
 public class DeleteAttachmentServerHandler extends AttachmentServerHandler {
 
     public AttachDocResult doDelete(HttpServletRequest request) {

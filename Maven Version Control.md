@@ -274,3 +274,61 @@ mvn versions:commit
 
 ```
 
+## 3. Maven 打包遇到的问题
+
+### 3.1 外部Jar包不存在
+
+在Maven的打包过程中，如果遇到项目中使用的类库不存在的情况，则需要引入相应的jar包，比如本项目中打包的过程就出现过`com.sun.image.codec.jpeg`不存在的问题，解决方案如下，利用maven打包编译插件解决。
+
+#### 3.1.1 包含进相应jar包
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.0</version>
+    <configuration>
+        <source>${maven.compiler.source}</source> <!-- 源代码使用的开发版本 -->
+        <target>${maven.compiler.target}</target> <!-- 需要生成的目标class文件的编译版本 -->
+        <!-- 这下面的是可选项 -->
+        <meminitial>128m</meminitial>
+        <maxmem>512m</maxmem>
+        <fork>true</fork> <!-- fork is enable,用于明确表示编译版本配置的可用 -->
+        <encoding>${project.build.sourceEncoding}</encoding>
+        <compilerVersion>${maven.compiler}</compilerVersion>
+        <!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
+        <compilerArguments>
+            <verbose/>
+            <bootclasspath>${env.JAVA_HOME}\jre\lib\rt.jar;${env.JAVA_HOME}\jre\lib\jce.jar</bootclasspath>
+        </compilerArguments>
+    </configuration>
+</plugin>
+```
+
+#### 3.1.2 包含jar的文件夹
+
+```xml
+<compilerArguments>
+    <extdirs>${env.JAVA_HOME}/jre/lib</extdirs>
+</compilerArguments>
+
+```
+
+#### 3.1.3 把jar放到webapp/WEB-INF/lib路径下
+
+```xml
+<compilerArguments>
+    <extdirs>${basedir}/src/main/webapp/WEB-INF/lib</extdirs>
+</compilerArguments>
+```
+
+#### 3.1.4 注意点
+
+> - <bootclasspath><extdirs>两个标签，如果配置多个数据，mac,linux用冒号(:)，而windows用分号(;)
+> - <bootclasspath><extdirs>两个标签，windows路径用\，mac，linux用/
+
+### 3.2 打包控制台出现乱码
+
+> Setting->maven->runner
+>
+> - VMoptions: -Dfile.encoding=GB2312
