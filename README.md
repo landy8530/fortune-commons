@@ -53,6 +53,7 @@ public class RootApplicationContextConfiguration {
 
 - Spring：5.x+ 
 - JDK：1.8+
+- Tomcat: 建议在tomcat 8以上
 
 ### 版本计划
 
