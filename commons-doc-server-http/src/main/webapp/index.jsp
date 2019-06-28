@@ -40,9 +40,6 @@ body {
 			return { f: hasFlash, v: flashVersion };
 		}
 
-
-
-
 		function doStartUpload() {
 			$('#uploadify').uploadify('upload', '*')
 		}
@@ -63,6 +60,11 @@ body {
 						'buttonText' : '选择图片',
 						'swf' : '${jquery}/uploadify/uploadify.swf',
 						'uploader' : '${base}/uploadImageDoc.do',
+						'formData': {
+							userName : $("#username").val(),
+							pwd : $("#pwd").val()
+						},
+						'fileObjName' : $("#uploadify").val(),
 						'auto' : false,
 						'multi' : true,
 						'removeCompleted' : true,
@@ -112,6 +114,8 @@ body {
 	    <td width="30%" valign="top" >
 		    <div class="col-xs-12">
 		    	<div id="queue"></div>
+				<input id="username" name="userName" value="fortune" type="hidden"/>
+				<input id="pwd" name="pwd" value="fortune" type="hidden"/>
 				<input id="uploadify" name="file_upload" type="file" multiple="true">
 					<a href="javascript:doStartUpload()">上传</a>| <a
 						href="javascript:doStopUpload()">取消上传</a>

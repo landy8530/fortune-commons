@@ -34,8 +34,8 @@ public abstract class DocServerHandler {
 
     protected void checkRootPath(String rootPath) {
         File uploadDir = new File(rootPath);
-        Assert.isTrue(uploadDir.isDirectory(), "上传的路径非目录");
-        Assert.isTrue(uploadDir.canWrite(), "上传的路径不可写");
+//        Assert.isTrue(uploadDir.isDirectory(), "上传的路径非目录");
+//        Assert.isTrue(uploadDir.canWrite(), "上传的路径不可写");
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
