@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
 <%@ taglib prefix="page" tagdir="/WEB-INF/tags"  %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,23 +13,35 @@ body {
 }
 </style>
 	<script type="text/javascript">
-		/*
-			$(function() {
-				$('#uploadify').uploadify({
-					'formData'     : {
-						'timestamp' : '11111',
-						'token'     : '2222222222'
-					},
-					'swf'      : '${jquery}/uploadify/uploadify.swf',
-					'uploader' : '${base}/upload.do',
-					'buttonText ':"选择",
-		            'auto': false,
-		            'multi': true
-		            
-				});
-			});*/
+		function flashChecker() {
+			var hasFlash = 0;　　　　 //是否安装了flash
+			var flashVersion = 0;　　 //flash版本
 
-		
+			if(document.all) {
+				var swf = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+				if(swf) {
+					hasFlash = 1;
+					VSwf = swf.GetVariable("$version");
+					flashVersion = parseInt(VSwf.split(" ")[1].split(",")[0]);
+				}
+			} else {
+				if(navigator.plugins && navigator.plugins.length > 0) {
+					var swf = navigator.plugins["Shockwave Flash"];
+					if(swf) {
+						hasFlash = 1;
+						var words = swf.description.split(" ");
+						for(var i = 0; i < words.length; ++i) {
+							if(isNaN(parseInt(words[i]))) continue;
+							flashVersion = parseInt(words[i]);
+						}
+					}
+				}
+			}
+			return { f: hasFlash, v: flashVersion };
+		}
+
+
+
 
 		function doStartUpload() {
 			$('#uploadify').uploadify('upload', '*')
@@ -37,7 +50,12 @@ body {
 			$('#uploadify').uploadify('cancel', "*");
 		}
 		$(function(){
-			
+			var fls = flashChecker();
+			var s = "";
+			if(!fls.f) {
+				$("#getflash").show();
+				$(".video-box-1").hide();
+			}
 			$("#uploadify").uploadify(
 					{
 						'height' : 27,
@@ -74,8 +92,8 @@ body {
 		})
 
 	</script>
-	
-	
+
+
 </page:header>
 
 
@@ -83,6 +101,11 @@ body {
 
 
 <body>
+<div id="getflash" style="display: none;text-align: center;margin-top: 150px;">
+	<!-- <a href="http://www.adobe.com/go/getflashplayer" rel="nofollow" target="_blank" title="升级Flash插件">启用flash</a> -->
+	<p><i class="iconfont_video_details" style="font-size: 30px;">&#xe625;</i></p>
+	<a href="https://get.adobe.com/cn/flashplayer/" target="_blank">您的计算机尚未安装Flash，点击安装https://get.adobe.com/cn/flashplayer/</a>
+</div>
 <h1>测试图片上传</h1>
 	<table width="100%" align="center" style="padding-left: 20px">
 	  <tr>

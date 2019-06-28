@@ -6,6 +6,7 @@ import org.fortune.doc.server.conf.web.SpringWebMvcConfiguration;
 import org.springframework.web.SpringServletContainerInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -50,7 +51,7 @@ public class WebApplicationAutoInitializer extends
      */
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[]{characterEncodingFilter()};
+        return new Filter[]{characterEncodingFilter(),new HiddenHttpMethodFilter()};
     }
 
     private Filter characterEncodingFilter() {
@@ -88,7 +89,7 @@ public class WebApplicationAutoInitializer extends
      */
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"*.do"};
     }
 
     @Override
