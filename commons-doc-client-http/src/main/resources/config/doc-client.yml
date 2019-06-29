@@ -1,8 +1,9 @@
 #上传成功后，访问文件的正确方式为：
-# ${host}/${port}/${appName}/${path}
+# ${host}/${port}/${appName}/${type}/${path}
 # appName为远程文件服务app名称，比如doc-server
+# type 为images/attaches
 # path为文件上传后服务端返回的文件相对路径
-#http://localhost:8080/doc-server/fortune//p//190629082821_8300.jpg
+#http://localhost:8080/doc-server/images/fortune/20190629/1561769031017.jpg
 upload:
   server:
     port: 8080 #需要配置的是远程文件服务器的tomcat的端口号，非远程文件服务netty端口号
