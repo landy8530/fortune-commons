@@ -40,28 +40,28 @@ public class ReplaceAttachmentServerHandler extends AttachmentServerHandler {
                 if (!file.isEmpty()) {
                     try {
                         String rootPath = super.getAttachmentRootPath();
+                        LOGGER.info("文件替换的根目录:{}",rootPath);
                         this.checkRootPath(rootPath);
                         String realPath = this.getRealPath(filePath);
+                        LOGGER.info("文件替换的绝对路径:{}",realPath);
                         File oldFile = new File(realPath);
                         if (!oldFile.exists() || !oldFile.isFile()) {
                             result.buildCustomMsg("替换的文件不存在");
                             result.buildFailed();
                             return result;
                         }
-
                         oldFile.delete();
                         file.transferTo(oldFile);
-                        result.setFilePath("");
+                        result.setFilePath(filePath);
                         result.buildSuccess();
-                    } catch (Exception var10) {
+                    } catch (Exception ex) {
                         result.buildFailed();
+                        LOGGER.error("替换的文件失败",ex);
                     }
                 } else {
                     result.buildFailed();
                 }
             }
-
-            result.buildFailed();
             return result;
         }
     }

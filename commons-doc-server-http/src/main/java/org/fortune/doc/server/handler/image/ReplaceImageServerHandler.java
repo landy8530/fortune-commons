@@ -6,6 +6,8 @@ import org.fortune.doc.common.domain.account.DocAccountBean;
 import org.fortune.doc.common.domain.account.ImageDocThumbBean;
 import org.fortune.doc.common.domain.result.ImageDocResult;
 import org.fortune.doc.server.util.ImageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -22,6 +24,7 @@ import java.util.List;
  */
 @Component
 public class ReplaceImageServerHandler extends ImageServerHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReplaceImageServerHandler.class);
 
     public ImageDocResult doReplace(HttpServletRequest request) {
         ImageDocResult result = new ImageDocResult();
@@ -44,17 +47,19 @@ public class ReplaceImageServerHandler extends ImageServerHandler {
                 if (!file.isEmpty()) {
                     try {
                         String rootPath = super.getImageRootPath();
+                        LOGGER.info("图片替换的根目录:{}",rootPath);
                         this.checkRootPath(rootPath);
                         String fileExt = filePath.substring(filePath.lastIndexOf(".") + 1).toLowerCase();
-                        String srcfilePathName = filePath.substring(0, filePath.lastIndexOf("."));
+                        String srcFilePathName = filePath.substring(0, filePath.lastIndexOf("."));
                         String realPath = this.getRealPath(filePath);
+                        LOGGER.info("图片替换的绝对路径:{}",realPath);
                         File oldFile = new File(realPath);
                         if (!oldFile.exists() || !oldFile.isFile()) {
+                            LOGGER.error("替换的文件不存在:{}",oldFile);
                             result.buildCustomMsg("替换的文件不存在");
                             result.buildFailed();
                             return result;
                         }
-
                         oldFile.delete();
                         file.transferTo(oldFile);
                         List<ImageDocThumbBean> thumbBeans = accountBean.getThumbConfig();
@@ -63,25 +68,25 @@ public class ReplaceImageServerHandler extends ImageServerHandler {
 
                             while(thumbBean.hasNext()) {
                                 ImageDocThumbBean thumb = (ImageDocThumbBean)thumbBean.next();
-                                String thumbFilePath = this.getRealPath(srcfilePathName + thumb.getSuffix() + "." + fileExt);
+                                String thumbFilePath = this.getRealPath(srcFilePathName + thumb.getSuffix() + "." + fileExt);
+                                LOGGER.info("图片替换动态生成的缩略图图片文件:{}",thumbFilePath);
                                 File thumbFile = new File(thumbFilePath);
                                 if (thumbFile.exists()) {
                                     ImageUtils.ratioZoom2(oldFile, thumbFile, thumb.getRatio());
                                 }
                             }
                         }
-
-                        result.setFilePath("");
+                        result.setFilePath(filePath);
                         result.buildSuccess();
+                        LOGGER.info("图片替换成功,路径为{}",result.getFilePath());
                     } catch (Exception ex) {
                         result.buildFailed();
+                        LOGGER.error("替换的图片失败",ex);
                     }
                 } else {
                     result.buildFailed();
                 }
             }
-
-            result.buildFailed();
             return result;
         }
     }

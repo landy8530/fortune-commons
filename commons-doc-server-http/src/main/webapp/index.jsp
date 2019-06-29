@@ -75,7 +75,7 @@ body {
 						'onUploadSuccess' : function(file, data, response) {
 							var json;
 							eval("json="+data);
-							var path=json.path;
+							var path=json.filePath;
 							var imglist=$("#imglist")
 							var rootpath=imglist.attr("rootpath");
 							var img="<img   width='150' height='150' src='"+rootpath+"/"+path+"' /> <br/>"
@@ -121,7 +121,7 @@ body {
 						href="javascript:doStopUpload()">取消上传</a>
 			</div>			
 	    </td>
-	    <td id="imglist" rootpath="${base}/attached">
+	    <td id="imglist" rootpath="${base}">
 	    </td>
 	  </tr>
 	</table>

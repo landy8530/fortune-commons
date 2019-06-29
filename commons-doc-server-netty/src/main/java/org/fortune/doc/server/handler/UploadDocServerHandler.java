@@ -1,9 +1,10 @@
 package org.fortune.doc.server.handler;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fortune.doc.common.domain.account.Account;
 import org.fortune.doc.common.domain.Constants;
+import org.fortune.doc.common.domain.account.Account;
 import org.fortune.doc.common.domain.result.Result;
+import org.fortune.doc.common.utils.FileUtil;
 import org.fortune.doc.common.utils.ThumbUtil;
 import org.fortune.doc.server.parse.RequestParam;
 import org.jboss.netty.handler.codec.http.multipart.FileUpload;
@@ -12,10 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
 
 /**
  * @author: landy
@@ -66,12 +63,7 @@ public class UploadDocServerHandler extends AbstractDocServerHandler {
     }
 
     private String generateFileNameOfTime(String fileName) {
-        DateFormat format = new SimpleDateFormat("yyMMddHHmmss");
-        String formatDate = format.format(new Date());
-        int random = new Random().nextInt(10000);
-        int position = fileName.lastIndexOf(".");
-        String suffix = fileName.substring(position);
-        return formatDate + "_" + random + suffix;
+        return FileUtil.generateFileNameOfTime(fileName);
     }
 
     private void createThumb() {
@@ -101,25 +93,7 @@ public class UploadDocServerHandler extends AbstractDocServerHandler {
      * @author Landy
      */
     private void createSaveDir() {
-        StringBuffer buf = new StringBuffer(account.getUserName()).append(File.separator);
-        int level = account.getLevel();
-
-        if (level > Constants.FOLDER_MAX_LEVEL) {
-            level = Constants.FOLDER_MAX_LEVEL;
-        }
-
-        Random r = new Random();
-        for (int i = 0; i < level; i++) {
-            buf.append(
-                    Constants.LETTER_AND_NUMBER_CHAR[r
-                            .nextInt(Constants.LETTER_AND_NUMBER_CHAR.length)])
-                    .append(File.separator);
-        }
-        if (buf.charAt(0) == File.separator.charAt(0)) {
-            buf.deleteCharAt(0);
-        }
-
-        this.savePath = buf.toString();
+        this.savePath = FileUtil.generateFileSavePath(this.account);
 
         this.dirPath = (this.account.getRootPath() + this.savePath);
 

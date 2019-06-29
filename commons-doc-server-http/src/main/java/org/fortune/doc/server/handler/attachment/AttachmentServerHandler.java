@@ -16,9 +16,13 @@ public class AttachmentServerHandler extends DocServerHandler {
         return super.getRootPath() + File.separator + DocServerContainer.getInstance().getAttachmentBasePath();
     }
 
+    public String getAttachmentBasePath() {
+        return DocServerContainer.getInstance().getAttachmentBasePath();
+    }
+
     @Override
     protected String getRealPath(String filePath) {
-        String realPath = this.getAttachmentRootPath();
+        String realPath = this.getRootPath();
         if (realPath.endsWith(File.separator)) {
             realPath = realPath + filePath;
         } else {

@@ -16,9 +16,13 @@ public class ImageServerHandler extends DocServerHandler {
         return super.getRootPath() + File.separator + DocServerContainer.getInstance().getImagesBasePath();
     }
 
+    public String getImageBasePath() {
+        return DocServerContainer.getInstance().getImagesBasePath();
+    }
+
     @Override
     protected String getRealPath(String filePath) {
-        String realPath = this.getImageRootPath();
+        String realPath = this.getRootPath();
         if (realPath.endsWith(File.separator)) {
             realPath = realPath + filePath;
         } else {

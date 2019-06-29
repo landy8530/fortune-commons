@@ -41,15 +41,13 @@ public class DeleteAttachmentServerHandler extends AttachmentServerHandler {
                         result.buildFailed();
                         return result;
                     }
-
                     oldFile.delete();
-                    result.setFilePath("");
+                    result.setFilePath(filePath);
                     result.buildSuccess();
-                } catch (Exception var8) {
+                } catch (Exception ex) {
                     result.buildFailed();
+                    LOGGER.error("删除文件失败",ex);
                 }
-
-                result.buildFailed();
                 return result;
             }
         }
