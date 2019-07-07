@@ -18,7 +18,7 @@
     <description>文件服务组件客户端 Netty实现方式</description>
 
     <properties>
-        <apache-httpcomponents.version>4.3.4</apache-httpcomponents.version>
+        <apache-httpcomponents.version>4.3.6</apache-httpcomponents.version>
     </properties>
 
     <dependencies>
