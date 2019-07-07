@@ -3,7 +3,7 @@ package org.fortune.doc.client;
 import org.fortune.doc.client.handler.*;
 import org.fortune.doc.client.support.DocClientPipelineFactory;
 import org.fortune.doc.common.domain.Constants;
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.result.Result;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFuture;
@@ -129,7 +129,7 @@ public class DocClient {
                 DocClientContainer.getInstance().getUserName(),
                 DocClientContainer.getInstance().getPassword());
         Result result = clientPipelineFactory.getResult();
-        if ((result != null) && (result.isCode())) {
+        if ((result != null) && (result.isSuccess())) {
             return result.getFilePath();
         }
         return null;
@@ -177,8 +177,8 @@ public class DocClient {
         deleteFile(bootstrap, DocClientContainer.getInstance().getHost(),
                 DocClientContainer.getInstance().getPort(), filePath, userName, pwd);
         Result result = clientPipelineFactory.getResult();
-        if ((result != null) && (result.isCode())) {
-            return result.isCode();
+        if ((result != null) && (result.isSuccess())) {
+            return result.isSuccess();
         }
         return false;
     }
@@ -234,8 +234,8 @@ public class DocClient {
                 DocClientContainer.getInstance().getUserName(),
                 DocClientContainer.getInstance().getPassword());
         Result result = clientPipelineFactory.getResult();
-        if ((result != null) && (result.isCode())) {
-            return result.isCode();
+        if ((result != null) && (result.isSuccess())) {
+            return result.isSuccess();
         }
 
         return false;
@@ -283,8 +283,8 @@ public class DocClient {
         createThumbPicture(bootstrap, DocClientContainer.getInstance().getHost(),
                 DocClientContainer.getInstance().getPort(), filePath, userName, pwd);
         Result result = clientPipelineFactory.getResult();
-        if ((result != null) && (result.isCode())) {
-            return result.isCode();
+        if ((result != null) && (result.isSuccess())) {
+            return result.isSuccess();
         }
         return false;
     }

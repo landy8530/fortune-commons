@@ -1,6 +1,6 @@
 package org.fortune.doc.server.handler;
 
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.result.Result;
 import org.fortune.doc.server.parse.RequestParam;
 
 /**

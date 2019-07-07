@@ -1,6 +1,14 @@
+#上传成功后，在需要访问文件web工程中配置以下服务器地址，正确格式为：
+# ${host}/${port}/${appName}/${path}
+# appName为远程文件服务app名称，比如doc-server
+# path为文件上传后服务端返回的文件相对路径
+#http://localhost:8080/doc-server/fortune//p//190629082821_8300.jpg
 upload:
   server:
-    port: 9999
+    port: 9999 #需要配置的是远程文件服务器netty服务端口号
     host: 127.0.0.1
+    access: #访问文件
+      port: 8080 #访问文件 web 服务端口号
+      domainName: doc-server #访问文件 web 服务应用名称
   userName: fortune
   password: fortune

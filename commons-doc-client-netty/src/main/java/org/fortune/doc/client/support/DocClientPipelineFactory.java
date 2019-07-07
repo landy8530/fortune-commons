@@ -1,6 +1,6 @@
 package org.fortune.doc.client.support;
 
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.result.Result;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;

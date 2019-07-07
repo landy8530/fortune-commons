@@ -5,14 +5,16 @@
     <parent>
         <artifactId>fortune-commons</artifactId>
         <groupId>org.fortune</groupId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fortune</groupId>
     <artifactId>commons-doc-client-netty</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <name>commons-doc-client-netty</name>
     <packaging>jar</packaging>
+
+    <description>文件服务组件客户端 Netty实现方式</description>
 
     <dependencies>
         <dependency>

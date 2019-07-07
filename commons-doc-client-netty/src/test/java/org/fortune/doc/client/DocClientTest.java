@@ -31,4 +31,8 @@ public class DocClientTest {
 //        DocClient.deleteFile("yt\\k\\171105144056_7470.pdf");
     }
 
+    @Test
+    public void docServerUrl() {
+        System.out.println(DocClientContainer.getInstance().getDocServerUrl());
+    }
 }

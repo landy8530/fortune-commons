@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fortune-commons</artifactId>
+        <groupId>org.fortune</groupId>
+        <version>1.0.4</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.fortune</groupId>
+    <artifactId>commons-doc-client-http</artifactId>
+    <version>1.0.4</version>
+    <name>commons-doc-client-http</name>
+    <packaging>jar</packaging>
+
+    <description>文件服务组件客户端 Netty实现方式</description>
+
+    <properties>
+        <apache-httpcomponents.version>4.3.4</apache-httpcomponents.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.fortune</groupId>
+            <artifactId>commons-doc-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${apache-httpcomponents.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${apache-httpcomponents.version}</version>
+        </dependency>
+        <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--spring单元测试依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>commons-doc-client-http</finalName>
+    </build>
+</project>
