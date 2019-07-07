@@ -1,4 +1,4 @@
-package org.fortune.doc.common.domain;
+package org.fortune.doc.common.domain.account;
 
 import org.apache.commons.lang3.StringUtils;
 

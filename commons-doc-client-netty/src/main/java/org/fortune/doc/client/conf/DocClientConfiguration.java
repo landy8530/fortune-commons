@@ -21,10 +21,14 @@ public class DocClientConfiguration {
     private String host ;
     @Value("${upload.server.port}")
     private int port ;
+    @Value("${upload.server.access.domainName}")
+    private String domainName ;
+    @Value("${upload.server.access.port}")
+    private int accessPort ;
 
     @Bean(DocClientContainer.BEAN_NAME_DOC_CLIENT_CONTAINER)
     public DocClientContainer docClientContainer() {
-        DocClientContainer docClientContainer = new DocClientContainer(userName, password, host, port);
+        DocClientContainer docClientContainer = new DocClientContainer(userName, password, host, port, domainName, accessPort);
         return docClientContainer;
     }
 

@@ -53,6 +53,7 @@ public class RootApplicationContextConfiguration {
 
 - Spring：5.x+ 
 - JDK：1.8+
+- Tomcat: 建议在tomcat 8以上
 
 ### 版本计划
 
@@ -140,48 +141,10 @@ NoSql模拟关系型数据库的CRUD操作，目前有Mongodb实现。
 
 初始想法源于自己工作中遇到的各种坑，主要目的是为了通过这个开源平台来帮助一些在学习 Java 或者直接在自己公司中使用或者扩展自己的项目。
 
-## Git操作说明
+## 操作指引
 
-### 切换分支
-
-fork本工程后可以按照如下操作即可，
-
-- 切换到master分支，并且更新最新远程库中的代码
-
-  - git checkout master
-  - git pull/git fetch
-
-### 创建分支
-
-- 创建自己的本地分支，以master为源创建
-
-  - git checkout -b fortune-commons-export
-
-- 查看是否创建成功
-
-  - git branch
-
-  ```
-    fortune-commons-beanutils
-  * fortune-commons-export
-    fortune-commons-memcached
-    master
-  ```
-
-  星号(*)表示当前所在分支。现在的状态是成功创建的新的分支并且已经切换到新分支上。
-
-### 同步分支
-
-- 把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）
-
-  - git push origin fortune-commons-export:fortune-commons-export
-
-### 创建标签
-
-- git tag -a v1.0.1 -m "fortune commons v1.0.1"
-- git push origin v1.0.1
-
-
-
-
+- [多JDK版本安装说明（Windows）](https://github.com/landy8530/fortune-commons/wiki/Multiple-JDK-Version-in-Windows-System)
+- [Git操作说明](https://github.com/landy8530/fortune-commons/wiki/Git-Instruction)
+- [Idea基于Maven的多JDK版本配置指引](https://github.com/landy8530/fortune-commons/wiki/Maven-JDK-Profile)
+- [Maven多项目依赖下的版本控制指引](https://github.com/landy8530/fortune-commons/wiki/Maven-Version-Control)
 

@@ -1,13 +1,19 @@
 package org.fortune.doc.common.domain;
 
+import org.fortune.doc.common.domain.account.Account;
+
 public final class Constants {
+	public static final String ENCODE_UTF_8 = "UTF-8";
+
 	public static final String BACKSLASH = "/";
 	public static final String USER_NAME_KEY = "userName";
 	public static final String PWD_KEY = "pwd";
 	public static final String ACTION_KEY = "action";
 	public static final String FILE_PATH_KEY = "filePath";
-	public static final String FILE_NAME_KEY = "fileName";
+	public static final String FILE_NAME_KEY = "Filename"; //
+	public static final String FILE_DATA_KEY = "Filedata";
 	public static final String THUMB_MARK_KEY = "thumbMark";
+	public static final String THUMB_MARK_VAL = "1";
 	public static final String THUMB_MARK_YES = "Y";
 	public static final String THUMB_MARK_NO = "N";
 	public static final String THUMB_SUFFIX = "_thumb";

@@ -1,8 +1,8 @@
 package org.fortune.doc.server.handler;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fortune.doc.common.domain.Account;
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.account.Account;
+import org.fortune.doc.common.domain.result.Result;
 import org.fortune.doc.common.enums.DocOperationType;
 import org.fortune.doc.common.utils.ThumbUtil;
 import org.fortune.doc.server.parse.RequestParam;
@@ -25,7 +25,7 @@ public class ReplaceDocServerHandler extends AbstractDocServerHandler {
 
     public Result process(RequestParam reqParams) {
         Result result = new Result();
-        result.setCode(false);
+        result.buildFailed();
         result.setAction(DocOperationType.REPLACE_FILE.getValue());
 
         if ((StringUtils.isNotBlank(reqParams.getFilePath()))
@@ -53,7 +53,7 @@ public class ReplaceDocServerHandler extends AbstractDocServerHandler {
             }
             try {
                 boolean bool = reqParams.getFileUpload().renameTo(oldFile);
-                result.setCode(bool);
+                result.buildSuccess();
                 result.setMsg("文件替换上传成功");
                 LOGGER.info("文件替换上传成功");
                 result.setFilePath(reqParams.getFilePath());
@@ -68,7 +68,7 @@ public class ReplaceDocServerHandler extends AbstractDocServerHandler {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                result.setCode(false);
+                result.buildFailed();
                 result.setMsg("文件替换报错" + e + ",acount:" + this.account);
                 LOGGER.error("文件替换报错" + e + ",acount:" + this.account);
             }

@@ -7,12 +7,12 @@
   <parent>
     <groupId>org.fortune</groupId>
     <artifactId>fortune-commons</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
   </parent>
 
   <groupId>org.fortune</groupId>
   <artifactId>commons-datacache</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <name>commons-datacache</name>
   <packaging>jar</packaging>
 

@@ -1,8 +1,8 @@
 package org.fortune.doc.server.handler;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fortune.doc.common.domain.Account;
-import org.fortune.doc.common.domain.Result;
+import org.fortune.doc.common.domain.account.Account;
+import org.fortune.doc.common.domain.result.Result;
 import org.fortune.doc.common.enums.DocOperationType;
 import org.fortune.doc.common.utils.ThumbUtil;
 import org.fortune.doc.server.parse.RequestParam;
@@ -25,7 +25,7 @@ public class CreateThumbPictureServerHandler extends AbstractDocServerHandler {
 
     public Result process(RequestParam reqParams) {
         Result result = new Result();
-        result.setCode(false);
+        result.buildFailed();
         result.setAction(DocOperationType.CREATE_THUMB_PICTURE.getValue());
 
         if (StringUtils.isNotBlank(reqParams.getFilePath())) {
@@ -50,10 +50,10 @@ public class CreateThumbPictureServerHandler extends AbstractDocServerHandler {
 					/*ThumbUtil.createThumbImage(new File(realPath),
 							thumbFile, this.account.getThumbWidth(),
 							this.account.getThumbHeight());*/
-                    result.setCode(bool);
+                    result.buildSuccess();
                     result.setMsg("缩略图创建成功");
                 } else {
-                    result.setCode(bool);
+                    result.buildFailed();
                     result.setMsg("缩略图已存在，无法创建；缩略图路径=" + thumbFilePath);
                 }
             }
