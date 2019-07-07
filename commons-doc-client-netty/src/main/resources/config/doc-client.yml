@@ -7,5 +7,8 @@ upload:
   server:
     port: 9999 #需要配置的是远程文件服务器netty服务端口号
     host: 127.0.0.1
+    access: #访问文件
+      port: 8080 #访问文件 web 服务端口号
+      domainName: doc-server #访问文件 web 服务应用名称
   userName: fortune
   password: fortune

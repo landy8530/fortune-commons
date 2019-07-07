@@ -43,7 +43,7 @@ public class ReplaceImageServerHandler extends ImageServerHandler {
                     return result;
                 }
 
-                MultipartFile file = mreqeust.getFile(Constants.FILE_PATH_KEY);
+                MultipartFile file = mreqeust.getFile(Constants.FILE_DATA_KEY);
                 if (!file.isEmpty()) {
                     try {
                         String rootPath = super.getImageRootPath();

@@ -1,7 +1,7 @@
 package org.fortune.doc.server.controller;
 
-import org.fortune.doc.common.domain.Constants;
 import org.fortune.doc.common.domain.result.AttachDocResult;
+import org.fortune.doc.common.enums.DocOperationURI;
 import org.fortune.doc.server.handler.attachment.DeleteAttachmentServerHandler;
 import org.fortune.doc.server.handler.attachment.ReplaceAttachmentServerHandler;
 import org.fortune.doc.server.handler.attachment.UploadAttachmentServerHandler;
@@ -29,7 +29,7 @@ public class AttachmentOperationController {
     private DeleteAttachmentServerHandler docDeleteServerHandler;
 
     @RequestMapping(
-            value = {Constants.URL_UPLOAD_ATTACH},
+            value = {DocOperationURI.URL_UPLOAD_ATTACH},
             method = {RequestMethod.POST}
     )
     @ResponseBody
@@ -39,7 +39,7 @@ public class AttachmentOperationController {
     }
 
     @RequestMapping(
-            value = {Constants.URL_REPLACE_ATTACH},
+            value = {DocOperationURI.URL_REPLACE_ATTACH},
             method = {RequestMethod.POST}
     )
     @ResponseBody
@@ -49,7 +49,7 @@ public class AttachmentOperationController {
     }
 
     @RequestMapping(
-            value = {Constants.URL_DELETE_ATTACH},
+            value = {DocOperationURI.URL_DELETE_ATTACH},
             method = {RequestMethod.POST}
     )
     @ResponseBody

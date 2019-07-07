@@ -1,7 +1,7 @@
 package org.fortune.doc.server.controller;
 
-import org.fortune.doc.common.domain.Constants;
 import org.fortune.doc.common.domain.result.ImageDocResult;
+import org.fortune.doc.common.enums.DocOperationURI;
 import org.fortune.doc.server.handler.image.DeleteImageServerHandler;
 import org.fortune.doc.server.handler.image.ReplaceImageServerHandler;
 import org.fortune.doc.server.handler.image.UploadImageServerHandler;
@@ -29,7 +29,7 @@ public class ImageOperationController {
     private DeleteImageServerHandler docDeleteServerHandler;
 
     @RequestMapping(
-            value = {Constants.URL_UPLOAD_IMAGE},
+            value = {DocOperationURI.URL_UPLOAD_IMAGE},
             method = {RequestMethod.POST}
     )
     @ResponseBody
@@ -39,7 +39,7 @@ public class ImageOperationController {
     }
 
     @RequestMapping(
-            value = {Constants.URL_REPLACE_IMAGE},
+            value = {DocOperationURI.URL_REPLACE_IMAGE},
             method = {RequestMethod.POST}
     )
     @ResponseBody
@@ -49,7 +49,7 @@ public class ImageOperationController {
     }
 
     @RequestMapping(
-            value = {Constants.URL_DELETE_IMAGE},
+            value = {DocOperationURI.URL_DELETE_IMAGE},
             method = {RequestMethod.POST}
     )
     @ResponseBody

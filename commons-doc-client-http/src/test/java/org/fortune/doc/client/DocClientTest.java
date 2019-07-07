@@ -25,14 +25,14 @@ public class DocClientTest {
 
     @Test
     public void test() {
-        DocClient.uploadFile(new File("C:\\06_temp\\psb.jpg"), "psb.jpg",false);
-//		DocClient.uploadFile(new File("D:\\tmp\\FUp_378131942802165004.pdf"), "FUp_378131942802165004.pdf",false);
-//        DocClient.replaceFile(new File("C:\\06_temp\\psb.jpg"), "yt\\k\\171105144056_7470.jpg");
-//        DocClient.deleteFile("yt\\k\\171105144056_7470.pdf");
+        //DocClient.doImageUpload("psb.jpg", new File("C:\\06_temp\\psb.jpg"));
+        //DocClient.doImageDelete("images\\fortune\\b\\190707114835_9573.jpg");
+        DocClient.doImageReplace("images\\fortune\\f\\\\190707114616_3742.JPG", new File("C:\\06_temp\\psb.jpg"));
     }
 
     @Test
     public void docServerUrl() {
         System.out.println(DocClientContainer.getInstance().getDocServerUrl());
     }
+
 }
