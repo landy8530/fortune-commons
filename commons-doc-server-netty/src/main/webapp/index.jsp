@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Commons-Doc-Server</title>
+<title>通用文件服务组件-服务端</title>
 </head>
 <body>
-静态资源服务器部署成功
+通用文件服务组件服务端部署成功
 </body>
 </html>
