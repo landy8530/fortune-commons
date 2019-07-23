@@ -261,6 +261,10 @@ private static void uploadFile(ClientBootstrap bootstrap, String host,
 
 ![1563636405662](https://github.com/landy8530/fortune-commons/raw/master/commons-doc-common/docs/netty/idea-tomcat-config.png)
 
+需要注意的是，在Deployment页签，需要配置该项目访问的Application Context，否则有可能启动后出现404的情况。如下图所示：
+
+![1563894965783](https://github.com/landy8530/fortune-commons/raw/master/commons-doc-common/docs/netty/idea-tomcat-config-note.png)
+
 配置完成即可启动文件服务组件，如下图即为启动信息日志：
 
 ```
