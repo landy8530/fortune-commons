@@ -92,15 +92,15 @@ public class RootApplicationContextConfiguration {
 
 实现方式计划采用以下两种方式实现：
 
-- 采用Netty实现文件的转储操作
-- 采用原生HTTP方式实现（利用Spring MVC）
+- 采用Netty实现文件的转储操作，参考 [文件服务组件之Netty实现](https://github.com/landy8530/fortune-commons/wiki/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6%E4%B9%8BNetty%E5%AE%9E%E7%8E%B0)
+- 采用原生HTTP方式实现（利用Spring MVC），参考 [文件服务组件之HTTP实现](https://github.com/landy8530/fortune-commons/wiki/%E9%80%9A%E7%94%A8%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6%EF%BC%88HTTP%E5%AE%9E%E7%8E%B0%E7%89%88%E6%9C%AC%EF%BC%89)
 
 #### commons-doc-server
 
 文件上传服务服务端，实现方式计划采用以下两种方式实现：
 
-- 采用Netty实现文件的转储操作
-- 采用原生HTTP方式实现（利用Spring MVC）
+- 采用Netty实现文件的转储操作，参考 [文件服务组件之Netty实现](https://github.com/landy8530/fortune-commons/wiki/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6%E4%B9%8BNetty%E5%AE%9E%E7%8E%B0)
+- 采用原生HTTP方式实现（利用Spring MVC），参考 [文件服务组件之HTTP实现](https://github.com/landy8530/fortune-commons/wiki/%E9%80%9A%E7%94%A8%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6%EF%BC%88HTTP%E5%AE%9E%E7%8E%B0%E7%89%88%E6%9C%AC%EF%BC%89)
 
 #### commons-datacache
 
