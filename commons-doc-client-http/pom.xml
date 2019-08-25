@@ -17,10 +17,6 @@
 
     <description>文件服务组件客户端 Netty实现方式</description>
 
-    <properties>
-        <apache-httpcomponents.version>4.3.6</apache-httpcomponents.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.fortune</groupId>
@@ -30,12 +26,10 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>${apache-httpcomponents.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>${apache-httpcomponents.version}</version>
         </dependency>
         <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
         <dependency>
