@@ -1,7 +1,7 @@
 package org.fortune.doc.client.support;
 
 import org.fortune.doc.common.domain.result.Result;
-import org.fortune.doc.common.utils.JsonUtil;
+import org.fortune.commons.core.util.JsonUtil;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ExceptionEvent;

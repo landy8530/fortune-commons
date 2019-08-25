@@ -1,8 +1,6 @@
 package org.fortune.doc.client.handler;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.http.entity.mime.content.ByteArrayBody;
-import org.apache.http.entity.mime.content.FileBody;
 import org.fortune.doc.client.DocClientContainer;
 import org.fortune.doc.client.support.DocClientWrapper;
 import org.fortune.doc.common.domain.Constants;
@@ -32,13 +30,11 @@ public abstract class AbstractDocClientHandler {
     }
 
     protected void addContent(DocClientWrapper hw, File file) {
-        FileBody fileBody = new FileBody(file);
-        hw.getContentBodies().put(Constants.FILE_DATA_KEY, fileBody);
+        hw.addContent(Constants.FILE_DATA_KEY, file);
     }
 
     protected void addContent(DocClientWrapper hw, byte[] content) {
-        ByteArrayBody byteArrayBody = new ByteArrayBody(content, Constants.FILE_DATA_KEY);
-        hw.getContentBodies().put(Constants.FILE_DATA_KEY, byteArrayBody);
+        hw.addContent(Constants.FILE_DATA_KEY, content);
     }
 
     protected <T> T convertToObject(String resultContent, Class<T> clazz) {
