@@ -124,6 +124,19 @@
             <artifactId>snakeyaml</artifactId>
         </dependency>
 
+        <!-- Apache http client  -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
         <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
         <dependency>
             <groupId>junit</groupId>

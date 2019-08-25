@@ -1,4 +1,4 @@
-package org.fortune.doc.common.utils;
+package org.fortune.commons.core.util;
 
 import com.alibaba.fastjson.JSON;
 
