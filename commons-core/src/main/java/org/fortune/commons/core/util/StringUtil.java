@@ -165,4 +165,44 @@ public class StringUtil {
         }
         return false;
     }
+
+    public static int compare(String text1, String text2) {
+        if (text1 == null && text2 == null) {
+            return 0;
+        } else if (text1 != null && text2 == null) {
+            return 1;
+        } else {
+            return text1 == null ? -1 : text1.compareTo(text2);
+        }
+    }
+
+    public static boolean hasText(String text) {
+        if (text == null) {
+            return false;
+        } else {
+            for(int i = 0; i < text.length(); ++i) {
+                if (!Character.isWhitespace(text.charAt(i))) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    public static boolean equals(String text1, String text2) {
+        if (text1 == null) {
+            return text2 == null;
+        } else {
+            return text1.equals(text2);
+        }
+    }
+
+    public static String truncate(String text, int maxLength) {
+        if (text == null) {
+            return null;
+        } else {
+            return text.length() <= maxLength ? text : text.substring(0, maxLength);
+        }
+    }
 }
