@@ -137,6 +137,13 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>it.svario.xpathapi</groupId>
+            <artifactId>xpathapi-jaxp</artifactId>
+            <version>0.4</version>
+        </dependency>
+
         <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
         <dependency>
             <groupId>junit</groupId>
