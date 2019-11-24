@@ -1,9 +1,8 @@
 package org.fortune.commons.core.util;
 
-import com.ehi.bo.webconnect.core.xml.DOMUtils;
-import com.ehi.bo.webconnect.core.xml.XMLException;
 import com.sun.org.apache.xpath.internal.XPathAPI;
 import com.sun.org.apache.xpath.internal.objects.XObject;
+import org.fortune.commons.core.exception.XMLException;
 import org.w3c.dom.*;
 
 import javax.xml.transform.TransformerException;
