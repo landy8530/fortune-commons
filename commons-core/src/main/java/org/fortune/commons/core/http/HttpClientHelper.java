@@ -280,7 +280,9 @@ public class HttpClientHelper {
         }
 
         public Builder addContentBodies(Map<String, ContentBody> contentBodies) {
-            this.contentBodies.putAll(contentBodies);
+            if(contentBodies != null) {
+                this.contentBodies.putAll(contentBodies);
+            }
             return this;
         }
 
