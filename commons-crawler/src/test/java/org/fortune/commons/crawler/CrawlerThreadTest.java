@@ -42,8 +42,8 @@ public class CrawlerThreadTest {
         headMap.put("Sec-Fetch-User","?1");
         headMap.put("Upgrade-Insecure-Requests","1");
         headMap.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36");
-        paramMap.put("username","00034859");
-        paramMap.put("password","xhf7250331");
+        paramMap.put("username","xxx");
+        paramMap.put("password","yyy");
         paramMap.put("imgCode","");
 
         crawlerThreadClient.setUrls("https://www.cndpp.com/client/login", "https://www.cndpp.com/client/order/order-list.htm")
