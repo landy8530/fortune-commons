@@ -24,6 +24,7 @@
         <module>commons-doc-common</module>
         <module>commons-doc-server-http</module>
         <module>commons-doc-client-http</module>
+        <module>commons-crawler</module>
     </modules>
 
     <properties>
