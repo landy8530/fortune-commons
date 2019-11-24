@@ -40,8 +40,8 @@ public class CrawlerTest {
                 .addHeader("Sec-Fetch-User","?1")
                 .addHeader("Upgrade-Insecure-Requests","1")
                 .addHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36")
-                .addParam("username","xxxx")
-                .addParam("password","yyyy")
+                .addParam("username","00034859")
+                .addParam("password","xhf7250331")
                 .addParam("imgCode","")
                 .submit();
 
