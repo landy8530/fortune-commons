@@ -2,6 +2,7 @@ package org.fortune.commons.core.util;
 
 import org.fortune.commons.core.cglib.BeanCopierContainer;
 import org.springframework.cglib.beans.BeanCopier;
+import org.springframework.cglib.core.Converter;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -51,6 +52,18 @@ public class BeanCopierUtil {
             copier = beanCopierMap.get(beanKey);
         }
         copier.copy(source, target, null);
+    }
+
+    public static <S,T> void copyProperties(S source, T target, Converter converter) {
+        String beanKey = generateKey(source.getClass(), target.getClass());
+        BeanCopier copier;
+        if (!beanCopierMap.containsKey(beanKey)) {
+            copier = BeanCopier.create(source.getClass(), target.getClass(), true);
+            beanCopierMap.put(beanKey, copier);
+        } else {
+            copier = beanCopierMap.get(beanKey);
+        }
+        copier.copy(source, target, converter);
     }
 
     private static String generateKey(Class<?> class1, Class<?> class2) {
