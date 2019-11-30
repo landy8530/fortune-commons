@@ -215,6 +215,14 @@ public class CrawlerClient implements GetMethodBuilder, PostMethodBuilder {
         return this;
     }
 
+    @Override
+    public GetMethodBuilder addGetParam(String name, String value) {
+        if (httpMethod instanceof Get) {
+            ((Get) httpMethod).addParameter(name, value);
+        }
+        return this;
+    }
+
     public List<Cookie> getCookies() {
         return this.response.getCookies().getCookies();
     }
