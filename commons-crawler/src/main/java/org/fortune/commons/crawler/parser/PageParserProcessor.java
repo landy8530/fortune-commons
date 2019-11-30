@@ -5,6 +5,7 @@ import org.fortune.commons.crawler.annotation.PageSelect;
 import org.fortune.commons.crawler.enums.SelectType;
 import org.fortune.commons.crawler.util.FieldReflectionUtil;
 import org.fortune.commons.crawler.util.JsoupUtil;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -147,4 +148,8 @@ public class PageParserProcessor {
         return true;
     }
 
+    public static boolean processPage(String html, PageParser pageParser) throws IllegalAccessException, InstantiationException {
+        Document document = Jsoup.parse(html);
+        return processPage(document, pageParser);
+    }
 }
