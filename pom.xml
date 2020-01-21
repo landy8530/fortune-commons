@@ -54,7 +54,7 @@
         <commons.io.version>2.4</commons.io.version>
         <!--Spring -->
         <!--<spring.version>4.2.3.RELEASE</spring.version>-->
-        <spring.version>5.1.5.RELEASE</spring.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
         <aspectj.version>1.8.7</aspectj.version>
 
         <!-- yaml -->
