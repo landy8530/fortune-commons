@@ -6,6 +6,7 @@ import org.fortune.commons.core.setting.SettingsFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.MutablePropertySources;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
+@ComponentScan(basePackages = "org.fortune.commons")
 public class SettingsConfiguration {
     private static final String FILE_ENCODING = Constants.ENCODING_UTF_8;
     private static final String PROPERTY_SOURCE_KEY_DATA_CACHE = "data-cache";

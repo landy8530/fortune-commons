@@ -43,6 +43,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- javax-mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
         <!-- apache commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>
