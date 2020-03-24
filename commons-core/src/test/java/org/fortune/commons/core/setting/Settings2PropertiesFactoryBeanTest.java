@@ -1,19 +1,14 @@
 package org.fortune.commons.core.setting;
 
-import org.fortune.commons.core.conf.SettingsConfiguration;
+import org.fortune.commons.core.BaseJunit4Test;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Properties;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {SettingsConfiguration.class})
-public class Settings2PropertiesFactoryBeanTest {
+public class Settings2PropertiesFactoryBeanTest extends BaseJunit4Test {
 
     @Autowired
     private Settings settings;
