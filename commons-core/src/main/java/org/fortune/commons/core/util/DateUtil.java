@@ -56,15 +56,22 @@ public class DateUtil {
      */
     public static final String DB_STORE_DATE_END = "235959";
 
-    public static final String DATE_PATTERN_DEFAULT = "MM/dd/yyyy";
     public static final String DATE_PATTERN_DASH_1 = "MM-dd-yyyy";
-    public static final String DATE_PATTERN_DASH_2 = "yyyy-MM-dd";
-    public static final String DATE_TIME_PATTERN_DEFAULT = "MM/dd/yyyy HH:mm:ss";
-    public static final String DATE_TIME_PATTERN_1 = "yyyyMMdd_HHmmss";
     public static final String DATE_TIME_PATTERN_2 = "yyyy-MM-dd HH:mm:ss";
 
+    public static final String PATTERN_SHORT_DATE_SLASH = "M/d/yyyy";
+    public static final String PATTERN_PERIOD_DATE = "yyyyMM";
+    public static final String PATTERN_MONTH_YEAR = "MM/yyyy";
+
+    public static final String PATTERN_FULL_DATE_SLASH = "MM/dd/yyyy";
+    public static final String PATTERN_FULL_DATE_DASH = "yyyy-MM-dd";
+
+    public static final String PATTERN_FULL_DATE_TIME_24 = "MM/dd/yyyy HH:mm:ss";
+    public static final String PATTERN_FULL_DATE_TIME_UNDERSCORE = "yyyyMMdd_HHmmss";
+
+
     public static String getCurrentDateTime() {
-        return getCurrentDateTime(new SimpleDateFormat(DATE_TIME_PATTERN_DEFAULT));
+        return getCurrentDateTime(new SimpleDateFormat(PATTERN_FULL_DATE_TIME_24));
     }
 
     public static String getCurrentDateTime(SimpleDateFormat dateFormat) {
@@ -72,7 +79,7 @@ public class DateUtil {
     }
 
     public static Date string2Date(String originalValue) {
-        return string2Date(originalValue, DATE_PATTERN_DEFAULT);
+        return string2Date(originalValue, PATTERN_FULL_DATE_SLASH);
     }
 
     public static Date string2Date(String originalValue, String format) {
@@ -90,7 +97,7 @@ public class DateUtil {
     }
 
     public static String date2String(Date originalValue) {
-        return date2String(originalValue, DATE_PATTERN_DEFAULT);
+        return date2String(originalValue, PATTERN_FULL_DATE_SLASH);
     }
 
     public static String date2String(Date originalValue, String format) {
@@ -101,7 +108,7 @@ public class DateUtil {
     }
 
     public static Date getDateIgnoreTime(Date date) {
-        return string2Date(date2String(date, DATE_PATTERN_DEFAULT), DATE_PATTERN_DEFAULT);
+        return string2Date(date2String(date, PATTERN_FULL_DATE_SLASH), PATTERN_FULL_DATE_SLASH);
     }
 
     public static boolean isValidDate(String dateStr, String format) {
@@ -139,8 +146,8 @@ public class DateUtil {
     }
 
     public static int dayDifferenceIgnoreTime(Date date1, Date date2) {
-        date1 = string2Date(date2String(date1, DATE_PATTERN_DEFAULT), DATE_PATTERN_DEFAULT);
-        date2 = string2Date(date2String(date2, DATE_PATTERN_DEFAULT), DATE_PATTERN_DEFAULT);
+        date1 = string2Date(date2String(date1, PATTERN_FULL_DATE_SLASH), PATTERN_FULL_DATE_SLASH);
+        date2 = string2Date(date2String(date2, PATTERN_FULL_DATE_SLASH), PATTERN_FULL_DATE_SLASH);
         return dayDifference(date1, date2);
     }
 
@@ -296,6 +303,6 @@ public class DateUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(DateUtil.string2Date("09/14/2017", DATE_TIME_PATTERN_DEFAULT));
+        System.out.println(DateUtil.string2Date("09/14/2017", PATTERN_FULL_DATE_TIME_24));
     }
 }

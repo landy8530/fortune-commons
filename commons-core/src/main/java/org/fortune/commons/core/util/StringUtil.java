@@ -1,5 +1,8 @@
 package org.fortune.commons.core.util;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -204,5 +207,57 @@ public class StringUtil {
         } else {
             return text.length() <= maxLength ? text : text.substring(0, maxLength);
         }
+    }
+
+    public static String escapeCSV(String str) {
+        return StringEscapeUtils.escapeCsv(str);
+    }
+
+    public static boolean contains(String str, char c) {
+        return StringUtils.contains(str, c);
+    }
+
+    public static String toUnderline(String s) {
+        if (s == null) {
+            return null;
+        } else {
+            boolean upperCase = false;
+            boolean nextUpperCase = false;
+            StringBuilder sb = new StringBuilder();
+
+            for(int i = 0; i < s.length(); ++i) {
+                char c = s.charAt(i);
+                nextUpperCase = true;
+                if (i < s.length() - 1) {
+                    nextUpperCase = Character.isUpperCase(s.charAt(i + 1));
+                }
+
+                if (i >= 0 && Character.isUpperCase(c)) {
+                    if ((!upperCase || !nextUpperCase) && i > 0) {
+                        sb.append('_');
+                    }
+
+                    upperCase = true;
+                } else {
+                    upperCase = false;
+                }
+
+                sb.append(Character.toLowerCase(c));
+            }
+
+            return sb.toString();
+        }
+    }
+
+    public static int getDelimiterCount(String str) {
+        return getDelimiterCount(str, "\\|");
+    }
+
+    public static int getDelimiterCount(String str, String delimiter) {
+        return str.length() - str.replaceAll(delimiter, "").length();
+    }
+
+    public static String remove(String str, String remove) {
+        return StringUtils.remove(str, remove);
     }
 }

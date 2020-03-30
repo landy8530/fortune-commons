@@ -2,8 +2,10 @@ package org.fortune.commons.core.freemarker;
 
 import freemarker.template.*;
 import org.fortune.commons.core.constants.Constants;
+import org.fortune.commons.core.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +29,7 @@ public class FortuneFreemarkerResolver {
 
     private String rootPath;
 
-    private static FortuneFreemarkerResolver instance;
+    private static final String DEFAULT_ROOT_PATH = "/templates";
 
     public synchronized static final FortuneFreemarkerResolver getInstance() {
         //在返回结果以前，一定会先加载内部类
@@ -68,6 +70,9 @@ public class FortuneFreemarkerResolver {
      * @author: Landy
      */
     public String process(FtlResourceData myResourceData) {
+        if (configuration == null) {
+            init();
+        }
         Map<String, Object> root = myResourceData.getData();
 
         //加入静态资源信息
@@ -113,6 +118,12 @@ public class FortuneFreemarkerResolver {
     }
 
     public String getRootPath() {
+        //如果没有显示设置根路径，则默认取class path下的template目录
+        if(!StringUtils.hasText(rootPath)) {
+            //设置根路径
+            String classPath = FileUtil.getFilePathByClassPath(DEFAULT_ROOT_PATH);
+            rootPath = classPath;
+        }
         return rootPath;
     }
 

@@ -9,9 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.env.MutablePropertySources;
-import org.springframework.core.env.PropertySource;
-import org.springframework.core.env.StandardEnvironment;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -55,7 +52,7 @@ public class SettingsConfiguration {
 //        return propertyPlaceholderConfigurer;
 //    }
     @Bean("propertyPlaceholderConfigurer")
-    public static final PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer(@Qualifier("applicationProperties") PropertiesFactoryBean applicationProperties) throws IOException {
+    public PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer(@Qualifier("applicationProperties") PropertiesFactoryBean applicationProperties) throws IOException {
         final PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         //在这里，通过使用自定义的settings转化为properties
 //        YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
@@ -76,16 +73,16 @@ public class SettingsConfiguration {
         return propertyPlaceholderConfigurer;
     }
 
-    static class SettingsEnvironment extends StandardEnvironment {
-        private PropertySource propertySource;
-        public SettingsEnvironment(PropertySource propertySource) {
-            this.propertySource = propertySource;
-        }
-
-        @Override
-        protected void customizePropertySources(MutablePropertySources propertySources) {
-            super.customizePropertySources(propertySources);
-            propertySources.addFirst(propertySource);
-        }
-    }
+//    static class SettingsEnvironment extends StandardEnvironment {
+//        private PropertySource propertySource;
+//        public SettingsEnvironment(PropertySource propertySource) {
+//            this.propertySource = propertySource;
+//        }
+//
+//        @Override
+//        protected void customizePropertySources(MutablePropertySources propertySources) {
+//            super.customizePropertySources(propertySources);
+//            propertySources.addFirst(propertySource);
+//        }
+//    }
 }
