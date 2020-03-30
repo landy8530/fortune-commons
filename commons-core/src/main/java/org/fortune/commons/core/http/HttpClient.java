@@ -1,8 +1,10 @@
 package org.fortune.commons.core.http;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -26,6 +28,7 @@ import org.apache.http.util.EntityUtils;
 import org.fortune.commons.core.exception.HttpException;
 import org.fortune.commons.core.util.ClasspathResource;
 import org.fortune.commons.core.util.StopWatch;
+import org.fortune.commons.core.util.StringUtil;
 import org.fortune.commons.core.util.TimeLength;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,10 +66,43 @@ public class HttpClient {
     private String defaultURL;
 
     public HttpClient() {
+        this(null);
+    }
+
+    public HttpClient(String proxyIp, int port) {
+        this(proxyIp, port, null);
+    }
+
+    public HttpClient(String proxyIp, int port, String scheme) {
+        HttpHost proxy = null;
+        if(StringUtils.isNotBlank(proxyIp) && port != -1) {
+            if(StringUtils.isNotBlank(scheme)) {
+                proxy = new HttpHost(proxyIp, port, scheme);
+            } else {
+                proxy = new HttpHost(proxyIp, port);
+            }
+        }
+        init(proxy);
+    }
+
+    public HttpClient(HttpHost proxy) {
+        init(proxy);
+    }
+
+    private void init(HttpHost proxy) {
         this.timeOut = DEFAULT_TIME_OUT;
         this.acceptSelfSignedCert = true;
         this.validateStatusCode = true;
-        this.defaultRequestConfig = RequestConfig.custom().setCookieSpec(this.cookieSpecs).setSocketTimeout((int)this.timeOut.toMilliseconds()).setConnectTimeout((int)this.timeOut.toMilliseconds()).setConnectionRequestTimeout((int)this.timeOut.toMilliseconds()).build();
+        RequestConfig.Builder builder = RequestConfig.custom();
+        if(proxy != null) {
+            builder.setProxy(proxy);
+        }
+        this.defaultRequestConfig = builder
+                .setCookieSpec(this.cookieSpecs)
+                .setSocketTimeout((int)this.timeOut.toMilliseconds())
+                .setConnectTimeout((int)this.timeOut.toMilliseconds())
+                .setConnectionRequestTimeout((int)this.timeOut.toMilliseconds())
+                .build();
     }
 
     public HttpResponse execute(HttpRequest request) {

@@ -1,15 +1,15 @@
 package org.fortune.commons.core.mail;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,6 +20,8 @@ import java.util.Map;
  */
 class MimeMessageBuilder {
     static final String HEADER_MESSAGE_ID = "Message-Id";
+
+    private static Logger LOGGER = LoggerFactory.getLogger(MimeMessageBuilder.class);
 
     final Mail mail;
 
@@ -39,7 +41,13 @@ class MimeMessageBuilder {
                 MimeBodyPart attachmentPart = new MimeBodyPart();
                 FileDataSource fileDataSource = new FileDataSource(attachment.getFile());
                 attachmentPart.setDataHandler(new DataHandler(fileDataSource));
-                attachmentPart.setFileName(attachment.getName());
+                String fileName = attachment.getName();
+                try {
+                    fileName = MimeUtility.encodeText(fileName); // 解决中文附件乱码
+                } catch (UnsupportedEncodingException e) {
+                    LOGGER.error("Occurring an unexpected exception", e);
+                }
+                attachmentPart.setFileName(fileName);
                 multipart.addBodyPart(attachmentPart);
             }
         }
@@ -49,7 +57,7 @@ class MimeMessageBuilder {
     }
 
     void removeServerInfoFromMessageIdHeader(MimeMessage message) throws MessagingException {
-        message.setHeader(HEADER_MESSAGE_ID, "<" + RandomUtils.nextInt(0, 2147483647) + "." + System.currentTimeMillis() + ".mail@ehealth.com>");
+        message.setHeader(HEADER_MESSAGE_ID, "<" + RandomUtils.nextInt(0, 2147483647) + "." + System.currentTimeMillis() + ".mail@qq.com>");
     }
 
     private void setBody(Multipart message) throws MessagingException {

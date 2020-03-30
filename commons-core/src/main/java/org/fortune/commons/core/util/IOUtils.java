@@ -181,6 +181,10 @@ public class IOUtils {
         }
     }
 
+    public static void closeQuietly(OutputStream output) {
+        org.apache.commons.io.IOUtils.closeQuietly(output);
+    }
+
     private IOUtils() {
     }
     

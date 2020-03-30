@@ -8,6 +8,7 @@ package org.fortune.commons.core;
 
 import org.fortune.commons.core.conf.SettingsConfiguration;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

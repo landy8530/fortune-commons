@@ -1,6 +1,8 @@
 package org.fortune.commons.core.setting;
 
 import org.fortune.commons.core.setting.exception.ResolveFailedConfigException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -8,6 +10,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import java.io.IOException;
 
 public class SettingsFactoryBean extends AbstractFactoryBean<Settings> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SettingsFactoryBean.class);
 
     private SettingsFileConfig settingsFileConfig = new SettingsFileConfig();
 
@@ -17,6 +20,7 @@ public class SettingsFactoryBean extends AbstractFactoryBean<Settings> {
         try {
             Resource[] resources = resolveConfig();
             for (Resource resource : resources) {
+                LOGGER.info("Start to resolve the config file: {}", resource.getURL());
                 builder.loadFromUrl(resource.getURL());
             }
         } catch (IOException e) {
