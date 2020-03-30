@@ -84,8 +84,12 @@
         <!-- jxls  -->
         <jxls.version>1.0.6</jxls.version>
         <jxl.version>2.6.12</jxl.version>
+        <!-- excel org.apache.poi -->
+        <org.apache.poi.version>4.1.1</org.apache.poi.version>
         <!-- itextpdf -->
-        <itextpdf.version>5.5.13</itextpdf.version>
+        <itextpdf.core.version>5.5.13</itextpdf.core.version>
+        <itextpdf.tool.version>5.5.13</itextpdf.tool.version>
+        <itextpdf.version>7.0.2</itextpdf.version>
         <!--中文支持包-->
         <itext-asian.version>5.2.0</itext-asian.version>
 
@@ -363,7 +367,7 @@
                 <version>${yaml.version}</version>
             </dependency>
 
-            <!-- excel 操作 start -->
+            <!-- excel 操作 模版操作相关 start -->
             <!--http://jxls.sourceforge.net/-->
             <!--2.x-->
             <!--https://www.cnblogs.com/Crysta1/p/10250270.html-->
@@ -374,6 +378,20 @@
                 <groupId>net.sf.jxls</groupId>
                 <artifactId>jxls-core</artifactId>
                 <version>${jxls.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi-ooxml</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.jexcelapi</groupId>
@@ -386,13 +404,38 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!-- excel 操作相关 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${org.apache.poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${org.apache.poi.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.poi</groupId>
+                        <artifactId>poi-ooxml-schemas</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${org.apache.poi.version}</version>
+            </dependency>
             <!-- excel 操作 end -->
-
             <!-- PDF插件相关 start -->
             <dependency>
                 <groupId>com.itextpdf</groupId>
                 <artifactId>itextpdf</artifactId>
-                <version>${itextpdf.version}</version>
+                <version>${itextpdf.core.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.itextpdf</groupId>
@@ -402,6 +445,26 @@
             <dependency>
                 <groupId>com.itextpdf.tool</groupId>
                 <artifactId>xmlworker</artifactId>
+                <version>${itextpdf.tool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>kernel</artifactId>
+                <version>${itextpdf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>io</artifactId>
+                <version>${itextpdf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>layout</artifactId>
+                <version>${itextpdf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>forms</artifactId>
                 <version>${itextpdf.version}</version>
             </dependency>
             <!--设置pdf文件密码，还要引入下面bcprov-jdk15on.jar包：-->

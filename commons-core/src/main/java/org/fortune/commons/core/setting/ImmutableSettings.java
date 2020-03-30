@@ -176,12 +176,16 @@ public class ImmutableSettings implements Settings {
         }
 
         public DefaultSettingsBuilder put(Map<String, String> settings) {
-            map.putAll(settings);
+            //不存在的才能再次加载，防止多个相同配置文件一起加载的情况，以class path所在目录的 文件优先
+            for(Map.Entry<String, String> entry : settings.entrySet()) {
+                map.putIfAbsent(entry.getKey(), entry.getValue());
+            }
+//            map.putAll(settings);
             return this;
         }
 
         public DefaultSettingsBuilder put(String key, String value) {
-            map.put(key, value);
+            map.putIfAbsent(key, value);
             return this;
         }
 

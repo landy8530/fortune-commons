@@ -85,8 +85,10 @@ public class MailSender {
             }
             LOGGER.info("sending email finished, elapsedTime={}",watch.elapsedTime());
         } catch (NoSuchProviderException ex) {
+            LOGGER.error("sending email failed",ex);
             throw new MailException(ex);
         } catch (MessagingException ex) {
+            LOGGER.error("sending email failed",ex);
             throw new MailException(ex);
         } finally {
             this.closeTransport(transport);
