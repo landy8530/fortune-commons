@@ -38,13 +38,16 @@ public final class ApacheBeanUtils {
     private static Set<String> patterns_date = new HashSet();
 
     static {
+        patterns_date.add(DateUtil.PATTERN_FULL_DATE_DASH);
         patterns_date.add(DateUtil.PATTERN_FULL_DATE_SLASH);
         patterns_date.add(DateUtil.PATTERN_SHORT_DATE_SLASH);
-        patterns_date.add(DateUtil.PATTERN_FULL_DATE_DASH);
         patterns_date.add(DateUtil.PATTERN_PERIOD_DATE);
         patterns_date.add(DateUtil.PATTERN_MONTH_YEAR);
+        patterns_date.add(DateUtil.DATE_PATTERN_DASH_1);
+        patterns_datetime.add(DateUtil.DATE_TIME_PATTERN_2);
         patterns_datetime.add(DateUtil.PATTERN_FULL_DATE_TIME_24);
         patterns_datetime.add(DateUtil.PATTERN_FULL_DATE_TIME_UNDERSCORE);
+
     }
 
     public static Object getProperty(Object bean, String name) {
