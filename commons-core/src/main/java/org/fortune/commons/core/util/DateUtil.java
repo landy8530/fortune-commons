@@ -57,7 +57,6 @@ public class DateUtil {
     public static final String DB_STORE_DATE_END = "235959";
 
     public static final String DATE_PATTERN_DASH_1 = "MM-dd-yyyy";
-    public static final String DATE_TIME_PATTERN_2 = "yyyy-MM-dd HH:mm:ss";
 
     public static final String PATTERN_SHORT_DATE_SLASH = "M/d/yyyy";
     public static final String PATTERN_PERIOD_DATE = "yyyyMM";
@@ -68,6 +67,7 @@ public class DateUtil {
 
     public static final String PATTERN_FULL_DATE_TIME_24 = "MM/dd/yyyy HH:mm:ss";
     public static final String PATTERN_FULL_DATE_TIME_UNDERSCORE = "yyyyMMdd_HHmmss";
+    public static final String DATE_TIME_PATTERN_2 = "yyyy-MM-dd HH:mm:ss";
 
 
     public static String getCurrentDateTime() {

@@ -1,6 +1,7 @@
 package org.fortune.commons.core.mail;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.fortune.commons.core.constants.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -9,6 +10,8 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.mail.util.ByteArrayDataSource;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Iterator;
@@ -66,7 +69,15 @@ class MimeMessageBuilder {
         if (StringUtils.hasText(htmlBody)) {
             String contentType = this.mail.getContentType();
             MimeBodyPart htmlBodyPart = new MimeBodyPart();
-            htmlBodyPart.setContent(htmlBody, StringUtils.hasText(contentType) ? contentType : "text/html;charset=UTF-8");
+            try {
+                ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(htmlBody, StringUtils.hasText(contentType) ? contentType : "text/html;charset=UTF-8");
+                DataHandler dataHandler = new DataHandler(byteArrayDataSource);
+                htmlBodyPart.setDataHandler(dataHandler);
+            } catch (IOException e) {
+                LOGGER.error("Occurring an unexpected exception", e);
+            }
+            //直接发送content，html内容会乱码
+            //htmlBodyPart.setContent(htmlBody, StringUtils.hasText(contentType) ? contentType : "text/html;charset=UTF-8");
             message.addBodyPart(htmlBodyPart);
         }
 
