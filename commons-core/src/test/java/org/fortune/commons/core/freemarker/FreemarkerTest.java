@@ -1,6 +1,7 @@
 package org.fortune.commons.core.freemarker;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -28,7 +29,7 @@ public class FreemarkerTest {
 
         String msg = resolver.process(resourceData);
 
-        System.out.println(msg);
+
     }
 
 }

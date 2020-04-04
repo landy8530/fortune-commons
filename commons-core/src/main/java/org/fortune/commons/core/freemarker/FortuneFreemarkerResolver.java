@@ -31,6 +31,9 @@ public class FortuneFreemarkerResolver {
 
     private static final String DEFAULT_ROOT_PATH = "/templates";
 
+    //保证单例线程安全的同时，也保证不被反射机制破坏
+    private boolean initialized = false;
+
     public synchronized static final FortuneFreemarkerResolver getInstance() {
         //在返回结果以前，一定会先加载内部类
         return FortuneFreemarkerResolverHolder.INSTANCE;
@@ -41,7 +44,14 @@ public class FortuneFreemarkerResolver {
     }
 
     private FortuneFreemarkerResolver() {
-        LOGGER.info("初始化Ftl解析类");
+        synchronized (FortuneFreemarkerResolver.class) {
+            if(initialized) {
+                throw new RuntimeException("单例初始化Ftl解析类被破坏");
+            } else {
+                initialized = true;
+                LOGGER.info("初始化Ftl解析类");
+            }
+        }
     }
 
     public synchronized void init() {
@@ -51,6 +61,7 @@ public class FortuneFreemarkerResolver {
             configuration.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
             configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_28));
             configuration.setClassicCompatible(true);
+            configuration.setDefaultEncoding(Constants.ENCODING_UTF_8);
             configuration.setEncoding(Locale.getDefault(), Constants.ENCODING_UTF_8);
             try {
                 File ftlRootPath = new File(getRootPath());

@@ -21,6 +21,7 @@ public class MailSenderTest extends BaseJunit4Test {
         Mail mail = new Mail();
         mail.setSubject("Test File....");
         mail.setTextBody("Test File Body From Landy....");
+        mail.setHtmlBody("<span>欣汇峰预估库存汇总表</span>");
         mail.addAttachment("TestFile.txt", new File("C:\\03_code\\idea_workspace\\fortune-commons\\commons-core\\src\\test\\resources\\doc\\Test.txt"));
         mailSender.send(mail);
     }
