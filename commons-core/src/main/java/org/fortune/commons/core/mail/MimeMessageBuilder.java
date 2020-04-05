@@ -1,7 +1,6 @@
 package org.fortune.commons.core.mail;
 
 import org.apache.commons.lang3.RandomUtils;
-import org.fortune.commons.core.constants.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -34,7 +33,13 @@ class MimeMessageBuilder {
 
     MimeMessage createMimeMessage(Session session) throws MessagingException {
         MimeMessage message = this.createMimeMessageEnvelope(session);
-        Multipart multipart = new MimeMultipart("alternative");
+       /* multipart/mixed：附件。
+        multipart/related：内嵌资源。
+        multipart/alternative：纯文本与超文本共存。
+        然后根据客户端情况显示不同内容
+        当一封邮件同时包含txt和html时，txt部分会默认不显示
+        */
+        Multipart multipart = new MimeMultipart("alternative");//mixed related alternative
         this.setBody(multipart);
         if (this.mail.getAttachments().size() > 0) {
             Iterator attachmentIterator = this.mail.getAttachments().iterator();

@@ -54,7 +54,7 @@ public class FortuneFreemarkerResolver {
         }
     }
 
-    public synchronized void init() {
+    public void init(FtlResourceData.TemplateLoadingType loadingType) {
         if (configuration == null) {
             LOGGER.info("初始化FTL上下文信息");
             configuration = new Configuration(Configuration.VERSION_2_3_28);
@@ -63,12 +63,16 @@ public class FortuneFreemarkerResolver {
             configuration.setClassicCompatible(true);
             configuration.setDefaultEncoding(Constants.ENCODING_UTF_8);
             configuration.setEncoding(Locale.getDefault(), Constants.ENCODING_UTF_8);
-            try {
-                File ftlRootPath = new File(getRootPath());
-                LOGGER.info("设置FTL资源路径：" + ftlRootPath.getAbsolutePath() + ",是否存在：" + ftlRootPath.exists());
-                configuration.setDirectoryForTemplateLoading(ftlRootPath);
-            } catch (IOException e) {
-                LOGGER.error("初始化FTL上下文信息失败", e);
+            if(loadingType.equals(FtlResourceData.TemplateLoadingType.FILE)) {
+                try {
+                    File ftlRootPath = new File(getRootPath(loadingType));
+                    LOGGER.info("设置FTL资源路径：" + ftlRootPath.getAbsolutePath() + ",是否存在：" + ftlRootPath.exists());
+                    configuration.setDirectoryForTemplateLoading(ftlRootPath);
+                } catch (IOException e) {
+                    LOGGER.error("初始化FTL上下文信息失败", e);
+                }
+            } else {
+                configuration.setClassForTemplateLoading(this.getClass(), getRootPath(loadingType));
             }
         }
     }
@@ -76,21 +80,21 @@ public class FortuneFreemarkerResolver {
     /**
      * 生成静态化文件
      *
-     * @param myResourceData
+     * @param ftlResourceData
      * @return
      * @author: Landy
      */
-    public String process(FtlResourceData myResourceData) {
+    public String process(FtlResourceData ftlResourceData) {
         if (configuration == null) {
-            init();
+            init(ftlResourceData.getTemplateLoadingType());
         }
-        Map<String, Object> root = myResourceData.getData();
+        Map<String, Object> root = ftlResourceData.getData();
 
         //加入静态资源信息
         if (this.getExtMapParams() != null) {
             root.putAll(this.extMapParams);
         }
-        String ftlPath = myResourceData.getFtlTemplatePath();
+        String ftlPath = ftlResourceData.getFtlTemplatePath();
         String fileName = ftlPath;
         Template temp;
         Writer out = null;
@@ -128,12 +132,16 @@ public class FortuneFreemarkerResolver {
         this.extMapParams = extMapParams;
     }
 
-    public String getRootPath() {
+    public String getRootPath(FtlResourceData.TemplateLoadingType loadingType) {
         //如果没有显示设置根路径，则默认取class path下的template目录
         if(!StringUtils.hasText(rootPath)) {
             //设置根路径
-            String classPath = FileUtil.getFilePathByClassPath(DEFAULT_ROOT_PATH);
-            rootPath = classPath;
+            if(loadingType.equals(FtlResourceData.TemplateLoadingType.FILE)) {
+                String classPath = FileUtil.getFilePathByClassPath(DEFAULT_ROOT_PATH);
+                rootPath = classPath;
+            } else {
+                rootPath = DEFAULT_ROOT_PATH;
+            }
         }
         return rootPath;
     }
