@@ -1,6 +1,7 @@
 package org.fortune.commons.web.conf;
 
 import org.fortune.commons.core.freemarker.FortuneFreemarkerResolver;
+import org.fortune.commons.core.freemarker.FtlResourceData;
 import org.fortune.commons.web.loader.WebContextLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ public class FreemarkerConfiguration {
         FortuneFreemarkerResolver resolver = FortuneFreemarkerResolver.getInstance();
         //设置根路径
         resolver.setRootPath(WebContextLoader.getInstance().getRootPath());
-        resolver.init(); //初始化FTL解析组件
+        resolver.init(FtlResourceData.TemplateLoadingType.FILE); //初始化FTL解析组件
         return resolver;
     }
 

@@ -29,7 +29,7 @@ public class FreemarkerTest {
 
         String msg = resolver.process(resourceData);
 
-
+        System.out.println(msg);
     }
 
 }

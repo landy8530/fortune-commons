@@ -19,6 +19,11 @@ public class FtlResourceData {
      */
     private Map<String,Object> data;
 
+    /**
+     * 默认用ClassLoad 的方式加载模版
+     */
+    private TemplateLoadingType templateLoadingType = TemplateLoadingType.CLASS;
+
     public String getFtlTemplatePath() {
         return ftlTemplatePath;
     }
@@ -35,4 +40,16 @@ public class FtlResourceData {
         this.data = data;
     }
 
+    public TemplateLoadingType getTemplateLoadingType() {
+        return templateLoadingType;
+    }
+
+    public void setTemplateLoadingType(TemplateLoadingType templateLoadingType) {
+        this.templateLoadingType = templateLoadingType;
+    }
+
+    public enum TemplateLoadingType {
+        FILE,
+        CLASS
+    }
 }
