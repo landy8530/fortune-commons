@@ -1,5 +1,7 @@
 package org.fortune.commons.core.util;
 
+import org.fortune.commons.core.constants.Constants;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -61,9 +63,11 @@ public class DateUtil {
     public static final String PATTERN_SHORT_DATE_SLASH = "M/d/yyyy";
     public static final String PATTERN_PERIOD_DATE = "yyyyMM";
     public static final String PATTERN_MONTH_YEAR = "MM/yyyy";
+    public static final String PATTERN_YEAR_MONTH = "yyyy/MM";
 
     public static final String PATTERN_FULL_DATE_SLASH = "MM/dd/yyyy";
     public static final String PATTERN_FULL_DATE_DASH = "yyyy-MM-dd";
+    public static final String PATTERN_FULL_DATE_DOT = "yyyy.MM.dd";
 
     public static final String PATTERN_FULL_DATE_TIME_24 = "MM/dd/yyyy HH:mm:ss";
     public static final String PATTERN_FULL_DATE_TIME_UNDERSCORE = "yyyyMMdd_HHmmss";
@@ -79,6 +83,9 @@ public class DateUtil {
     }
 
     public static Date string2Date(String originalValue) {
+        if(!StringUtil.hasText(originalValue)) return null;
+        if(originalValue.contains(Constants.DELIMITER_PERIOD)) return string2Date(originalValue, PATTERN_FULL_DATE_DOT);
+        if(originalValue.contains(Constants.DELIMITER_DASH)) return string2Date(originalValue, PATTERN_FULL_DATE_DASH);
         return string2Date(originalValue, PATTERN_FULL_DATE_SLASH);
     }
 
@@ -303,6 +310,6 @@ public class DateUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(DateUtil.string2Date("09/14/2017", PATTERN_FULL_DATE_TIME_24));
+        System.out.println(DateUtil.string2Date("2017.09.07", PATTERN_FULL_DATE_DOT));
     }
 }
