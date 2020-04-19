@@ -309,6 +309,24 @@ public class DateUtil {
         }
     }
 
+    /**
+     * 获取最近12个月，经常用于统计图表的X轴(倒序)
+     */
+    public static String[] getLast12Months(){
+        String[] last12Months = new String[12];
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)+1); //要先+1,才能把本月的算进去
+        // 加此行,否则3月重复
+        cal.set(Calendar.DATE,1);
+
+        for(int i=11; i>=0; i--){
+            cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)-1); //逐次往前推1个月
+            last12Months[11-i] = cal.get(Calendar.YEAR)+ Constants.SLASH +  String.format("%02d", (cal.get(Calendar.MONTH)+1));
+        }
+        return last12Months;
+    }
+
     public static void main(String[] args) {
         System.out.println(DateUtil.string2Date("2017.09.07", PATTERN_FULL_DATE_DOT));
     }
