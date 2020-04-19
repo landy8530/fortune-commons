@@ -4,8 +4,7 @@ import org.fortune.commons.core.constants.Constants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class DateUtil {
 
@@ -66,6 +65,7 @@ public class DateUtil {
     public static final String PATTERN_YEAR_MONTH = "yyyy/MM";
 
     public static final String PATTERN_FULL_DATE_SLASH = "MM/dd/yyyy";
+    public static final String PATTERN_FULL_DATE_SLASH_1 = "yyyy/MM/dd";
     public static final String PATTERN_FULL_DATE_DASH = "yyyy-MM-dd";
     public static final String PATTERN_FULL_DATE_DOT = "yyyy.MM.dd";
 
@@ -73,6 +73,23 @@ public class DateUtil {
     public static final String PATTERN_FULL_DATE_TIME_UNDERSCORE = "yyyyMMdd_HHmmss";
     public static final String DATE_TIME_PATTERN_2 = "yyyy-MM-dd HH:mm:ss";
 
+    private static Set<String> patterns_datetime = new HashSet();
+    private static Set<String> patterns_date = new HashSet();
+
+    static {
+        patterns_date.add(DateUtil.PATTERN_FULL_DATE_DASH);
+        patterns_date.add(DateUtil.PATTERN_FULL_DATE_DOT);
+        patterns_date.add(DateUtil.PATTERN_FULL_DATE_SLASH_1);
+        patterns_date.add(DateUtil.PATTERN_FULL_DATE_SLASH);
+        patterns_date.add(DateUtil.PATTERN_SHORT_DATE_SLASH);
+        patterns_date.add(DateUtil.PATTERN_PERIOD_DATE);
+        patterns_date.add(DateUtil.PATTERN_MONTH_YEAR);
+        patterns_date.add(DateUtil.DATE_PATTERN_DASH_1);
+        patterns_datetime.add(DateUtil.DATE_TIME_PATTERN_2);
+        patterns_datetime.add(DateUtil.PATTERN_FULL_DATE_TIME_24);
+        patterns_datetime.add(DateUtil.PATTERN_FULL_DATE_TIME_UNDERSCORE);
+
+    }
 
     public static String getCurrentDateTime() {
         return getCurrentDateTime(new SimpleDateFormat(PATTERN_FULL_DATE_TIME_24));
@@ -82,11 +99,21 @@ public class DateUtil {
         return dateFormat.format(new Date());
     }
 
-    public static Date string2Date(String originalValue) {
-        if(!StringUtil.hasText(originalValue)) return null;
-        if(originalValue.contains(Constants.DELIMITER_PERIOD)) return string2Date(originalValue, PATTERN_FULL_DATE_DOT);
-        if(originalValue.contains(Constants.DELIMITER_DASH)) return string2Date(originalValue, PATTERN_FULL_DATE_DASH);
-        return string2Date(originalValue, PATTERN_FULL_DATE_SLASH);
+    public static Date string2Date(String date) {
+        if(!StringUtil.hasText(date)) return null;
+        Date dateObj;
+        Iterator it = patterns_date.iterator();
+        if(date.length() > 10) {
+            it = patterns_datetime.iterator();
+        }
+        while (it.hasNext()) {
+            String pattern = (String) it.next();
+            dateObj = string2Date(date,pattern,false);
+            if(dateObj != null) {
+                return dateObj;
+            }
+        }
+        return string2Date(date, PATTERN_FULL_DATE_SLASH);
     }
 
     public static Date string2Date(String originalValue, String format) {
