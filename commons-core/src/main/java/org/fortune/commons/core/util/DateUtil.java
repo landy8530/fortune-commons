@@ -4,6 +4,9 @@ import org.fortune.commons.core.constants.Constants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class DateUtil {
@@ -68,6 +71,7 @@ public class DateUtil {
     public static final String PATTERN_FULL_DATE_SLASH_1 = "yyyy/MM/dd";
     public static final String PATTERN_FULL_DATE_DASH = "yyyy-MM-dd";
     public static final String PATTERN_FULL_DATE_DOT = "yyyy.MM.dd";
+    public static final String PATTERN_FULL_DATE = "yyyyMMdd";
 
     public static final String PATTERN_FULL_DATE_TIME_24 = "MM/dd/yyyy HH:mm:ss";
     public static final String PATTERN_FULL_DATE_TIME_UNDERSCORE = "yyyyMMdd_HHmmss";
@@ -81,6 +85,7 @@ public class DateUtil {
         patterns_date.add(DateUtil.PATTERN_FULL_DATE_DOT);
         patterns_date.add(DateUtil.PATTERN_FULL_DATE_SLASH_1);
         patterns_date.add(DateUtil.PATTERN_FULL_DATE_SLASH);
+        patterns_date.add(DateUtil.PATTERN_FULL_DATE);
         patterns_date.add(DateUtil.PATTERN_SHORT_DATE_SLASH);
         patterns_date.add(DateUtil.PATTERN_PERIOD_DATE);
         patterns_date.add(DateUtil.PATTERN_MONTH_YEAR);
@@ -354,7 +359,38 @@ public class DateUtil {
         return last12Months;
     }
 
+    /**
+     * 取得当天离24点还有多少秒
+     * @param currentDate
+     * @return
+     */
+    public static Integer getRemainSecondsOneDay(Date currentDate) {
+        LocalDateTime midnight = LocalDateTime.ofInstant(currentDate.toInstant(),
+                ZoneId.systemDefault()).plusDays(1).withHour(0).withMinute(0)
+                .withSecond(0).withNano(0);
+        LocalDateTime currentDateTime = LocalDateTime.ofInstant(currentDate.toInstant(),
+                ZoneId.systemDefault());
+        long seconds = ChronoUnit.SECONDS.between(currentDateTime, midnight);
+        return (int) seconds;
+    }
+
+    /**
+     * 取得当天离指定时辰还有多少秒
+     * @param currentDate
+     * @param hour
+     * @return
+     */
+    public static Integer getRemainSecondsOneDay(Date currentDate, int hour) {
+        LocalDateTime midnight = LocalDateTime.ofInstant(currentDate.toInstant(),
+                ZoneId.systemDefault()).withHour(hour).withMinute(0)
+                .withSecond(0).withNano(0);
+        LocalDateTime currentDateTime = LocalDateTime.ofInstant(currentDate.toInstant(),
+                ZoneId.systemDefault());
+        long seconds = ChronoUnit.SECONDS.between(currentDateTime, midnight);
+        return (int) seconds;
+    }
+
     public static void main(String[] args) {
-        System.out.println(DateUtil.string2Date("2017.09.07", PATTERN_FULL_DATE_DOT));
+        System.out.println(getRemainSecondsOneDay(new Date(), 19)/(60*60));
     }
 }
