@@ -58,6 +58,12 @@
             <groupId>org.apache.cocoon</groupId>
             <artifactId>cocoon-xml-impl</artifactId>
             <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--SpringJUnit4ClassRunner requires JUnit 4.12 or higher.-->
