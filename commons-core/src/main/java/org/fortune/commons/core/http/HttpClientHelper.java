@@ -1,7 +1,9 @@
 package org.fortune.commons.core.http;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.*;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -15,14 +17,19 @@ import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.CharsetUtils;
 import org.apache.http.util.EntityUtils;
+import org.fortune.commons.core.util.DateUtil;
 import org.fortune.commons.core.util.JsonUtil;
+import org.fortune.commons.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,13 +53,20 @@ public class HttpClientHelper {
     private Map<String, ContentBody> contentBodies;
 
 
-    public HttpClientHelper(RequestConfig requestConfig, List<NameValuePair> nameValuePostBodies, List<Header> headers, String mimeType, Map<String, String> bodyParams, Map<String, ContentBody> contentBodies) {
+    HttpClientHelper(RequestConfig requestConfig, List<NameValuePair> nameValuePostBodies, List<Header> headers, String mimeType, Map<String, String> bodyParams, Map<String, ContentBody> contentBodies, CookieStore cookieStore) {
         PoolingHttpClientConnectionManager connectionManager = HttpClientManager.getConnManager();
+        HttpClientBuilder httpClientBuilder;
         if(requestConfig != null) {
-            this.client = HttpClients.custom().setDefaultRequestConfig(requestConfig).setConnectionManager(connectionManager).build();
+            httpClientBuilder = HttpClients.custom().setDefaultRequestConfig(requestConfig).setConnectionManager(connectionManager);
         } else {
-            this.client = HttpClients.custom().setConnectionManager(connectionManager).build();
+            httpClientBuilder = HttpClients.custom().setConnectionManager(connectionManager);
         }
+
+        if(CollectionUtils.isNotEmpty(cookieStore.getCookies())) {
+            httpClientBuilder.setDefaultCookieStore(cookieStore);
+        }
+
+        this.client = httpClientBuilder.build();
         this.nameValuePostBodies = nameValuePostBodies;
         this.headers = headers;
         this.mimeType = mimeType;
@@ -202,6 +216,10 @@ public class HttpClientHelper {
         //Used to Multiple part form data
         private Map<String, ContentBody> contentBodies;
 
+        private CookieStore cookieStore = new BasicCookieStore();
+
+        private static final int cookieExpire = 7 * 24 * 60 * 60; //默认cookie失效时间
+
         public Builder() {
             contentBodies = new LinkedHashMap<>();
         }
@@ -286,6 +304,25 @@ public class HttpClientHelper {
             return this;
         }
 
+        public Builder setCookieStore(String cookieName, String cookieValue, String domain, String path, int expire) {
+            if(StringUtil.hasText(cookieName) && StringUtil.hasText(cookieValue)) {
+                BasicClientCookie cookie = new BasicClientCookie(cookieName, cookieValue);
+                cookie.setDomain(domain);
+                cookie.setPath(path);
+                cookie.setExpiryDate(DateUtil.plusSeconds(new Date(), expire));
+                cookieStore.addCookie(cookie);
+            }
+            return this;
+        }
+
+        public Builder setCookieStore(String cookieName, String cookieValue, String domain) {
+            return setCookieStore(cookieName, cookieValue, domain, "/", cookieExpire);
+        }
+
+        public Builder setCookieStore(String cookieName, String cookieValue) {
+            return setCookieStore(cookieName, cookieValue, null);
+        }
+
         private boolean isMultiplePart(String mimeType) {
             return ContentType.MULTIPART_FORM_DATA.getMimeType().equals(mimeType);
         }
@@ -295,7 +332,7 @@ public class HttpClientHelper {
                 this.setRequestConfig(socketTimeout, connectTimeout, connectionRequestTimeout);
             }
             if(StringUtils.isBlank(mimeType)) mimeType = ContentType.APPLICATION_JSON.getMimeType();
-            return new HttpClientHelper(requestConfig, nameValuePostBodies, headers, mimeType, bodyParamsCopy , contentBodies);
+            return new HttpClientHelper(requestConfig, nameValuePostBodies, headers, mimeType, bodyParamsCopy , contentBodies, cookieStore);
         }
     }
 }

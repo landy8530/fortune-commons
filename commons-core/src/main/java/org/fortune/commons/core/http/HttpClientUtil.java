@@ -17,13 +17,21 @@ public class HttpClientUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientUtil.class);
 
     public static HttpResponseContent doPost(String url, Map<String, String> bodyParams, Map<String, String> headerParams, Map<String, ContentBody> contentBodies) {
+        return doPost(url, bodyParams, headerParams, contentBodies, null, null);
+    }
+
+    public static HttpResponseContent doPost(String url, Map<String, String> bodyParams, Map<String, String> headerParams, Map<String, ContentBody> contentBodies, String cookieName, String cookieValue) {
+        return doPost(url, bodyParams, headerParams, contentBodies, cookieName, cookieValue, null);
+    }
+
+    public static HttpResponseContent doPost(String url, Map<String, String> bodyParams, Map<String, String> headerParams, Map<String, ContentBody> contentBodies, String cookieName, String cookieValue, String domain) {
         LOGGER.info("Access URL according HttpClient: {}", url);
         HttpClientHelper.Builder builder = create();
         if(headerParams == null) {
             headerParams = new HashMap<>();
             headerParams.put(HttpConstants.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
         }
-        HttpClientHelper helper = builder.setBodyParams(bodyParams).setHeaderParams(headerParams).addContentBodies(contentBodies).build();
+        HttpClientHelper helper = builder.setBodyParams(bodyParams).setHeaderParams(headerParams).addContentBodies(contentBodies).setCookieStore(cookieName, cookieValue, domain).build();
         return helper.doPost(url);
     }
 

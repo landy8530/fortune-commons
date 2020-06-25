@@ -219,6 +219,13 @@ public class DateUtil {
         return calendar.getTime();
     }
 
+    public static Date plusSeconds(Date date, int seconds) {
+        Calendar calendar = getCalendar(date);
+        calendar.add(Calendar.SECOND, seconds);
+
+        return calendar.getTime();
+    }
+
     public static Date getSysDate() {
         return getDateIgnoreTime(new Date());
     }
@@ -391,6 +398,8 @@ public class DateUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getRemainSecondsOneDay(new Date(), 19)/(60*60));
+        Date date = new Date();
+        System.out.println(date);
+        System.out.println(plusSeconds(date, 60));
     }
 }
