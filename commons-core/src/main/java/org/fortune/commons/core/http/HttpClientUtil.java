@@ -21,17 +21,21 @@ public class HttpClientUtil {
     }
 
     public static HttpResponseContent doPost(String url, Map<String, String> bodyParams, Map<String, String> headerParams, Map<String, ContentBody> contentBodies, String cookieName, String cookieValue) {
-        return doPost(url, bodyParams, headerParams, contentBodies, cookieName, cookieValue, null);
+        return doPost(url, bodyParams, headerParams, contentBodies, cookieName, cookieValue, null, null);
     }
 
     public static HttpResponseContent doPost(String url, Map<String, String> bodyParams, Map<String, String> headerParams, Map<String, ContentBody> contentBodies, String cookieName, String cookieValue, String domain) {
+        return doPost(url, bodyParams, headerParams, contentBodies, cookieName, cookieValue, domain, null);
+    }
+
+    public static HttpResponseContent doPost(String url, Map<String, String> bodyParams, Map<String, String> headerParams, Map<String, ContentBody> contentBodies, String cookieName, String cookieValue, String domain, String xmlContent) {
         LOGGER.info("Access URL according HttpClient: {}", url);
         HttpClientHelper.Builder builder = create();
         if(headerParams == null) {
             headerParams = new HashMap<>();
             headerParams.put(HttpConstants.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
         }
-        HttpClientHelper helper = builder.setBodyParams(bodyParams).setHeaderParams(headerParams).addContentBodies(contentBodies).setCookieStore(cookieName, cookieValue, domain).build();
+        HttpClientHelper helper = builder.setBodyParams(bodyParams).setHeaderParams(headerParams).addContentBodies(contentBodies).setCookieStore(cookieName, cookieValue, domain).setXmlContent(xmlContent).build();
         return helper.doPost(url);
     }
 
@@ -41,6 +45,18 @@ public class HttpClientUtil {
 
     public static HttpResponseContent doPost(String url, Map<String, String> bodyParams, Map<String, ContentBody> contentBodies) {
         return doPost(url, bodyParams, null, contentBodies);
+    }
+
+    public static HttpResponseContent doPostAsXml(String url, String xmlContent) {
+        Map<String, String> headerParams = new HashMap<>();
+        headerParams.put(HttpConstants.CONTENT_TYPE, ContentType.TEXT_XML.getMimeType());
+        return doPost(url, null, headerParams, null, null, null, null, xmlContent);
+    }
+
+    public static HttpResponseContent doGet(String url) {
+        HttpClientHelper.Builder builder = create();
+        HttpClientHelper helper = builder.build();
+        return helper.doGet(url);
     }
 
     private static HttpClientHelper.Builder create() {
