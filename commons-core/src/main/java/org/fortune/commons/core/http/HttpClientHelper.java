@@ -7,6 +7,7 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
@@ -51,9 +52,9 @@ public class HttpClientHelper {
     private Map<String, String> bodyParams;
     //Used to Multiple part form data
     private Map<String, ContentBody> contentBodies;
+    private String xmlContent;
 
-
-    HttpClientHelper(RequestConfig requestConfig, List<NameValuePair> nameValuePostBodies, List<Header> headers, String mimeType, Map<String, String> bodyParams, Map<String, ContentBody> contentBodies, CookieStore cookieStore) {
+    HttpClientHelper(RequestConfig requestConfig, List<NameValuePair> nameValuePostBodies, List<Header> headers, String mimeType, Map<String, String> bodyParams, Map<String, ContentBody> contentBodies, CookieStore cookieStore, String xmlContent) {
         PoolingHttpClientConnectionManager connectionManager = HttpClientManager.getConnManager();
         HttpClientBuilder httpClientBuilder;
         if(requestConfig != null) {
@@ -65,7 +66,7 @@ public class HttpClientHelper {
         if(CollectionUtils.isNotEmpty(cookieStore.getCookies())) {
             httpClientBuilder.setDefaultCookieStore(cookieStore);
         }
-
+        this.xmlContent = xmlContent;
         this.client = httpClientBuilder.build();
         this.nameValuePostBodies = nameValuePostBodies;
         this.headers = headers;
@@ -81,6 +82,19 @@ public class HttpClientHelper {
             LOGGER.error("occurs an unexpected exception,url:{}", url, ex);
             return null;
         }
+    }
+
+    public HttpResponseContent doGet(String url) {
+        HttpGet httpGet = new HttpGet(url);
+        try(CloseableHttpResponse response = client.execute(httpGet)) {
+            HttpResponseContent responseContent = this.buildResponseContent(response);
+            return responseContent;
+        } catch (Exception ex) {
+            LOGGER.error("occurs an unexpected exception,url:{}", url, ex);
+        } finally {
+            httpGet.releaseConnection();
+        }
+        return null;
     }
 
     public HttpResponseContent doPost(String url, String urlEncoding) throws HttpException, IOException {
@@ -117,6 +131,9 @@ public class HttpClientHelper {
                 }
                 entityBuilder.setCharset(CharsetUtils.get(urlEncoding));
                 httpPost.setEntity(entityBuilder.build());
+            } else if(ContentType.TEXT_XML.getMimeType().equals(mimeType) && StringUtil.hasText(xmlContent)) {
+                StringEntity entityParams = new StringEntity(xmlContent, ContentType.create(ContentType.TEXT_XML.getMimeType(), HttpConstants.ENCODING_UTF8));
+                httpPost.setEntity(entityParams);
             } else {
                 throw new HttpException("Currently, we do not support the mine type equals to {} " + mimeType);
             }
@@ -217,6 +234,8 @@ public class HttpClientHelper {
         private Map<String, ContentBody> contentBodies;
 
         private CookieStore cookieStore = new BasicCookieStore();
+
+        private String xmlContent;
 
         private static final int cookieExpire = 7 * 24 * 60 * 60; //默认cookie失效时间
 
@@ -323,6 +342,11 @@ public class HttpClientHelper {
             return setCookieStore(cookieName, cookieValue, null);
         }
 
+        public Builder setXmlContent(String xmlContent) {
+            this.xmlContent = xmlContent;
+            return this;
+        }
+
         private boolean isMultiplePart(String mimeType) {
             return ContentType.MULTIPART_FORM_DATA.getMimeType().equals(mimeType);
         }
@@ -332,7 +356,7 @@ public class HttpClientHelper {
                 this.setRequestConfig(socketTimeout, connectTimeout, connectionRequestTimeout);
             }
             if(StringUtils.isBlank(mimeType)) mimeType = ContentType.APPLICATION_JSON.getMimeType();
-            return new HttpClientHelper(requestConfig, nameValuePostBodies, headers, mimeType, bodyParamsCopy , contentBodies, cookieStore);
+            return new HttpClientHelper(requestConfig, nameValuePostBodies, headers, mimeType, bodyParamsCopy , contentBodies, cookieStore, xmlContent);
         }
     }
 }
