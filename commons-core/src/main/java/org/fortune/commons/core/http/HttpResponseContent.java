@@ -1,5 +1,7 @@
 package org.fortune.commons.core.http;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+
 /**
  * @author landyl
  * @create 10:29 08/23/2019
@@ -10,6 +12,7 @@ public class HttpResponseContent {
     private int statusCode;
     private String contentType;
     private String contentTypeString;
+    private CloseableHttpResponse originalResponse;
 
     public String getEncoding() {
         return encoding;
@@ -65,5 +68,13 @@ public class HttpResponseContent {
                 return "";
             }
         }
+    }
+
+    public CloseableHttpResponse getOriginalResponse() {
+        return originalResponse;
+    }
+
+    public void setOriginalResponse(CloseableHttpResponse originalResponse) {
+        this.originalResponse = originalResponse;
     }
 }

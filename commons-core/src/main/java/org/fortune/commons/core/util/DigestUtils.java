@@ -35,6 +35,15 @@ public class DigestUtils {
     public static String base64(String plainData) {
         return base64(plainData.getBytes(Charset.defaultCharset()));
     }
+
+    /**
+     * 功能简述: 使用BASE64进行加密.
+     * @param plainData 明文数据
+     * @return 加密之后的文本内容
+     */
+    public static String base64UrlSafe(String plainData) {
+        return base64UrlSafe(plainData.getBytes(Charset.defaultCharset()));
+    }
     /**
      * 功能简述: 使用BASE64进行加密.
      * @param plainData 明文数据
@@ -42,6 +51,14 @@ public class DigestUtils {
      */
     public static String base64(byte[] plainData) {
         return new String(Base64.encodeBase64(plainData), Charset.defaultCharset());
+    }
+    /**
+     * 功能简述: 使用BASE64进行加密.
+     * @param plainData 明文数据
+     * @return 加密之后的文本内容
+     */
+    public static String base64UrlSafe(byte[] plainData) {
+        return new String(Base64.encodeBase64URLSafe(plainData), Charset.defaultCharset());
     }
     /**
      * 功能简述: 使用BASE64进行解密.
