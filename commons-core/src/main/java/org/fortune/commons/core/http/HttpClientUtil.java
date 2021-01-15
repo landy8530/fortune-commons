@@ -59,6 +59,12 @@ public class HttpClientUtil {
         return helper.doGet(url);
     }
 
+    public static HttpResponseContent doGet(String url, Map<String, String> headerParams) {
+        HttpClientHelper.Builder builder = create();
+        HttpClientHelper helper = builder.setHeaderParams(headerParams).build();
+        return helper.doGet(url);
+    }
+
     private static HttpClientHelper.Builder create() {
         return new HttpClientHelper.Builder();
     }

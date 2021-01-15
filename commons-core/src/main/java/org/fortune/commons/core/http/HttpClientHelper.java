@@ -86,6 +86,12 @@ public class HttpClientHelper {
 
     public HttpResponseContent doGet(String url) {
         HttpGet httpGet = new HttpGet(url);
+
+        //set headers
+        for (Header header : headers) {
+            httpGet.setHeader(header);
+        }
+
         try(CloseableHttpResponse response = client.execute(httpGet)) {
             HttpResponseContent responseContent = this.buildResponseContent(response);
             return responseContent;
@@ -173,6 +179,7 @@ public class HttpClientHelper {
                 throw new HttpException("Invalid status code: " + statusCode + ", result: " + result);
             }
 
+            responseContent.setOriginalResponse(response);
             responseContent.setStatusCode(statusCode);
             responseContent.setContentType(contentType);
             responseContent.setContentTypeString(this.getResponseContentTypeString(entity));
