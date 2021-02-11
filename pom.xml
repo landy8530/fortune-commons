@@ -73,7 +73,7 @@
         <!--cglib-->
         <cglib.version>3.2.10</cglib.version>
         <!--test-->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
 
         <!--memCached 四种客户端版本，推荐：xmemcached-->
         <!--https://www.cnblogs.com/EasonJim/p/7624822.html-->
