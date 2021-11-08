@@ -44,8 +44,8 @@ fork本工程后可以按照如下操作即可，
 #### 总体步骤
 
 ```shell
-# first create a repo on eHealth Bitbucket server from the interface
-# clone that empty repo from eHealth Bitbucket
+# first create a repo on github Bitbucket server from the interface
+# clone that empty repo from github Bitbucket
 git clone ssh://git@github.com/landy8530/wx-api.git
 # get into the new repo
 cd wx-api
@@ -59,7 +59,7 @@ git remote -v
 git pull upstream master
 # set an upstream branch to track the future changes in upstream repo
 git branch --track github-master upstream/master
-# push these files to eHealth repo
+# push these files to github repo
 git push -u origin master
 #you should regularly fetch the changes in upstream/master and rebase your master onto upstream master. That way your repo will get the latest changes of upstream open source project
 ```
