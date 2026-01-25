@@ -1,7 +1,5 @@
 package org.fortune.doc.server.util;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +11,6 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -173,14 +170,12 @@ public class ImageUtils {
             if (!srcFile.exists()) {
                 return;
             }
-
-            Image src = ImageIO.read(srcFile);
-            BufferedImage tag = new BufferedImage(widthDist, heightDist, 1);
-            tag.getGraphics().drawImage(src.getScaledInstance(widthDist, heightDist, 4), 0, 0, (ImageObserver)null);
-            FileOutputStream out = new FileOutputStream(imgDist);
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-            encoder.encode(tag);
-            out.close();
+            BufferedImage src = ImageIO.read(srcFile);
+            BufferedImage tag = new BufferedImage(widthDist, heightDist, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = tag.createGraphics();
+            g.drawImage(src.getScaledInstance(widthDist, heightDist, Image.SCALE_SMOOTH), 0, 0, null);
+            g.dispose();
+            ImageIO.write(tag, "jpg", new File(imgDist));
         } catch (IOException var9) {
             var9.printStackTrace();
         }
@@ -192,7 +187,6 @@ public class ImageUtils {
             if (!src.exists()) {
                 throw new NullPointerException("文件不存在");
             }
-
             BufferedImage image = ImageIO.read(src);
             double ratio = 0.0D;
             if (image.getHeight() > 100 || image.getWidth() > 100) {
@@ -202,20 +196,17 @@ public class ImageUtils {
                     ratio = ratio0 / (double)image.getWidth();
                 }
             }
-
             int newWidth = (int)((double)image.getWidth() * ratio);
             int newHeight = (int)((double)image.getHeight() * ratio);
-            BufferedImage bfImage = new BufferedImage(newWidth, newHeight, 1);
-            bfImage.getGraphics().drawImage(image.getScaledInstance(newWidth, newHeight, 4), 0, 0, (ImageObserver)null);
-            FileOutputStream os = new FileOutputStream(dist);
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(os);
-            encoder.encode(bfImage);
-            os.close();
+            BufferedImage bfImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = bfImage.createGraphics();
+            g.drawImage(image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH), 0, 0, null);
+            g.dispose();
+            ImageIO.write(bfImage, "jpg", dist);
             System.out.println("创建缩略图成功");
         } catch (Exception var12) {
             System.out.println("创建缩略图发生异常" + var12.getMessage());
         }
-
     }
 
     public static void main(String[] args) {

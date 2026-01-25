@@ -1,6 +1,6 @@
 package org.fortune.commons.core.util;
 
-import org.fortune.commons.core.BaseJunit4Test;
+import org.fortune.commons.core.Junit4TestBase;
 import org.junit.Test;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -16,7 +16,7 @@ import java.security.*;
  * @date: 2020/5/10 17:53
  * @description:
  */
-public class EncryptUtilTest extends BaseJunit4Test {
+public class EncryptUtilTest extends Junit4TestBase {
 
     /**
      * 功能简述: 测试MD5单向加密.

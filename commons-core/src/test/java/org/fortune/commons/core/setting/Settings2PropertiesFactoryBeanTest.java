@@ -1,6 +1,6 @@
 package org.fortune.commons.core.setting;
 
-import org.fortune.commons.core.BaseJunit4Test;
+import org.fortune.commons.core.Junit4TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Properties;
 
-public class Settings2PropertiesFactoryBeanTest extends BaseJunit4Test {
+public class Settings2PropertiesFactoryBeanTest extends Junit4TestBase {
 
     @Autowired
     private Settings settings;

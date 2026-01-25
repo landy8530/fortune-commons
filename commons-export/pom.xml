@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>commons-export</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.4</version>
     <name>commons-export</name>
     <packaging>jar</packaging>
     <description>通用导出组件</description>

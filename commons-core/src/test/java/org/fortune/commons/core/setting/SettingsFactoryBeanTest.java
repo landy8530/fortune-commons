@@ -1,13 +1,13 @@
 package org.fortune.commons.core.setting;
 
-import org.fortune.commons.core.BaseJunit4Test;
+import org.fortune.commons.core.Junit4TestBase;
 import org.fortune.commons.core.setting.exception.ResolveFailedConfigException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 //@SpringApplicationConfiguration(classes = Application.class, initializers = YamlFileApplicationContextInitializer.class)
-public class SettingsFactoryBeanTest extends BaseJunit4Test {
+public class SettingsFactoryBeanTest extends Junit4TestBase {
 
     @Autowired
     private Settings settings;

@@ -68,10 +68,31 @@ public class MailSender {
         Transport transport = null;
 
         try {
-            Session session = Session.getInstance(new Properties());
-            transport = session.getTransport("smtp");
+//            Session session = Session.getInstance(new Properties());
+//
+            String from = this.user;
+            String authCode = this.password;  // ← 这里用授权码，不是密码！
+
+            Properties props = new Properties();
+            props.put("mail.smtp.host", this.host);
+            props.put("mail.smtp.port", this.port);
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.ssl.enable", "true");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.socketFactory.port", this.port);
+            props.put("mail.smtp.ssl.protocols", "TLSv1.2 TLSv1.3");
+
+            Session session = Session.getInstance(props, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(from, authCode);
+                }
+            });
             LOGGER.info("connecting to smtp server, host={}",this.host);
-            transport.connect(this.host, this.port, this.user, this.password);
+
+            session.setDebug(true);
+            transport = session.getTransport("smtp");
+            transport.connect();
             StopWatch watch = new StopWatch();
             Iterator mailIterator = mails.iterator();
 

@@ -62,7 +62,7 @@
         <!-- yaml -->
         <yaml.version>1.18</yaml.version>
         <!-- log4j -->
-        <slf4j.version>1.7.5</slf4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <logback.version>1.2.3</logback.version>
         <!--Jackson-->
@@ -180,6 +180,17 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
             </dependency>
+            <!-- slf4j 实现之二：log4j -->
+<!--            <dependency>-->
+<!--                <groupId>org.slf4j</groupId>-->
+<!--                <artifactId>slf4j-log4j12</artifactId>-->
+<!--                <version>1.7.36</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>log4j</groupId>-->
+<!--                <artifactId>log4j</artifactId>-->
+<!--                <version>1.2.17</version>-->
+<!--            </dependency>-->
             <!-- slf4j end -->
 
             <!-- javax-servlet -->
@@ -627,10 +638,10 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <compilerVersion>${maven.compiler}</compilerVersion>
                         <!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
-                        <compilerArguments>
-                            <verbose/>
-                            <bootclasspath>${env.JAVA_HOME}\jre\lib\rt.jar;${env.JAVA_HOME}\jre\lib\jce.jar</bootclasspath>
-                        </compilerArguments>
+<!--                        <compilerArguments>-->
+<!--                            <verbose/>-->
+<!--                            <bootclasspath>${env.JAVA_HOME}\jre\lib\rt.jar;${env.JAVA_HOME}\jre\lib\jce.jar</bootclasspath>-->
+<!--                        </compilerArguments>-->
                     </configuration>
                 </plugin>
 
