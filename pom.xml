@@ -97,7 +97,7 @@
 
         <!--<mongodb.version>2.9.3</mongodb.version>-->
         <mongodb.version>3.10.1</mongodb.version>
-        <spring.data.mongo.version>2.1.5.RELEASE</spring.data.mongo.version>
+        <spring.data.mongo.version>3.3.5</spring.data.mongo.version>
         <!--redis-->
         <!--https://github.com/xetorthio/jedis-->
         <jedis.version>3.0.1</jedis.version>
