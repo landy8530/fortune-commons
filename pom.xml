@@ -111,7 +111,7 @@
 
         <javax.mail.version>1.4.7</javax.mail.version>
 
-        <apache-httpcomponents.version>4.5.5</apache-httpcomponents.version>
+        <apache-httpcomponents.version>4.5.13</apache-httpcomponents.version>
     </properties>
 
     <dependencyManagement>
